@@ -34,7 +34,20 @@ const postProcessJq = `{
     detention: .psc.detention
 }`;
 
-const abiSignature = `tuple(string imo, string risk_detected, string detention_count, string deficiency_count, string inspection_authority, string inspection_port, string inspection_date, string detention)`;
+const abiSignature = JSON.stringify({
+  components: [
+    { internalType: "string", name: "imo", type: "string" },
+    { internalType: "string", name: "risk_detected", type: "string" },
+    { internalType: "string", name: "detention_count", type: "string" },
+    { internalType: "string", name: "deficiency_count", type: "string" },
+    { internalType: "string", name: "inspection_authority", type: "string" },
+    { internalType: "string", name: "inspection_port", type: "string" },
+    { internalType: "string", name: "inspection_date", type: "string" },
+    { internalType: "string", name: "detention", type: "string" }
+  ],
+  name: "PSCInspectionData",
+  type: "tuple"
+});
 
 // --- Main Service Logic ---
 
