@@ -4,8 +4,87 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ftrer63QJWpT3aZgpnyy-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="60" width="120" x="280" y="210" as="geometry" />
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-11" edge="1" parent="1" source="ftrer63QJWpT3aZgpnyy-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="4KWQ-z5AnoqI9zOPar04-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-12" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="JSON request" vertex="1">
+          <mxGeometry relative="1" x="-0.0452" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ftrer63QJWpT3aZgpnyy-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Web2 UI/Frontend&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-13" edge="1" parent="1" source="4KWQ-z5AnoqI9zOPar04-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="4KWQ-z5AnoqI9zOPar04-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-14" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Validated event outcome" vertex="1">
+          <mxGeometry relative="1" x="-0.1899" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Market Adapter&lt;/b&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;/API&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Oracle - FDC&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Pure functions (core logic)&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-17" edge="1" parent="1" source="4KWQ-z5AnoqI9zOPar04-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="4KWQ-z5AnoqI9zOPar04-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-18" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Transaction payloads" vertex="1">
+          <mxGeometry relative="1" x="0.0571" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-21" edge="1" parent="1" source="4KWQ-z5AnoqI9zOPar04-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ftrer63QJWpT3aZgpnyy-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="600" />
+              <mxPoint x="60" y="600" />
+              <mxPoint x="60" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-22" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-21" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Market status update&lt;div&gt;; user notified&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.3844" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Backend&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="425" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-15" edge="1" parent="1" source="4KWQ-z5AnoqI9zOPar04-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="4KWQ-z5AnoqI9zOPar04-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-16" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Settle tokens" vertex="1">
+          <mxGeometry relative="1" x="0.0449" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-19" edge="1" parent="1" source="4KWQ-z5AnoqI9zOPar04-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="4KWQ-z5AnoqI9zOPar04-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="340" />
+              <mxPoint x="640" y="600" />
+              <mxPoint x="485" y="600" />
+            </Array>
+            <mxPoint x="570" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-20" connectable="0" parent="4KWQ-z5AnoqI9zOPar04-19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="State update/Oracle feed" vertex="1">
+          <mxGeometry relative="1" x="-0.3038" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Smart contract - FTSO (Web3)&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="425" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="4KWQ-z5AnoqI9zOPar04-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Token Collateral Layer&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="425" y="190" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
