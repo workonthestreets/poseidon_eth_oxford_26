@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T21:56:54.352Z",
+    "timestamp": "2026-02-07T22:30:35.449Z",
     "imo": "9341328",
     "name": "ATLANTIC TWIN",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9341328",
     "voyage_completed": false,
-    "current_lat": 51.79602166666667,
-    "current_lon": 2.276483333333333,
+    "current_lat": 51.70393833333333,
+    "current_lon": 2.153995,
     "destination": "GB LWT",
     "navigation_status": "Unknown"
   },
@@ -202,7 +202,7 @@
         }
       ],
       "meta": {
-        "duration": 0.076124447,
+        "duration": 0.088503273,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -229,7 +229,7 @@
         }
       ],
       "meta": {
-        "duration": 0.009920853,
+        "duration": 0.016253247,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -237,7 +237,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.007372719,
+        "duration": 0.010084174,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -252,227 +252,21 @@
         "country_iso": "GI",
         "type": "Tanker",
         "type_specific": "Oil or Chemical Tanker",
-        "lat": 51.79602166666667,
-        "lon": 2.276483333333333,
-        "speed": 10.8,
-        "course": 224.8,
-        "heading": 218,
+        "lat": 51.70393833333333,
+        "lon": 2.153995,
+        "speed": 11.6,
+        "course": 233.9,
+        "heading": 234,
         "navigation_status": "Under way using engine",
         "destination": "GB LWT",
-        "last_position_epoch": 1770500571,
-        "last_position_UTC": "2026-02-07T21:42:51Z",
+        "last_position_epoch": 1770502930,
+        "last_position_UTC": "2026-02-07T22:22:10Z",
         "eta_epoch": 1770499800,
         "eta_UTC": "2026-02-07T21:30:00Z"
       },
       "meta": {
-        "duration": 0.001336567,
+        "duration": 0.00202989,
         "endpoint": "/api/v0/vessel",
-        "success": true
-      }
-    },
-    "congestion": {
-      "data": {
-        "point": {
-          "lat": 51.79602166666667,
-          "lon": 2.276483333333333,
-          "radius": 10
-        },
-        "total": 9,
-        "vessels": [
-          {
-            "uuid": "3b01ad06-2bc7-f1ff-3904-336bba1cef17",
-            "name": "ATLANTIC TWIN",
-            "mmsi": "236112059",
-            "imo": "9341328",
-            "eni": null,
-            "country_iso": "GI",
-            "type": "Tanker",
-            "type_specific": "Oil or Chemical Tanker",
-            "lat": 51.79602166666667,
-            "lon": 2.276483333333333,
-            "speed": 10.8,
-            "course": 224.8,
-            "heading": 218,
-            "destination": "GB LWT",
-            "last_position_epoch": 1770500571,
-            "last_position_UTC": "2026-02-07T21:42:51Z",
-            "eta_epoch": 1770499800,
-            "eta_UTC": "2026-02-07T21:30:00Z",
-            "distance": 0
-          },
-          {
-            "uuid": "6a78f177-251f-1190-00fa-85497f262e62",
-            "name": "MAERSK LINS",
-            "mmsi": "219506000",
-            "imo": "9527025",
-            "eni": null,
-            "country_iso": "DK",
-            "type": "Cargo - Hazard A (Major)",
-            "type_specific": "Container Ship",
-            "lat": 51.79557333333333,
-            "lon": 2.2982533333333333,
-            "speed": 1.2,
-            "course": 294.9,
-            "heading": 235,
-            "destination": "NLROT",
-            "last_position_epoch": 1770501160,
-            "last_position_UTC": "2026-02-07T21:52:40Z",
-            "eta_epoch": 1770607800,
-            "eta_UTC": "2026-02-09T03:30:00Z",
-            "distance": 0.808841366866195
-          },
-          {
-            "uuid": "1e7b2e01-0ccc-8e55-e237-25cdbc23f5fa",
-            "name": "SCHOUWENBANK",
-            "mmsi": "245594000",
-            "imo": "9361732",
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 51.74192166666667,
-            "lon": 2.3403666666666667,
-            "speed": 11.2,
-            "course": 221.7,
-            "heading": 220,
-            "destination": "AVEIRO  PORTUGAL",
-            "last_position_epoch": 1770501155,
-            "last_position_UTC": "2026-02-07T21:52:35Z",
-            "eta_epoch": 1770937200,
-            "eta_UTC": "2026-02-12T23:00:00Z",
-            "distance": 4.02305685131701
-          },
-          {
-            "uuid": "6997e467-8466-d887-3aa2-708440a8e397",
-            "name": "MSC TIANPING",
-            "mmsi": "636020495",
-            "imo": "9305489",
-            "eni": null,
-            "country_iso": "LR",
-            "type": "Cargo",
-            "type_specific": "Container Ship",
-            "lat": 51.886,
-            "lon": 2.323173333333333,
-            "speed": 6.2,
-            "course": 97.3,
-            "heading": 100,
-            "destination": " GBLGP-NLRTM",
-            "last_position_epoch": 1770501132,
-            "last_position_UTC": "2026-02-07T21:52:12Z",
-            "eta_epoch": 1770526800,
-            "eta_UTC": "2026-02-08T05:00:00Z",
-            "distance": 5.6732494985796
-          },
-          {
-            "uuid": "2b2985a9-2f21-71c6-c5a8-985bbebd6ad3",
-            "name": "SAMSKIP AMINA",
-            "mmsi": "255806464",
-            "imo": "9448683",
-            "eni": null,
-            "country_iso": "PT",
-            "type": "Cargo",
-            "type_specific": "Container Ship",
-            "lat": 51.797595,
-            "lon": 2.460515,
-            "speed": 17.6,
-            "course": 223.4,
-            "heading": 221,
-            "destination": "MAAGA",
-            "last_position_epoch": 1770501163,
-            "last_position_UTC": "2026-02-07T21:52:43Z",
-            "eta_epoch": 1770879600,
-            "eta_UTC": "2026-02-12T07:00:00Z",
-            "distance": 6.83421265341507
-          },
-          {
-            "uuid": "4c49d21f-eef0-3dfc-f668-260a59f61049",
-            "name": "SOFIA",
-            "mmsi": "219001518",
-            "imo": "8648298",
-            "eni": null,
-            "country_iso": "DK",
-            "type": "Fishing",
-            "type_specific": "Fishing Vessel",
-            "lat": 51.732635,
-            "lon": 2.46576,
-            "speed": 2.9,
-            "course": 221.1,
-            "heading": 206,
-            "destination": "HANSTHOLM",
-            "last_position_epoch": 1770501159,
-            "last_position_UTC": "2026-02-07T21:52:39Z",
-            "eta_epoch": null,
-            "eta_UTC": null,
-            "distance": 7.99703441624455
-          },
-          {
-            "uuid": "103455e8-3734-981c-1d1d-227de7591f58",
-            "name": "EEMSLIFT ELLEN",
-            "mmsi": "244790608",
-            "imo": "9671474",
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 51.694568333333336,
-            "lon": 2.089958333333333,
-            "speed": 14.2,
-            "course": 53.9,
-            "heading": 54,
-            "destination": "NOHAL",
-            "last_position_epoch": 1770501159,
-            "last_position_UTC": "2026-02-07T21:52:39Z",
-            "eta_epoch": 1770658200,
-            "eta_UTC": "2026-02-09T17:30:00Z",
-            "distance": 9.22961367147803
-          },
-          {
-            "uuid": "cae57852-4eda-1ecb-acf1-7ae621157c1c",
-            "name": "LADY CLARA",
-            "mmsi": "305015000",
-            "imo": "9375800",
-            "eni": null,
-            "country_iso": "AG",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 51.87309166666667,
-            "lon": 2.498701666666667,
-            "speed": 8.7,
-            "course": 78.6,
-            "heading": 79,
-            "destination": "NLRTM",
-            "last_position_epoch": 1770501155,
-            "last_position_UTC": "2026-02-07T21:52:35Z",
-            "eta_epoch": 1770523200,
-            "eta_UTC": "2026-02-08T04:00:00Z",
-            "distance": 9.45442503591458
-          },
-          {
-            "uuid": "f6fbfca5-4f6b-0554-9d20-956bd33c71b4",
-            "name": "ISLA B",
-            "mmsi": "232007860",
-            "imo": "5393555",
-            "eni": null,
-            "country_iso": "GB",
-            "type": "Dredger",
-            "type_specific": "Fishing Vessel",
-            "lat": 51.91066,
-            "lon": 2.09847,
-            "speed": 3.9,
-            "course": 71.5,
-            "heading": 45,
-            "destination": "GUARD-NEU",
-            "last_position_epoch": 1770501120,
-            "last_position_UTC": "2026-02-07T21:52:00Z",
-            "eta_epoch": 1788926400,
-            "eta_UTC": "2026-09-09T04:00:00Z",
-            "distance": 9.53726371521361
-          }
-        ]
-      },
-      "meta": {
-        "duration": 0.013838474,
-        "endpoint": "/api/v0/vessel_inradius",
         "success": true
       }
     }

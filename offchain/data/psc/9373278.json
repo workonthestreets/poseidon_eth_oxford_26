@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T21:56:59.195Z",
+    "timestamp": "2026-02-07T22:30:40.060Z",
     "imo": "9373278",
     "name": "GT PIKE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9373278",
     "voyage_completed": false,
-    "current_lat": 53.598195,
-    "current_lon": 5.65377,
+    "current_lat": 53.619525,
+    "current_lon": 5.756778333333333,
     "destination": "DEHAM",
     "navigation_status": "Unknown"
   },
@@ -268,7 +268,7 @@
         }
       ],
       "meta": {
-        "duration": 0.07850378,
+        "duration": 0.09918493,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -295,7 +295,7 @@
         }
       ],
       "meta": {
-        "duration": 0.015509643,
+        "duration": 0.017537613,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -313,7 +313,7 @@
         }
       ],
       "meta": {
-        "duration": 0.00741808,
+        "duration": 0.010917938,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -328,227 +328,21 @@
         "country_iso": "AG",
         "type": "Cargo",
         "type_specific": "General Cargo",
-        "lat": 53.598195,
-        "lon": 5.65377,
-        "speed": 11.3,
-        "course": 75.3,
-        "heading": 72,
+        "lat": 53.619525,
+        "lon": 5.756778333333333,
+        "speed": 11.5,
+        "course": 72.1,
+        "heading": 70,
         "navigation_status": "Under way using engine",
         "destination": "DEHAM",
-        "last_position_epoch": 1770500591,
-        "last_position_UTC": "2026-02-07T21:43:11Z",
+        "last_position_epoch": 1770501801,
+        "last_position_UTC": "2026-02-07T22:03:21Z",
         "eta_epoch": 1770591600,
         "eta_UTC": "2026-02-08T23:00:00Z"
       },
       "meta": {
-        "duration": 0.001926971,
+        "duration": 0.001644689,
         "endpoint": "/api/v0/vessel",
-        "success": true
-      }
-    },
-    "congestion": {
-      "data": {
-        "point": {
-          "lat": 53.598195,
-          "lon": 5.65377,
-          "radius": 10
-        },
-        "total": 9,
-        "vessels": [
-          {
-            "uuid": "26e01b34-116e-a07f-18ff-ed859e3d9937",
-            "name": "GT PIKE",
-            "mmsi": "305814000",
-            "imo": "9373278",
-            "eni": null,
-            "country_iso": "AG",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 53.598195,
-            "lon": 5.65377,
-            "speed": 11.3,
-            "course": 75.3,
-            "heading": 72,
-            "destination": "DEHAM",
-            "last_position_epoch": 1770500591,
-            "last_position_UTC": "2026-02-07T21:43:11Z",
-            "eta_epoch": 1770591600,
-            "eta_UTC": "2026-02-08T23:00:00Z",
-            "distance": 0
-          },
-          {
-            "uuid": "eb13668e-be42-28c2-bc53-d16d75e56a1e",
-            "name": "FINN III",
-            "mmsi": "305166000",
-            "imo": "9534456",
-            "eni": null,
-            "country_iso": "AG",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 53.58198,
-            "lon": 5.552101666666666,
-            "speed": 12.6,
-            "course": 74.4,
-            "heading": 72,
-            "destination": "SEOSK",
-            "last_position_epoch": 1770501126,
-            "last_position_UTC": "2026-02-07T21:52:06Z",
-            "eta_epoch": 1770699600,
-            "eta_UTC": "2026-02-10T05:00:00Z",
-            "distance": 3.75176142285902
-          },
-          {
-            "uuid": "4f872d3d-1e37-8491-2c24-c5b0b8f48aab",
-            "name": "X PRESS GODAVARI",
-            "mmsi": "229191000",
-            "imo": "9353735",
-            "eni": null,
-            "country_iso": "MT",
-            "type": "Cargo - Hazard A (Major)",
-            "type_specific": "Container Ship",
-            "lat": 53.630028333333335,
-            "lon": 5.747951666666666,
-            "speed": 12.6,
-            "course": 72.3,
-            "heading": 71,
-            "destination": "LTKLJ VIA DENOK",
-            "last_position_epoch": 1770501022,
-            "last_position_UTC": "2026-02-07T21:50:22Z",
-            "eta_epoch": 1770696000,
-            "eta_UTC": "2026-02-10T04:00:00Z",
-            "distance": 3.86082005493049
-          },
-          {
-            "uuid": "50041d05-488f-5ecf-14a3-5bfa18aab405",
-            "name": "LADY HESTIA",
-            "mmsi": "244110824",
-            "imo": "9828364",
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 53.565525,
-            "lon": 5.512973333333333,
-            "speed": 11.6,
-            "course": 72.3,
-            "heading": 71,
-            "destination": "SESOE",
-            "last_position_epoch": 1770501158,
-            "last_position_UTC": "2026-02-07T21:52:38Z",
-            "eta_epoch": 1770706800,
-            "eta_UTC": "2026-02-10T07:00:00Z",
-            "distance": 5.38838367728542
-          },
-          {
-            "uuid": "ff633292-43a8-60f6-cb6e-62d50bcd7947",
-            "name": "WESER STAHL",
-            "mmsi": "212848000",
-            "imo": "9186687",
-            "eni": null,
-            "country_iso": "CY",
-            "type": "Cargo",
-            "type_specific": "Self Discharging Bulk Carrier",
-            "lat": 53.66116666666667,
-            "lon": 5.522931666666667,
-            "speed": 9.3,
-            "course": 250.7,
-            "heading": 253,
-            "destination": "FRDKK",
-            "last_position_epoch": 1770500676,
-            "last_position_UTC": "2026-02-07T21:44:36Z",
-            "eta_epoch": 1770591660,
-            "eta_UTC": "2026-02-08T23:01:00Z",
-            "distance": 5.99967019481852
-          },
-          {
-            "uuid": "86dc57cf-eeb4-8403-753b-4c0bada79fe4",
-            "name": "EEMS COBALT",
-            "mmsi": "246179000",
-            "imo": "9013062",
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 53.644501,
-            "lon": 5.4866233,
-            "speed": 8.6,
-            "course": 251,
-            "heading": null,
-            "destination": "ROTTERDAM",
-            "last_position_epoch": 1770499800,
-            "last_position_UTC": "2026-02-07T21:30:00Z",
-            "eta_epoch": 1770562800,
-            "eta_UTC": "2026-02-08T15:00:00Z",
-            "distance": 6.56964451793351
-          },
-          {
-            "uuid": "4632264c-6a45-21d7-5fd0-b9d6f4f5f03f",
-            "name": "BOS PRELUDE",
-            "mmsi": "253000039",
-            "imo": "9444340",
-            "eni": null,
-            "country_iso": "LU",
-            "type": "Other",
-            "type_specific": "Multi Purpose Offshore Vessel",
-            "lat": 53.708805,
-            "lon": 5.5502748,
-            "speed": 8.8,
-            "course": 232,
-            "heading": null,
-            "destination": "EAST ANGLIA 3",
-            "last_position_epoch": 1770499920,
-            "last_position_UTC": "2026-02-07T21:32:00Z",
-            "eta_epoch": 1770433200,
-            "eta_UTC": "2026-02-07T03:00:00Z",
-            "distance": 7.59393483661366
-          },
-          {
-            "uuid": "f018e350-702f-919d-dca0-60caabd8993f",
-            "name": "FUTURE WAY",
-            "mmsi": "265050000",
-            "imo": "9945590",
-            "eni": null,
-            "country_iso": "SE",
-            "type": "Cargo",
-            "type_specific": "Vehicles Carrier",
-            "lat": 53.634816666666666,
-            "lon": 5.87751,
-            "speed": 5.2,
-            "course": 73.1,
-            "heading": 77,
-            "destination": "DE EME",
-            "last_position_epoch": 1770501162,
-            "last_position_UTC": "2026-02-07T21:52:42Z",
-            "eta_epoch": 1770553800,
-            "eta_UTC": "2026-02-08T12:30:00Z",
-            "distance": 8.26642265804384
-          },
-          {
-            "uuid": "0befe513-d308-30be-6572-8190c83b8469",
-            "name": "NGT PIPELINE",
-            "mmsi": "992456978",
-            "imo": null,
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Beacon, Isolated danger",
-            "type_specific": "Beacon, Isolated danger",
-            "lat": 53.553001,
-            "lon": 5.8959999,
-            "speed": null,
-            "course": null,
-            "heading": null,
-            "destination": "",
-            "last_position_epoch": 1770499980,
-            "last_position_UTC": "2026-02-07T21:33:00Z",
-            "eta_epoch": null,
-            "eta_UTC": null,
-            "distance": 9.05180142368213
-          }
-        ]
-      },
-      "meta": {
-        "duration": 0.017495294,
-        "endpoint": "/api/v0/vessel_inradius",
         "success": true
       }
     }

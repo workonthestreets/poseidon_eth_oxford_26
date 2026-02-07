@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T21:57:02.256Z",
+    "timestamp": "2026-02-07T22:30:42.990Z",
     "imo": "9736183",
     "name": "MICK",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9736183",
     "voyage_completed": false,
-    "current_lat": 54.228195,
-    "current_lon": 5.3940649,
+    "current_lat": 54.27795,
+    "current_lon": 5.5124035,
     "destination": "DKEBJ",
     "navigation_status": "Unknown"
   },
@@ -334,7 +334,7 @@
         }
       ],
       "meta": {
-        "duration": 0.075198002,
+        "duration": 0.083984609,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -361,7 +361,7 @@
         }
       ],
       "meta": {
-        "duration": 0.023403885,
+        "duration": 0.014140116,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -379,7 +379,7 @@
         }
       ],
       "meta": {
-        "duration": 0.008482285,
+        "duration": 0.008304644,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -394,164 +394,21 @@
         "country_iso": "AG",
         "type": "Cargo",
         "type_specific": "Heavy Lift Vessel",
-        "lat": 54.228195,
-        "lon": 5.3940649,
-        "speed": 9.3,
-        "course": 54,
+        "lat": 54.27795,
+        "lon": 5.5124035,
+        "speed": 9.1,
+        "course": 55,
         "heading": 54,
         "navigation_status": null,
         "destination": "DKEBJ",
-        "last_position_epoch": 1770499980,
-        "last_position_UTC": "2026-02-07T21:33:00Z",
+        "last_position_epoch": 1770501900,
+        "last_position_UTC": "2026-02-07T22:05:00Z",
         "eta_epoch": 1770530400,
         "eta_UTC": "2026-02-08T06:00:00Z"
       },
       "meta": {
-        "duration": 0.001454728,
+        "duration": 0.002315973,
         "endpoint": "/api/v0/vessel",
-        "success": true
-      }
-    },
-    "congestion": {
-      "data": {
-        "point": {
-          "lat": 54.228195,
-          "lon": 5.3940649,
-          "radius": 10
-        },
-        "total": 6,
-        "vessels": [
-          {
-            "uuid": "087123b3-a664-8e6f-5df2-2ef580816f14",
-            "name": "MICK",
-            "mmsi": "304342000",
-            "imo": "9736183",
-            "eni": null,
-            "country_iso": "AG",
-            "type": "Cargo",
-            "type_specific": "Heavy Lift Vessel",
-            "lat": 54.228195,
-            "lon": 5.3940649,
-            "speed": 9.3,
-            "course": 54,
-            "heading": 54,
-            "destination": "DKEBJ",
-            "last_position_epoch": 1770499980,
-            "last_position_UTC": "2026-02-07T21:33:00Z",
-            "eta_epoch": 1770530400,
-            "eta_UTC": "2026-02-08T06:00:00Z",
-            "distance": 0
-          },
-          {
-            "uuid": "aa12943d-67f3-a287-2dba-522e3831ba0d",
-            "name": "KARLINO",
-            "mmsi": "636017076",
-            "imo": "9727510",
-            "eni": null,
-            "country_iso": "LR",
-            "type": "Cargo",
-            "type_specific": "Bulk Carrier",
-            "lat": 54.239021,
-            "lon": 5.2648034,
-            "speed": 12.3,
-            "course": 27,
-            "heading": null,
-            "destination": "SE GOT",
-            "last_position_epoch": 1770499440,
-            "last_position_UTC": "2026-02-07T21:24:00Z",
-            "eta_epoch": 1770606000,
-            "eta_UTC": "2026-02-09T03:00:00Z",
-            "distance": 4.58249642410785
-          },
-          {
-            "uuid": "b8924587-f862-bd58-8086-1324aad4df3e",
-            "name": "JORK RULER",
-            "mmsi": "210008000",
-            "imo": "9328027",
-            "eni": null,
-            "country_iso": "CY",
-            "type": "Cargo - Hazard A (Major)",
-            "type_specific": "Container Ship",
-            "lat": 54.299511,
-            "lon": 5.2999048,
-            "speed": 16.2,
-            "course": 29,
-            "heading": null,
-            "destination": "NOOSL",
-            "last_position_epoch": 1770499920,
-            "last_position_UTC": "2026-02-07T21:32:00Z",
-            "eta_epoch": 1770589800,
-            "eta_UTC": "2026-02-08T22:30:00Z",
-            "distance": 5.40715336094942
-          },
-          {
-            "uuid": "b0d6a133-7b4c-99e0-7460-52e6d5e2ab89",
-            "name": "HARUKA",
-            "mmsi": "255916032",
-            "imo": "9589619",
-            "eni": null,
-            "country_iso": "PT",
-            "type": "Cargo",
-            "type_specific": "Bulk Carrier",
-            "lat": 54.321823,
-            "lon": 5.1869049,
-            "speed": 12,
-            "course": 207,
-            "heading": null,
-            "destination": "CIABJ",
-            "last_position_epoch": 1770499920,
-            "last_position_UTC": "2026-02-07T21:32:00Z",
-            "eta_epoch": 1771588800,
-            "eta_UTC": "2026-02-20T12:00:00Z",
-            "distance": 9.18401433371018
-          },
-          {
-            "uuid": "054f936b-a314-317a-155a-dd7b776f4dfc",
-            "name": "PALMBORG",
-            "mmsi": "245281000",
-            "imo": "9356505",
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Cargo",
-            "type_specific": "General Cargo",
-            "lat": 54.180882,
-            "lon": 5.1320267,
-            "speed": 9.1,
-            "course": 218,
-            "heading": null,
-            "destination": "FRSML",
-            "last_position_epoch": 1770500040,
-            "last_position_UTC": "2026-02-07T21:34:00Z",
-            "eta_epoch": 1770660000,
-            "eta_UTC": "2026-02-09T18:00:00Z",
-            "distance": 9.63064528792497
-          },
-          {
-            "uuid": "2d7a899c-3eb9-20bd-a6ff-578469fde987",
-            "name": "STENHEIM",
-            "mmsi": "255915987",
-            "imo": "9261114",
-            "eni": null,
-            "country_iso": "PT",
-            "type": "Tanker",
-            "type_specific": "Oil or Chemical Tanker",
-            "lat": 54.374733,
-            "lon": 5.2756801,
-            "speed": 8.8,
-            "course": 208,
-            "heading": null,
-            "destination": "NL RTM",
-            "last_position_epoch": 1770499920,
-            "last_position_UTC": "2026-02-07T21:32:00Z",
-            "eta_epoch": 1770544800,
-            "eta_UTC": "2026-02-08T10:00:00Z",
-            "distance": 9.72691424155025
-          }
-        ]
-      },
-      "meta": {
-        "duration": 0.013547273,
-        "endpoint": "/api/v0/vessel_inradius",
         "success": true
       }
     }

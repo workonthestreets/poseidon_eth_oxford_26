@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T21:56:52.863Z",
+    "timestamp": "2026-02-07T22:30:34.088Z",
     "imo": "9935600",
     "name": "SEA SAPPHIRE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9935600",
     "voyage_completed": false,
-    "current_lat": 53.776669,
-    "current_lon": 4.3484449,
+    "current_lat": 53.846859,
+    "current_lon": 4.4655852,
     "destination": "SE GOT",
     "navigation_status": "Unknown"
   },
@@ -224,7 +224,7 @@
         }
       ],
       "meta": {
-        "duration": 0.088343912,
+        "duration": 0.081269114,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -232,7 +232,7 @@
     "drydock": {
       "data": [],
       "meta": {
-        "duration": 0.016627449,
+        "duration": 0.01684337,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -240,7 +240,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.011799423,
+        "duration": 0.0075066,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -255,122 +255,21 @@
         "country_iso": "GR",
         "type": "Tanker",
         "type_specific": "Crude Oil Tanker",
-        "lat": 53.776669,
-        "lon": 4.3484449,
+        "lat": 53.846859,
+        "lon": 4.4655852,
         "speed": 12.8,
-        "course": 47,
+        "course": 42,
         "heading": null,
         "navigation_status": null,
         "destination": "SE GOT",
-        "last_position_epoch": 1770499860,
-        "last_position_UTC": "2026-02-07T21:31:00Z",
+        "last_position_epoch": 1770501420,
+        "last_position_UTC": "2026-02-07T21:57:00Z",
         "eta_epoch": 1770638400,
         "eta_UTC": "2026-02-09T12:00:00Z"
       },
       "meta": {
-        "duration": 0.002252293,
+        "duration": 0.002645534,
         "endpoint": "/api/v0/vessel",
-        "success": true
-      }
-    },
-    "congestion": {
-      "data": {
-        "point": {
-          "lat": 53.776669,
-          "lon": 4.3484449,
-          "radius": 10
-        },
-        "total": 4,
-        "vessels": [
-          {
-            "uuid": "0bf08540-cdd8-cbeb-0792-6e0f7b6abb8f",
-            "name": "SEA SAPPHIRE",
-            "mmsi": "241785000",
-            "imo": "9935600",
-            "eni": null,
-            "country_iso": "GR",
-            "type": "Tanker",
-            "type_specific": "Crude Oil Tanker",
-            "lat": 53.776669,
-            "lon": 4.3484449,
-            "speed": 12.8,
-            "course": 47,
-            "heading": null,
-            "destination": "SE GOT",
-            "last_position_epoch": 1770499860,
-            "last_position_UTC": "2026-02-07T21:31:00Z",
-            "eta_epoch": 1770638400,
-            "eta_UTC": "2026-02-09T12:00:00Z",
-            "distance": 0
-          },
-          {
-            "uuid": "dd559412-45d8-ed24-2f2f-4be98717835e",
-            "name": "LADY ELA",
-            "mmsi": "538003488",
-            "imo": "9511442",
-            "eni": null,
-            "country_iso": "MH",
-            "type": "Tanker",
-            "type_specific": "Oil or Chemical Tanker",
-            "lat": 53.73946,
-            "lon": 4.3020535,
-            "speed": 12.1,
-            "course": 54,
-            "heading": null,
-            "destination": "SESFT",
-            "last_position_epoch": 1770499680,
-            "last_position_UTC": "2026-02-07T21:28:00Z",
-            "eta_epoch": 1770976800,
-            "eta_UTC": "2026-02-13T10:00:00Z",
-            "distance": 2.77537721159095
-          },
-          {
-            "uuid": "869a99c4-a83b-0777-3dbc-0705622776db",
-            "name": "DINA SUPPORTER",
-            "mmsi": "255805762",
-            "imo": "9402342",
-            "eni": null,
-            "country_iso": "PT",
-            "type": "Other",
-            "type_specific": "Multi Purpose Offshore Vessel",
-            "lat": 53.78476,
-            "lon": 4.4467883,
-            "speed": 8,
-            "course": 59,
-            "heading": null,
-            "destination": "L5D",
-            "last_position_epoch": 1770500040,
-            "last_position_UTC": "2026-02-07T21:34:00Z",
-            "eta_epoch": 1770496200,
-            "eta_UTC": "2026-02-07T20:30:00Z",
-            "distance": 3.52257718644751
-          },
-          {
-            "uuid": "5ba18294-d162-4066-e41a-873f6d528cf5",
-            "name": "L4A",
-            "mmsi": "992441029",
-            "imo": null,
-            "eni": null,
-            "country_iso": "NL",
-            "type": "Spare",
-            "type_specific": "Spare",
-            "lat": 53.724445,
-            "lon": 4.0974998,
-            "speed": null,
-            "course": null,
-            "heading": null,
-            "destination": "",
-            "last_position_epoch": 1770500040,
-            "last_position_UTC": "2026-02-07T21:34:00Z",
-            "eta_epoch": null,
-            "eta_UTC": null,
-            "distance": 9.44482721544512
-          }
-        ]
-      },
-      "meta": {
-        "duration": 0.016266327,
-        "endpoint": "/api/v0/vessel_inradius",
         "success": true
       }
     }
