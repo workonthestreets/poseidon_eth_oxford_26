@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaritimeShield | Demurrage Insurance Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0052CC;
+      --primary-dark: #003d99;
+      --success: #00875A;
+      --danger: #DE350B;
+      --warning: #FF991F;
+      --bg-dark: #0D1421;
+      --bg-card: #151E2D;
+      --bg-input: #1C2637;
+      --border: #2A3648;
+      --text-primary: #FFFFFF;
+      --text-secondary: #8492A6;
+      --bid-green: #00C48C;
+      --ask-red: #FF6B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary) 0%, #0066FF 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .wallet-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .wallet-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 300px 1fr 320px;
+      gap: 16px;
+      padding: 16px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    /* Markets List */
+    .markets-list {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+
+    .market-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .market-item:hover, .market-item.active {
+      background: var(--bg-input);
+    }
+
+    .market-vessel {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .market-route {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .market-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .market-price {
+      color: var(--bid-green);
+      font-weight: 600;
+    }
+
+    /* Order Book */
+    .orderbook-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 200px);
+    }
+
+    .orderbook-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .orderbook-asks, .orderbook-bids {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .orderbook-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 4px 16px;
+      font-size: 13px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      position: relative;
+    }
+
+    .orderbook-row .depth-bar {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.15;
+    }
+
+    .orderbook-asks .orderbook-row .depth-bar {
+      background: var(--ask-red);
+    }
+
+    .orderbook-bids .orderbook-row .depth-bar {
+      background: var(--bid-green);
+    }
+
+    .orderbook-asks .price { color: var(--ask-red); }
+    .orderbook-bids .price { color: var(--bid-green); }
+
+    .spread-row {
+      padding: 12px 16px;
+      text-align: center;
+      background: var(--bg-input);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .spread-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Trading Panel */
+    .trade-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trade-tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .trade-tab.active {
+      border-bottom-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .trade-tab:hover {
+      background: var(--bg-input);
+    }
+
+    .side-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .side-btn {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+    }
+
+    .side-btn.buy.active {
+      background: var(--bid-green);
+      color: white;
+    }
+
+    .side-btn.sell.active {
+      background: var(--ask-red);
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .input-suffix {
+      position: relative;
+    }
+
+    .input-suffix .form-input {
+      padding-right: 50px;
+    }
+
+    .input-suffix::after {
+      content: attr(data-suffix);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .order-summary {
+      background: var(--bg-input);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .summary-row:last-child {
+      margin-bottom: 0;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .submit-btn.buy {
+      background: var(--bid-green);
+      color: white;
+    }
+
+    .submit-btn.sell {
+      background: var(--ask-red);
+      color: white;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Recent Trades */
+    .trades-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .trade-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+
+    .trade-row.buy .price { color: var(--bid-green); }
+    .trade-row.sell .price { color: var(--ask-red); }
+
+    /* Market Info */
+    .market-info-header {
+      padding: 20px;
+      background: linear-gradient(135deg, var(--bg-input) 0%, var(--bg-card) 100%);
+    }
+
+    .market-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .market-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .market-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-success { background: rgba(0, 135, 90, 0.2); color: var(--success); }
+    .badge-warning { background: rgba(255, 153, 31, 0.2); color: var(--warning); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">⚓</div>
+      <span>MaritimeShield</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#" class="nav-link active" data-page="markets">Markets</a>
+      <a href="#" class="nav-link" data-page="portfolio">Portfolio</a>
+      <a href="#" class="nav-link" data-page="howitworks">How It Works</a>
+    </nav>
+    <button class="wallet-btn" id="connectWallet">Connect Wallet</button>
+  </header>
+
+  <main class="main-container">
+    <!-- Markets List -->
+    <aside class="card">
+      <div class="card-header">
+        <span>Active Markets</span>
+        <span class="badge badge-success" id="marketCount">0 Open</span>
+      </div>
+      <div class="markets-list" id="marketsList">
+        <!-- Populated by JS -->
+      </div>
+    </aside>
+
+    <!-- Main Trading Area -->
+    <section>
+      <!-- Market Info Banner -->
+      <div class="card" style="margin-bottom: 16px;">
+        <div class="market-info-header" id="marketInfo">
+          <div class="market-title">Select a Market</div>
+          <div class="market-subtitle">Choose a vessel from the list to start trading</div>
+        </div>
+      </div>
+
+      <!-- Order Book -->
+      <div class="card">
+        <div class="card-header">
+          <span>Order Book</span>
+          <span class="badge badge-warning">LIVE</span>
+        </div>
+        <div class="orderbook-container">
+          <div class="orderbook-header">
+            <span>Price (¢)</span>
+            <span class="text-center">Size</span>
+            <span class="text-right">Total</span>
+          </div>
+          <div class="orderbook-asks" id="asks">
+            <!-- Populated by JS -->
+          </div>
+          <div class="spread-row">
+            Spread: <span class="spread-value" id="spread">--</span>¢
+          </div>
+          <div class="orderbook-bids" id="bids">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Trades -->
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-header">Recent Trades</div>
+        <div class="orderbook-header">
+          <span>Price (¢)</span>
+          <span class="text-center">Size</span>
+          <span class="text-right">Time</span>
+        </div>
+        <div class="trades-list" id="tradesList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Trading Panel -->
+    <aside class="card">
+      <div class="trade-tabs">
+        <div class="trade-tab active" data-type="LIMIT">Limit</div>
+        <div class="trade-tab" data-type="MARKET">Market</div>
+      </div>
+      <div class="card-body">
+        <div class="side-toggle">
+          <button class="side-btn buy active" data-side="BUY">Buy YES</button>
+          <button class="side-btn sell" data-side="SELL">Buy NO</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Price (probability)</label>
+          <div class="input-suffix" data-suffix="¢">
+            <input type="number" class="form-input" id="priceInput" min="1" max="99" value="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Shares</label>
+          <input type="number" class="form-input" id="quantityInput" min="1" value="100" step="1">
+        </div>
+
+        <div class="order-summary">
+          <div class="summary-row">
+            <span>Avg. Price</span>
+            <span id="avgPrice">50¢</span>
+          </div>
+          <div class="summary-row">
+            <span>Shares</span>
+            <span id="sharesDisplay">100</span>
+          </div>
+          <div class="summary-row">
+            <span>Est. Cost</span>
+            <span id="estCost">$50.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Potential Payout</span>
+            <span id="potentialPayout">$100.00</span>
+          </div>
+        </div>
+
+        <button class="submit-btn buy" id="submitOrder">Place Buy Order</button>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // State
+    let currentMarket = null;
+    let currentSide = 'BUY';
+    let currentType = 'LIMIT';
+    let ws = null;
+    let walletConnected = false;
+    let simulationInterval = null;
+    let userPositions = {};
+    let userBalance = 10000;
+    let userOrders = [];
+    let allMarkets = [];
+    const userId = 'user-' + Math.random().toString(36).substr(2, 9);
+
+    // DOM Elements
+    const marketsList = document.getElementById('marketsList');
+    const marketCount = document.getElementById('marketCount');
+    const marketInfo = document.getElementById('marketInfo');
+    const asksEl = document.getElementById('asks');
+    const bidsEl = document.getElementById('bids');
+    const spreadEl = document.getElementById('spread');
+    const tradesList = document.getElementById('tradesList');
+    const priceInput = document.getElementById('priceInput');
+    const quantityInput = document.getElementById('quantityInput');
+    const submitBtn = document.getElementById('submitOrder');
+
+    // Show notification
+    function showNotification(title, message, type = 'info') {
+      const existing = document.querySelectorAll('.notification');
+      existing.forEach(n => n.remove());
+      
+      const notification = document.createElement('div');
+      notification.className = 'notification ' + type;
+      notification.innerHTML = `<strong>${title}</strong><p style="margin:4px 0 0;font-size:13px;white-space:pre-line;">${message}</p>`;
+      notification.style.cssText = `
+        position: fixed; top: 80px; right: 20px; background: var(--bg-card);
+        border: 1px solid ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+        border-radius: 8px; padding: 16px; z-index: 1001; min-width: 280px; max-width: 350px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      `;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 4000);
+    }
+
+    // Modal system
+    function showModal(title, content) {
+      let modal = document.getElementById('modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modal';
+        modal.innerHTML = `
+          <div class="modal-backdrop"></div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title"></h2>
+              <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body"></div>
+          </div>
+        `;
+        modal.style.cssText = `position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:none;align-items:center;justify-content:center;`;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+          .modal-backdrop{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);}
+          .modal-content{position:relative;background:var(--bg-card);border-radius:12px;border:1px solid var(--border);width:90%;max-width:700px;max-height:85vh;overflow-y:auto;}
+          .modal-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--bg-card);z-index:1;}
+          .modal-title{margin:0;font-size:20px;}
+          .modal-close{background:none;border:none;color:var(--text-secondary);font-size:28px;cursor:pointer;line-height:1;}
+          .modal-close:hover{color:var(--text-primary);}
+          .modal-body{padding:20px;}
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(modal);
+        
+        modal.querySelector('.modal-backdrop').onclick = hideModal;
+        modal.querySelector('.modal-close').onclick = hideModal;
+      }
+      modal.querySelector('.modal-title').textContent = title;
+      modal.querySelector('.modal-body').innerHTML = content;
+      modal.style.display = 'flex';
+    }
+
+    function hideModal() {
+      const modal = document.getElementById('modal');
+      if (modal) modal.style.display = 'none';
+      document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.toggle('active', l.dataset.page === 'markets');
+      });
+    }
+
+    // Fetch markets
+    async function loadMarkets() {
+      const res = await fetch('/api/markets');
+      allMarkets = await res.json();
+      marketCount.textContent = `${allMarkets.length} Open`;
+      
+      marketsList.innerHTML = allMarkets.map(m => `
+        <div class="market-item" data-id="${m.id}">
+          <div class="market-vessel">${m.vesselName}</div>
+          <div class="market-route">${m.route}</div>
+          <div class="market-stats">
+            <span>IMO: ${m.vesselIMO}</span>
+            <span class="market-price">$${(m.maxPayout/1000).toFixed(0)}K max</span>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.market-item').forEach(item => {
+        item.addEventListener('click', () => selectMarket(item.dataset.id));
+      });
+
+      if (allMarkets.length > 0) {
+        selectMarket(allMarkets[0].id);
+      }
+    }
+
+    // Select market
+    async function selectMarket(marketId) {
+      currentMarket = marketId;
+      
+      document.querySelectorAll('.market-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.id === marketId);
+      });
+
+      const res = await fetch(`/api/markets/${marketId}`);
+      const data = await res.json();
+      
+      const arrival = new Date(data.market.expectedArrival);
+      const daysLeft = Math.ceil((arrival - Date.now()) / (1000*60*60*24));
+      
+      marketInfo.innerHTML = `
+        <div class="market-title">${data.market.vesselName}</div>
+        <div class="market-subtitle">${data.market.route} | ETA: ${arrival.toLocaleDateString()} (${daysLeft} days)</div>
+        <div class="market-metrics">
+          <div class="metric">
+            <div class="metric-value">${data.orderBook.lastPrice || '--'}¢</div>
+            <div class="metric-label">Last Price</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value" style="color:var(--bid-green)">${data.orderBook.bids[0]?.price || '--'}¢</div>
+            <div class="metric-label">Best Bid</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value" style="color:var(--ask-red)">${data.orderBook.asks[0]?.price || '--'}¢</div>
+            <div class="metric-label">Best Ask</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$${(data.volume24h / 100).toFixed(0)}</div>
+            <div class="metric-label">24h Volume</div>
+          </div>
+        </div>
+      `;
+
+      updateOrderBook(data.orderBook);
+      updateTrades(data.recentTrades);
+      connectWebSocket(marketId);
+    }
+
+    // Update order book display
+    function updateOrderBook(ob) {
+      const asks = [...ob.asks].reverse().slice(0, 10);
+      const maxAskQty = Math.max(...asks.map(a => a.quantity), 1);
+      
+      asksEl.innerHTML = asks.length === 0 
+        ? '<div style="padding:20px;text-align:center;color:var(--text-secondary)">No asks</div>'
+        : asks.map(level => {
+          const depthPct = (level.quantity / maxAskQty) * 100;
+          return `
+            <div class="orderbook-row" onclick="fillPrice(${level.price}, 'BUY')" style="cursor:pointer" title="Click to buy at ${level.price}¢">
+              <span class="price">${level.price}</span>
+              <span class="text-center">${level.quantity}</span>
+              <span class="text-right">${level.quantity}</span>
+              <div class="depth-bar" style="width:${depthPct}%"></div>
+            </div>
+          `;
+        }).join('');
+
+      const bids = ob.bids.slice(0, 10);
+      const maxBidQty = Math.max(...bids.map(b => b.quantity), 1);
+      
+      bidsEl.innerHTML = bids.length === 0
+        ? '<div style="padding:20px;text-align:center;color:var(--text-secondary)">No bids</div>'
+        : bids.map(level => {
+          const depthPct = (level.quantity / maxBidQty) * 100;
+          return `
+            <div class="orderbook-row" onclick="fillPrice(${level.price}, 'SELL')" style="cursor:pointer" title="Click to sell at ${level.price}¢">
+              <span class="price">${level.price}</span>
+              <span class="text-center">${level.quantity}</span>
+              <span class="text-right">${level.quantity}</span>
+              <div class="depth-bar" style="width:${depthPct}%"></div>
+            </div>
+          `;
+        }).join('');
+
+      spreadEl.textContent = ob.spread ?? '--';
+    }
+
+    function fillPrice(price, suggestedSide) {
+      priceInput.value = price;
+      document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.side-btn.${suggestedSide.toLowerCase()}`).classList.add('active');
+      currentSide = suggestedSide;
+      submitBtn.className = `submit-btn ${currentSide === 'BUY' ? 'buy' : 'sell'}`;
+      submitBtn.textContent = currentSide === 'BUY' ? 'Place Buy Order' : 'Place Sell Order';
+      updateSummary();
+    }
+
+    function updateTrades(trades) {
+      tradesList.innerHTML = trades.length === 0
+        ? '<div style="padding:20px;text-align:center;color:var(--text-secondary)">No trades yet</div>'
+        : trades.slice(0, 15).map(t => `
+          <div class="trade-row">
+            <span class="price" style="color:var(--bid-green)">${t.price}¢</span>
+            <span class="text-center">${t.quantity}</span>
+            <span class="text-right">${new Date(t.timestamp).toLocaleTimeString()}</span>
+          </div>
+        `).join('');
+    }
+
+    function connectWebSocket(marketId) {
+      if (ws) ws.close();
+      const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${protocol}//${location.host}`);
+      
+      ws.onopen = () => ws.send(JSON.stringify({ type: 'SUBSCRIBE', marketId }));
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.type === 'ORDER_BOOK') updateOrderBook(msg.data);
+        else if (msg.type === 'TRADES') updateTrades(msg.data);
+      };
+      ws.onerror = () => console.log('WebSocket error');
+    }
+
+    // Trading panel
+    document.querySelectorAll('.trade-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.trade-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentType = tab.dataset.type;
+        priceInput.disabled = currentType === 'MARKET';
+        if (currentType === 'MARKET') priceInput.value = '--';
+        else priceInput.value = 50;
+        updateSummary();
+      });
+    });
+
+    document.querySelectorAll('.side-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSide = btn.dataset.side;
+        submitBtn.className = `submit-btn ${currentSide === 'BUY' ? 'buy' : 'sell'}`;
+        submitBtn.textContent = currentSide === 'BUY' ? 'Place Buy Order' : 'Place Sell Order';
+        updateSummary();
+      });
+    });
+
+    function updateSummary() {
+      const price = parseInt(priceInput.value) || 50;
+      const qty = parseInt(quantityInput.value) || 0;
+      const cost = (price * qty) / 100;
+      
+      document.getElementById('avgPrice').textContent = currentType === 'MARKET' ? 'Market' : `${price}¢`;
+      document.getElementById('sharesDisplay').textContent = qty;
+      document.getElementById('estCost').textContent = `$${cost.toFixed(2)}`;
+      document.getElementById('potentialPayout').textContent = `$${qty.toFixed(2)}`;
+    }
+
+    priceInput.addEventListener('input', updateSummary);
+    quantityInput.addEventListener('input', updateSummary);
+
+    // Submit order - SINGLE handler
+    submitBtn.onclick = async function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (!walletConnected) {
+        showNotification('Connect Wallet', 'Please connect your wallet first to trade', 'error');
+        return;
+      }
+
+      if (!currentMarket) {
+        showNotification('Select Market', 'Please select a market first', 'error');
+        return;
+      }
+
+      const price = parseInt(priceInput.value) || 50;
+      const quantity = parseInt(quantityInput.value) || 0;
+      
+      if (quantity <= 0) {
+        showNotification('Invalid Quantity', 'Please enter a valid number of shares', 'error');
+        return;
+      }
+
+      const cost = (price * quantity) / 100;
+      if (cost > userBalance) {
+        showNotification('Insufficient Funds', `Need $${cost.toFixed(2)}, have $${userBalance.toFixed(2)}`, 'error');
+        return;
+      }
+
+      const order = {
+        marketId: currentMarket,
+        userId: userId,
+        side: currentSide,
+        type: currentType,
+        price: currentType === 'LIMIT' ? price : undefined,
+        quantity: quantity
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Placing...';
+
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order)
+        });
+
+        const result = await res.json();
+        
+        if (!res.ok) {
+          throw new Error(result.error || 'Order failed');
+        }
+
+        // Track the order
+        userOrders.push(result.order);
+        
+        // Calculate actual cost
+        let actualCost = 0;
+        if (result.trades && result.trades.length > 0) {
+          actualCost = result.trades.reduce((sum, t) => sum + (t.price * t.quantity / 100), 0);
+        } else if (result.order.status === 'OPEN') {
+          actualCost = (price * quantity) / 100; // Reserved for open orders
+        }
+        
+        userBalance -= actualCost;
+        if (walletConnected) {
+          document.getElementById('connectWallet').textContent = `$${userBalance.toFixed(2)}`;
+        }
+
+        // Track position
+        const market = allMarkets.find(m => m.id === currentMarket);
+        if (!userPositions[currentMarket]) {
+          userPositions[currentMarket] = {
+            vesselName: market?.vesselName || 'Unknown',
+            yesShares: 0,
+            noShares: 0,
+            totalCost: 0,
+            avgCost: 0
+          };
+        }
+        
+        const pos = userPositions[currentMarket];
+        const filled = result.order.filledQuantity;
+        
+        if (currentSide === 'BUY') {
+          pos.yesShares += filled;
+        } else {
+          pos.noShares += filled;
+        }
+        pos.totalCost += actualCost;
+        pos.avgCost = pos.totalCost / ((pos.yesShares + pos.noShares) || 1) * 100;
+
+        const status = result.order.status === 'FILLED' ? 'Filled' : 
+                       result.order.status === 'PARTIAL' ? 'Partially Filled' : 'Open';
+        
+        showNotification(`Order ${status}!`, 
+          `${currentSide} ${filled > 0 ? filled : quantity} shares @ ${price}¢\nCost: $${actualCost.toFixed(2)}${result.order.status === 'OPEN' ? '\nOrder added to book' : ''}`, 
+          'success'
+        );
+
+        // Refresh orderbook
+        if (currentMarket) {
+          const data = await fetch(`/api/markets/${currentMarket}`).then(r => r.json());
+          updateOrderBook(data.orderBook);
+          updateTrades(data.recentTrades);
+        }
+
+      } catch (e) {
+        showNotification('Order Failed', e.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = currentSide === 'BUY' ? 'Place Buy Order' : 'Place Sell Order';
+      }
+    };
+
+    // Wallet button
+    document.getElementById('connectWallet').onclick = function() {
+      if (!walletConnected) {
+        walletConnected = true;
+        this.textContent = `$${userBalance.toFixed(2)}`;
+        this.style.background = 'var(--success)';
+        showNotification('Wallet Connected', `Balance: $${userBalance.toFixed(2)}\nUser: ${userId.slice(0, 12)}...`, 'success');
+      } else {
+        showPortfolio();
+      }
+    };
+
+    // Navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        if (page === 'markets') {
+          hideModal();
+        } else if (page === 'portfolio') {
+          showPortfolio();
+        } else if (page === 'howitworks') {
+          showHowItWorks();
+        }
+      });
+    });
+
+    // Portfolio
+    function showPortfolio() {
+      const positions = Object.entries(userPositions);
+      const totalValue = positions.reduce((sum, [id, pos]) => {
+        return sum + (pos.yesShares + pos.noShares) * 0.5; // Rough estimate at 50c
+      }, 0);
+      
+      const openOrders = userOrders.filter(o => o.status === 'OPEN' || o.status === 'PARTIAL');
+      
+      const positionsHtml = positions.length === 0 
+        ? '<div style="text-align:center;padding:40px;color:var(--text-secondary)"><p style="font-size:48px;margin-bottom:16px;">📊</p><p>No positions yet</p><p style="font-size:13px;margin-top:8px;">Start trading to build your portfolio</p></div>'
+        : positions.map(([marketId, pos]) => {
+          const market = allMarkets.find(m => m.id === marketId);
+          const totalShares = pos.yesShares + pos.noShares;
+          return `
+            <div style="background:var(--bg-input);padding:16px;border-radius:8px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div style="font-weight:600;">${pos.vesselName}</div>
+                <span style="font-size:12px;color:var(--text-secondary)">${market?.route || ''}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:13px;">
+                <div><div style="color:var(--text-secondary);font-size:11px;">YES SHARES</div><div style="color:var(--bid-green);font-weight:600;">${pos.yesShares}</div></div>
+                <div><div style="color:var(--text-secondary);font-size:11px;">NO SHARES</div><div style="color:var(--ask-red);font-weight:600;">${pos.noShares}</div></div>
+                <div><div style="color:var(--text-secondary);font-size:11px;">AVG COST</div><div>${pos.avgCost?.toFixed(1) || 0}¢</div></div>
+                <div><div style="color:var(--text-secondary);font-size:11px;">TOTAL COST</div><div>$${pos.totalCost?.toFixed(2) || '0.00'}</div></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      const ordersHtml = openOrders.length === 0
+        ? '<p style="color:var(--text-secondary);text-align:center;padding:20px;">No open orders</p>'
+        : openOrders.map(o => {
+          const market = allMarkets.find(m => m.id === o.marketId);
+          return `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-input);border-radius:8px;margin-bottom:8px;">
+              <div>
+                <div style="font-weight:500;">${market?.vesselName || 'Unknown'}</div>
+                <div style="font-size:12px;color:var(--text-secondary);">${o.side} ${o.remainingQuantity} @ ${o.price}¢</div>
+              </div>
+              <button onclick="cancelOrder('${o.id}','${o.marketId}')" style="background:var(--danger);color:white;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;">Cancel</button>
+            </div>
+          `;
+        }).join('');
+
+      showModal('Portfolio', `
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
+          <div style="background:var(--bg-input);padding:20px;border-radius:8px;text-align:center;">
+            <div style="font-size:28px;font-weight:700;color:var(--bid-green);">$${userBalance.toFixed(2)}</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">AVAILABLE BALANCE</div>
+          </div>
+          <div style="background:var(--bg-input);padding:20px;border-radius:8px;text-align:center;">
+            <div style="font-size:28px;font-weight:700;">$${totalValue.toFixed(2)}</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">POSITIONS VALUE</div>
+          </div>
+          <div style="background:var(--bg-input);padding:20px;border-radius:8px;text-align:center;">
+            <div style="font-size:28px;font-weight:700;">${positions.length}</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">ACTIVE MARKETS</div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom:16px;display:flex;align-items:center;gap:8px;"><span style="font-size:20px;">📈</span> Your Positions</h3>
+        ${positionsHtml}
+        
+        <h3 style="margin:24px 0 16px;display:flex;align-items:center;gap:8px;"><span style="font-size:20px;">📋</span> Open Orders</h3>
+        ${ordersHtml}
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;">
+          <button onclick="addFunds()" style="padding:14px;background:var(--primary);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Add $1,000 Demo Funds</button>
+          <button onclick="hideModal()" style="padding:14px;background:var(--bg-input);color:white;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-weight:600;">Back to Trading</button>
+        </div>
+      `);
+    }
+
+    async function cancelOrder(orderId, marketId) {
+      try {
+        const res = await fetch(`/api/orders/${orderId}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ marketId, userId })
+        });
+        if (res.ok) {
+          const order = userOrders.find(o => o.id === orderId);
+          if (order) {
+            userBalance += (order.price * order.remainingQuantity) / 100;
+            order.status = 'CANCELLED';
+            document.getElementById('connectWallet').textContent = `$${userBalance.toFixed(2)}`;
+          }
+          showNotification('Order Cancelled', 'Your order has been cancelled', 'success');
+          showPortfolio();
+        }
+      } catch (e) {
+        showNotification('Cancel Failed', e.message, 'error');
+      }
+    }
+
+    function addFunds() {
+      userBalance += 1000;
+      document.getElementById('connectWallet').textContent = `$${userBalance.toFixed(2)}`;
+      showNotification('Funds Added', '+$1,000 added to your balance', 'success');
+      showPortfolio();
+    }
+
+    // How It Works
+    function showHowItWorks() {
+      showModal('How It Works', `
+        <div style="line-height:1.8;">
+          <div style="background:linear-gradient(135deg,var(--primary),#0066FF);padding:24px;border-radius:12px;margin-bottom:24px;text-align:center;">
+            <div style="font-size:48px;margin-bottom:12px;">⚓</div>
+            <h2 style="margin:0 0 8px;">Maritime Demurrage Insurance</h2>
+            <p style="margin:0;opacity:0.9;">Hedge against shipping delays with prediction markets</p>
+          </div>
+          
+          <h3 style="color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <span style="background:var(--primary);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">1</span>
+            What is Demurrage?
+          </h3>
+          <p style="margin-bottom:24px;color:var(--text-secondary);">
+            Demurrage is a fee charged when a vessel stays in port longer than the agreed time. It can cost <strong style="color:var(--text-primary);">$25,000-$100,000+ per day</strong> for large container ships. Port congestion, weather, and customs delays are common causes.
+          </p>
+          
+          <h3 style="color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <span style="background:var(--primary);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">2</span>
+            How the Market Works
+          </h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+            <div style="background:var(--bg-input);padding:16px;border-radius:8px;border-left:3px solid var(--bid-green);">
+              <div style="font-weight:600;color:var(--bid-green);margin-bottom:8px;">Buy YES (Insure)</div>
+              <p style="font-size:13px;color:var(--text-secondary);margin:0;">If you're a shipper, buy YES shares to hedge. If demurrage occurs, you get $1.00 per share to offset your losses.</p>
+            </div>
+            <div style="background:var(--bg-input);padding:16px;border-radius:8px;border-left:3px solid var(--ask-red);">
+              <div style="font-weight:600;color:var(--ask-red);margin-bottom:8px;">Buy NO (Speculate)</div>
+              <p style="font-size:13px;color:var(--text-secondary);margin:0;">If you believe the vessel will arrive on time, buy NO shares. If no demurrage, you get $1.00 per share.</p>
+            </div>
+          </div>
+          
+          <h3 style="color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <span style="background:var(--primary);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">3</span>
+            Price = Probability
+          </h3>
+          <div style="background:var(--bg-input);padding:20px;border-radius:8px;margin-bottom:24px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <span>YES at 35¢</span>
+              <span style="font-size:24px;">→</span>
+              <span>35% chance of demurrage</span>
+            </div>
+            <div style="background:var(--bg-dark);padding:12px;border-radius:6px;font-size:13px;">
+              <strong>Example:</strong> Buy 100 YES shares at 35¢ = $35 cost<br>
+              <span style="color:var(--bid-green);">If demurrage occurs: Win $100 (profit: $65)</span><br>
+              <span style="color:var(--ask-red);">If on time: Lose $35</span>
+            </div>
+          </div>
+          
+          <h3 style="color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <span style="background:var(--primary);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">4</span>
+            Market Resolution
+          </h3>
+          <p style="color:var(--text-secondary);margin-bottom:24px;">
+            Markets resolve based on official port data and AIS tracking. If the vessel exceeds the demurrage threshold (typically 24-48 hours late), YES wins. Otherwise, NO wins. Settlement is automatic and instant.
+          </p>
+          
+          <div style="background:var(--bg-input);padding:20px;border-radius:8px;border:1px solid var(--border);">
+            <h4 style="margin:0 0 12px;">Who Uses This Platform?</h4>
+            <ul style="margin:0;padding-left:20px;color:var(--text-secondary);">
+              <li style="margin-bottom:8px;"><strong style="color:var(--text-primary);">Shippers & Cargo Owners:</strong> Hedge against demurrage costs</li>
+              <li style="margin-bottom:8px;"><strong style="color:var(--text-primary);">Trading Firms:</strong> Speculate on shipping delays using route/port analysis</li>
+              <li style="margin-bottom:8px;"><strong style="color:var(--text-primary);">Market Makers:</strong> Provide liquidity and earn the bid-ask spread</li>
+              <li><strong style="color:var(--text-primary);">Insurers:</strong> Offload risk to the market efficiently</li>
+            </ul>
+          </div>
+        </div>
+        
+        <button onclick="hideModal()" style="width:100%;margin-top:24px;padding:14px;background:var(--primary);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Start Trading</button>
+      `);
+    }
+
+    // Trade simulation
+    function startSimulation() {
+      if (simulationInterval) return;
+      
+      simulationInterval = setInterval(async () => {
+        if (!currentMarket) return;
+        
+        try {
+          const ob = await fetch(`/api/markets/${currentMarket}/orderbook`).then(r => r.json());
+          const side = Math.random() > 0.5 ? 'BUY' : 'SELL';
+          
+          let price;
+          if (side === 'BUY' && ob.asks.length > 0) {
+            price = ob.asks[0].price + Math.floor(Math.random() * 3) - 1;
+          } else if (side === 'SELL' && ob.bids.length > 0) {
+            price = ob.bids[0].price + Math.floor(Math.random() * 3) - 1;
+          } else {
+            price = 40 + Math.floor(Math.random() * 20);
+          }
+          
+          price = Math.max(1, Math.min(99, price));
+          const quantity = 20 + Math.floor(Math.random() * 80);
+          
+          await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              marketId: currentMarket,
+              userId: 'bot-' + Math.floor(Math.random() * 1000),
+              side,
+              type: Math.random() > 0.3 ? 'LIMIT' : 'MARKET',
+              price,
+              quantity
+            })
+          });
+        } catch (e) {}
+      }, 1500 + Math.random() * 2000);
+    }
+
+    function stopSimulation() {
+      if (simulationInterval) {
+        clearInterval(simulationInterval);
+        simulationInterval = null;
+      }
+    }
+
+    function addSimulationToggle() {
+      const btn = document.createElement('button');
+      btn.id = 'simToggle';
+      btn.textContent = 'Start Bots';
+      btn.style.cssText = 'background:var(--warning);color:black;border:none;padding:6px 12px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600;margin-left:8px;';
+      btn.onclick = () => {
+        if (simulationInterval) {
+          stopSimulation();
+          btn.textContent = 'Start Bots';
+          btn.style.background = 'var(--warning)';
+        } else {
+          startSimulation();
+          btn.textContent = 'Stop Bots';
+          btn.style.background = 'var(--danger)';
+        }
+      };
+      document.querySelector('.markets-list').parentElement.querySelector('.card-header').appendChild(btn);
+    }
+
+    // Initialize
+    loadMarkets();
+    updateSummary();
+    addSimulationToggle();
+  </script>
+</body>
+</html>

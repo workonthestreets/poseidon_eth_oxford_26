@@ -91,6 +91,18 @@ contract MaritimeRiskOracle {
         string navigationStatus
     );
     
+    event ProofVerificationSuccess(
+        bytes32 indexed attestationType,
+        bytes32 indexed sourceId,
+        uint64 votingRound
+    );
+    
+    event ProofVerificationFailed(
+        bytes32 indexed attestationType,
+        bytes32 indexed sourceId,
+        string reason
+    );
+    
     // ============ Modifiers ============
     
     modifier onlyOwner() {
@@ -119,13 +131,89 @@ contract MaritimeRiskOracle {
     // ============ FDC Verification ============
     
     /**
-     * @notice Verifies a Web2Json proof from Flare Data Connector
+     * @notice Verifies a Web2Json proof from Flare Data Connector with comprehensive validation
      * @param _proof The proof structure from FDC
      * @return True if the proof is valid
+     * @dev Performs multiple validation checks:
+     *      1. Merkle proof array is not empty
+     *      2. Response body contains data
+     *      3. Attestation type is Web2Json
+     *      4. Merkle proof verification via FdcVerification contract
      */
-    function verifyWeb2JsonProof(IWeb2Json.Proof calldata _proof) public view returns (bool) {
+    function verifyWeb2JsonProof(IWeb2Json.Proof calldata _proof) public returns (bool) {
+        // Validation 1: Check Merkle proof exists
+        require(_proof.merkleProof.length > 0, "Empty Merkle proof");
+        
+        // Validation 2: Check response body has data
+        require(_proof.data.responseBody.abiEncodedData.length > 0, "Empty response data");
+        
+        // Validation 3: Verify attestation type is Web2Json (0x5765623244617461000000000000000000000000000000000000000000000000)
+        bytes32 expectedAttestationType = 0x5765623244617461000000000000000000000000000000000000000000000000;
+        require(
+            _proof.data.attestationType == expectedAttestationType,
+            "Invalid attestation type - expected Web2Json"
+        );
+        
+        // Validation 4: Verify Merkle proof against DA Layer root
         IFdcVerification fdcVerification = ContractRegistry.getFdcVerification();
-        return fdcVerification.verifyWeb2Json(_proof);
+        bool isValid = fdcVerification.verifyWeb2Json(_proof);
+        
+        if (isValid) {
+            emit ProofVerificationSuccess(
+                _proof.data.attestationType,
+                _proof.data.sourceId,
+                _proof.data.votingRound
+            );
+        } else {
+            emit ProofVerificationFailed(
+                _proof.data.attestationType,
+                _proof.data.sourceId,
+                "Merkle root verification failed"
+            );
+        }
+        
+        return isValid;
+    }
+    
+    /**
+     * @notice Safe proof verification that returns false instead of reverting
+     * @param _proof The proof structure from FDC
+     * @return isValid True if proof is valid, false otherwise
+     * @return errorMessage Error message if validation failed
+     */
+    function safeVerifyWeb2JsonProof(IWeb2Json.Proof calldata _proof) 
+        public 
+        view 
+        returns (bool isValid, string memory errorMessage) 
+    {
+        // Check 1: Merkle proof exists
+        if (_proof.merkleProof.length == 0) {
+            return (false, "Empty Merkle proof");
+        }
+        
+        // Check 2: Response body has data
+        if (_proof.data.responseBody.abiEncodedData.length == 0) {
+            return (false, "Empty response data");
+        }
+        
+        // Check 3: Attestation type
+        bytes32 expectedAttestationType = 0x5765623244617461000000000000000000000000000000000000000000000000;
+        if (_proof.data.attestationType != expectedAttestationType) {
+            return (false, "Invalid attestation type");
+        }
+        
+        // Check 4: Merkle proof verification
+        try ContractRegistry.getFdcVerification().verifyWeb2Json(_proof) returns (bool valid) {
+            if (valid) {
+                return (true, "");
+            } else {
+                return (false, "Merkle root verification failed");
+            }
+        } catch Error(string memory reason) {
+            return (false, reason);
+        } catch {
+            return (false, "Unknown verification error");
+        }
     }
     
     // ============ Data Submission with FDC Verification ============

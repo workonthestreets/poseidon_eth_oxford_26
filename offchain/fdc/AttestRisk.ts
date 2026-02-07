@@ -1,8 +1,10 @@
 import { ethers } from "ethers";
 import * as fs from "fs";
 import * as dotenv from "dotenv";
+import * as path from "path";
 
-dotenv.config();
+// Load .env from project root
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // ABI for the FdcHub (Minimal interface for requesting attestation)
 const IFdcHub = [

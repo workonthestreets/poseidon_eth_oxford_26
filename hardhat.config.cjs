@@ -25,7 +25,8 @@ const config = {
         }
     },
     paths: {
-        sources: "./contracts",
+        sources: "./onchain/contracts",
+        scripts: "./onchain/scripts",
         tests: "./test",
         cache: "./cache",
         artifacts: "./artifacts"

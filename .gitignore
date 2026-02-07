@@ -1,2 +1,56 @@
-node_modules
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment variables (NEVER COMMIT)
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Build outputs
+dist/
+build/
+artifacts/
+cache/
+typechain-types/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Hardhat
+cache/
+artifacts/
+
+# Rust (clob-rs)
+offchain/clob-rs/target/
+**/*.rs.bk
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
