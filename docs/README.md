@@ -115,8 +115,9 @@ UI / Frontend → Market Adapter → Oracle / FDC → DA Verification → Core L
 
 - FDC integration allowed verified event submission from Web2 to on-chain contracts seamlessly  
 - Separation of effectful and pure layers made testing and fallback management easier  
-- Implementing fallback handling required explicit FDC submission patterns, which could be clarified in future documentation  
-- Overall, FDC is well-suited for risk market settlement with minimized reliance on untrusted off-chain sources  
+- Implementing fallback handling required explicit FDC submission patterns, which could be clarified in future documentation
+- While attempting to use Flare's Web2Json on the TestNet, we encountered significant difficulties on the server's end pertaining to DA validation
+- Overall, FDC is well-suited for risk market settlement with minimized reliance on untrusted off-chain sources. Ideally, it would be better if the aforementioned problem were solved for ease-of-use.
 
 ---
 
