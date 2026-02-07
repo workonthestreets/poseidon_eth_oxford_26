@@ -57,12 +57,12 @@ async function main() {
   // Step 1: Define data source and processing
   const imo = "9749544"; // User specified vessel (from Seed List)
 
-  // Use GitHub Raw URL (Bypasses Vercel/ngrok blocking entirely)
-  // Requires: git push origin main
+  // Use JSDelivr CDN (Proxies GitHub with correct headers for Verifier)
   const githubUser = "joakimtallingsmith";
   const repo = "eth-oxford";
-  const branch = "main";
-  const apiUrl = `https://raw.githubusercontent.com/${githubUser}/${repo}/${branch}/offchain/data/psc/${imo}.json`;
+  const branch = "1f1f8cf"; // Specific commit hash to bypass CDN cache of large files
+  // const apiUrl = `https://raw.githubusercontent.com/${githubUser}/${repo}/${branch}/offchain/data/psc/${imo}.json`;
+  const apiUrl = `https://cdn.jsdelivr.net/gh/${githubUser}/${repo}@${branch}/offchain/data/psc/${imo}.json`;
 
   console.log("📋 Attestation Configuration:");
   console.log(`   IMO: ${imo}`);

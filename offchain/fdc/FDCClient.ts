@@ -259,7 +259,15 @@ export async function prepareWeb2JsonRequest(
 
     const result: any = await response.json();
     console.log("✅ Verifier prepared request successfully\n");
-    console.log("   Verifier Response:", JSON.stringify(result, null, 2));
+    // Debugging: (Uncomment to inspect full response in case of ABI errors)
+    // console.log("   Verifier Response Status:", result.status);
+    // console.log("   Verifier Response Keys:", Object.keys(result));
+    // if (result.data) console.log("   Verifier Response Data (partial):", JSON.stringify(result.data).substring(0, 200) + "...");
+
+    // Check if result.abiEncodedRequest exists
+    if (!result.abiEncodedRequest) {
+        console.warn("⚠️  WARNING: abiEncodedRequest MISSING in Verifier response!");
+    }
 
     // The verifier returns { abiEncodedRequest: "0x..." } 
     // which is ready to submit to FdcHub

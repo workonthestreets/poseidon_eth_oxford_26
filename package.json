@@ -1,13 +1,12 @@
 {
   "name": "maritime-shield",
   "version": "1.0.0",
-  "description": "Maritime Demurrage Insurance Prediction Market",
-  "main": "dist/src/api/server.js",
+  "description": "Maritime Demurrage Insurance Prediction Market (FDC Integration)",
+  "main": "offchain/fdc/testPSCInspection.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/src/api/server.js",
-    "dev": "tsx src/api/server.ts",
-    "test": "tsx src/test/clob.test.ts"
+    "test": "npx hardhat test",
+    "fdc:test": "tsx offchain/fdc/testPSCInspection.ts",
+    "data:fetch": "tsx offchain/data/fetchFullVesselProfile.ts"
   },
   "keywords": [
     "prediction-market",
@@ -24,17 +23,11 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
-    "@types/express": "^5.0.6",
     "@types/node": "^25.2.1",
-    "@types/uuid": "^10.0.0",
-    "@types/ws": "^8.18.1",
     "dotenv": "^17.2.4",
-    "express": "^5.2.1",
     "hardhat": "^2.22.17",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "uuid": "^9.0.1",
-    "ws": "^8.19.0"
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@flarenetwork/flare-periphery-contract-artifacts": "^0.1.40",

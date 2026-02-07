@@ -197,13 +197,13 @@ async function processVessel(vessel: any) {
         voyage: voyProcessed,
         congestion: congProcessed,
 
-        // Include RAW data for debugging if needed
+        // Include RAW data for debugging if needed (EXCLUDE congestion for FDC size limits)
         raw: {
             psc: pscRaw,
             drydock: ddRaw,
             casualty: casRaw,
             voyage: voyRaw,
-            congestion: congRaw
+            // congestion: congRaw // Too large for FDC Verifier
         }
     };
 

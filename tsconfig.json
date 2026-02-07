@@ -16,7 +16,7 @@
     "declaration": true
   },
   "include": [
-    "src/**/*",
+    "onchain/**/*",
     "offchain/**/*",
     "hardhat.config.ts"
   ],
