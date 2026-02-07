@@ -1,0 +1,92 @@
+[
+  {
+    "imo": "9749544",
+    "name": "ELANDRA GULF",
+    "lat": 52.372593,
+    "lon": 3.1571651,
+    "status": "Moving (11.1kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9803687",
+    "name": "BG JADE",
+    "lat": 52.260502,
+    "lon": 3.2323334,
+    "status": "Moving (13.6kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9935600",
+    "name": "SEA SAPPHIRE",
+    "lat": 52.150848,
+    "lon": 2.6743317,
+    "status": "Moving (10.6kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9341328",
+    "name": "ATLANTIC TWIN",
+    "lat": 52.47887333333333,
+    "lon": 4.465195,
+    "status": "Moving (10.1kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9473456",
+    "name": "CITY OF ST.PETERSBURG",
+    "lat": 52.48411333333333,
+    "lon": 4.426746666666666,
+    "status": "Moving (13.6kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9375616",
+    "name": "TORM LAURA",
+    "lat": 52.468115,
+    "lon": 4.156206666666667,
+    "status": "Moving (4kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9373278",
+    "name": "GT PIKE",
+    "lat": 52.503029,
+    "lon": 3.7337816,
+    "status": "Moving (9.1kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9340623",
+    "name": "BRO NISSUM",
+    "lat": 52.407293333333335,
+    "lon": 3.69308,
+    "status": "Moving (10.7kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9736183",
+    "name": "MICK",
+    "lat": 52.839558333333336,
+    "lon": 4.231331666666667,
+    "status": "Moving (12.2kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9266425",
+    "name": "THUN GRANITE",
+    "lat": 51.990323333333336,
+    "lon": 3.93354,
+    "status": "Moving (9.8kn)",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  }
+]

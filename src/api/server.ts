@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import express, { Request, Response } from 'express';
 import { WebSocketServer, WebSocket } from 'ws';
 import http from 'http';
@@ -267,8 +270,6 @@ server.listen(PORT, () => {
   console.log('Demo markets initialized');
 });
 
-
-
 // ==========================================
 // DATALASTIC PROXY ENDPOINTS FOR FDC
 // ==========================================
@@ -292,6 +293,10 @@ app.get('/api/proxy/risk/psc/:imo', async (req: Request, res: Response) => {
       deficiency_count: 0,
       deficiency_description: "",
       last_detention_date: null as string | null,
+      inspection_authority: "",
+      inspection_port: "",
+      inspection_date: "",
+      detention: "False",
       timestamp: new Date().toISOString()
     };
 
@@ -317,6 +322,13 @@ app.get('/api/proxy/risk/psc/:imo', async (req: Request, res: Response) => {
         responseData.detention_count = recentDetentions.length;
         responseData.deficiency_count = latest ? parseInt(latest.ship_deficiencies || "0") : 0;
         responseData.deficiency_description = latest ? (latest.deficiency_description || "") : "";
+
+        // Spec Fields
+        responseData.inspection_authority = latest ? (latest.inspection_authority || latest.authority || "Unknown") : "";
+        responseData.inspection_port = latest ? (latest.inspection_port || latest.port || "") : "";
+        responseData.inspection_date = latest ? (latest.inspection_date || latest.date || "") : "";
+        responseData.detention = latest ? (latest.detention || "False") : "False";
+
         if (recentDetentions.length > 0) {
           responseData.last_detention_date = recentDetentions[0].date || recentDetentions[0].inspection_date;
         }
@@ -346,6 +358,8 @@ app.get('/api/proxy/risk/drydock/:imo', async (req: Request, res: Response) => {
     let responseData = {
       imo: imo,
       next_due_date: null as string | null,
+      dry_dock_from: null as string | null,
+      dry_dock_to: null as string | null,
       is_overdue: false,
       timestamp: new Date().toISOString()
     };
@@ -356,9 +370,13 @@ app.get('/api/proxy/risk/drydock/:imo', async (req: Request, res: Response) => {
         const json: any = await response.json();
         const data = json.data ? json.data[0] : null; // Assuming list or single obj
 
-        if (data && data.dry_dock_next_due) {
-          responseData.next_due_date = data.dry_dock_next_due;
-          responseData.is_overdue = new Date(data.dry_dock_next_due) < new Date();
+        if (data) {
+          if (data.dry_dock_next_due) {
+            responseData.next_due_date = data.dry_dock_next_due;
+            responseData.is_overdue = new Date(data.dry_dock_next_due) < new Date();
+          }
+          responseData.dry_dock_from = data.dry_dock_from || null;
+          responseData.dry_dock_to = data.dry_dock_to || null;
         }
       }
     }
@@ -383,6 +401,8 @@ app.get('/api/proxy/risk/casualty/:imo', async (req: Request, res: Response) => 
       casualty_detected: false,
       casualty_type: "",
       casualty_date: null as string | null,
+      casualty_details: "",
+      vessel_name: "",
       timestamp: new Date().toISOString()
     };
 
@@ -398,6 +418,8 @@ app.get('/api/proxy/risk/casualty/:imo', async (req: Request, res: Response) => 
           responseData.casualty_detected = true;
           responseData.casualty_type = latest.casualty_type;
           responseData.casualty_date = latest.casualty_date || latest.date;
+          responseData.casualty_details = latest.casualty_details || "";
+          responseData.vessel_name = latest.vessel_name || "";
         }
       }
     }
@@ -428,6 +450,7 @@ app.get('/api/proxy/risk/voyage/:imo', async (req: Request, res: Response) => {
       current_lon: 0,
       destination: "",
       eta: "",
+      navigation_status: "Unknown",
       timestamp: new Date().toISOString()
     };
 
@@ -435,13 +458,15 @@ app.get('/api/proxy/risk/voyage/:imo', async (req: Request, res: Response) => {
       const response = await fetch(url);
       if (response.ok) {
         const json: any = await response.json();
-        const vessel = json.data ? json.data[0] : null; // v0/vessel often returns array
+        // v0/vessel might return array in data, or single object in data
+        const vessel = Array.isArray(json.data) ? json.data[0] : (json.data || null);
 
         if (vessel) {
           responseData.current_lat = parseFloat(vessel.lat);
           responseData.current_lon = parseFloat(vessel.lon);
           responseData.destination = vessel.destination;
           responseData.eta = vessel.eta;
+          responseData.navigation_status = vessel.nav_status || "Unknown";
 
           // Simple Haversine (or just euclidean for short dist) to check radius
           // Mock check: if lat/lon is close to 0,0 (default) or target
@@ -500,6 +525,149 @@ app.get('/api/proxy/risk/congestion', async (req: Request, res: Response) => {
       }
     }
     res.json(responseData);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 6. DISCOVERY & MARKET LIFECYCLE (Emission vs Settlement)
+// Used to find vessels for NEW markets (Emission) or checking status for EXISTING ones (Settlement)
+// MODES: 'scan' (default, costly) or 'seed' (safe, specific IMOs)
+app.get('/api/proxy/discovery/port', async (req: Request, res: Response) => {
+  // Default to Rotterdam if not provided
+  const lat = req.query.lat || "51.90";
+  const lon = req.query.lon || "4.50";
+  const radius = req.query.radius || "50";
+  const type = req.query.type || "cargo"; // heavy lift, tanker, etc.
+  const limit = req.query.limit || "5"; // Default to 5 to save credits
+  const mode = req.query.mode || "seed"; // DEFAULT TO SAFE SEED MODE
+  const apiKey = process.env.DATALASTIC_API_KEY;
+
+  // IMOs provided by User for Rotterdam region
+  const SEED_IMOS = [
+    "9749544", "9803687", "9935600", "9341328", "9473456",
+    "9375616", "9373278", "9340623", "9736183", "9266425"
+  ];
+
+  try {
+    let vessels: any[] = [];
+
+    if (mode === "seed" && apiKey) {
+      console.log(`[Discovery] Running SEED MODE for ${SEED_IMOS.length} specific IMOs...`);
+
+      // Parallel fetch for specific IMOs (Cost: 1 credit per IMO = 10 credits total)
+      // Using /vessel endpoint for details
+      const promises = SEED_IMOS.map(async (imo) => {
+        const url = `${DATA_API}/v0/vessel?api-key=${apiKey}&imo=${imo}`;
+        try {
+          const r = await fetch(url);
+          if (r.ok) {
+            const j: any = await r.json();
+            // Datalastic /vessel returns { data: {...} } single obj usually
+            return j.data ? j.data : null;
+          }
+          return null;
+        } catch (e) {
+          console.error(`Failed to fetch IMO ${imo}:`, e);
+          return null;
+        }
+      });
+
+      const results = await Promise.all(promises);
+      vessels = results.filter(v => v !== null);
+      console.log(`[Discovery] Seed Fetch Complete. Found ${vessels.length}/${SEED_IMOS.length} vessels.`);
+
+    } else if (mode === "scan" && apiKey) {
+      // ORIGINAL EXPENSIVE SCAN LOGIC
+      // Only use if explicitly requested!
+      const url = `${DATA_API}/v0/vessel_inradius?api-key=${apiKey}&lat=${lat}&lon=${lon}&radius=${radius}&type=${type}&limit=${limit}`;
+      console.log(`[Discovery] Fetching (SCAN MODE): ${url.replace(apiKey || '', 'HIDDEN')}`);
+
+      const response = await fetch(url);
+      if (response.ok) {
+        const json: any = await response.json();
+        console.log(`[Discovery] API Response: ${JSON.stringify(json).substring(0, 500)}`); // Log first 500 chars
+        if (json.error) console.error(`[Discovery] API Logical Error: ${json.error}`);
+
+        // Handle variations: data array, root array, or nested data.vessels
+        if (Array.isArray(json)) vessels = json;
+        else if (Array.isArray(json?.data)) vessels = json.data;
+        else if (json?.data?.vessels && Array.isArray(json.data.vessels)) vessels = json.data.vessels;
+        else vessels = [];
+
+        // Filter out vessels without IMO
+        vessels = vessels.filter((v: any) => v.imo);
+
+        // Enforce limit manually if API ignored it, though we still paid for the fetch
+        if (vessels.length > Number(limit)) {
+          vessels = vessels.slice(0, Number(limit));
+        }
+
+        console.log(`[Discovery] Parsed ${vessels.length} valid vessels (with IMO).`);
+      } else {
+        const errText = await response.text();
+        console.error(`[Discovery] API Error: ${response.status} ${errText}`);
+        res.status(response.status).json({ error: `Datalastic Error: ${errText}` });
+        return;
+      }
+    } else {
+      // Basic Mock if no key
+      vessels = [
+        { imo: "9703318", name: "MSC OSCAR", nav_status: "moored", lat: 51.9, lon: 4.5 },
+        { imo: "9811000", name: "EVER GIVEN", nav_status: "under way using engine", lat: 50.0, lon: 2.0 }
+      ];
+    }
+
+    // Process vessels into Market Categories based on Navigational Status Codes
+    const marketCandidates = vessels.map((v: any) => {
+      // Nav Status Codes:
+      // 0=Underway using engine, 1=At anchor, 5=Moored, 6=Aground, 8=Underway sailing
+
+      let code = -1;
+      if (v.nav_status_code !== undefined) code = parseInt(v.nav_status_code);
+      else if (v.nav_status === "under way using engine") code = 0;
+      else if (v.nav_status === "at anchor") code = 1;
+      else if (v.nav_status === "moored") code = 5;
+
+      const isMoving = [0, 3, 4, 8, 11, 12].includes(code);
+      const isStopped = [1, 5].includes(code); // Anchor or Moored
+      const isCasualtyRisk = [2, 6, 14].includes(code);
+
+      let action = "UNKNOWN";
+      if (isMoving) action = "EMIT_MARKET";
+      if (isStopped) action = "SETTLE_VOYAGE";
+      if (isCasualtyRisk) action = "SETTLE_CASUALTY";
+
+      // Fallback: If nav_status is missing or Unknown, use Speed
+      if (action === "UNKNOWN" && v.speed !== undefined) {
+        const speed = Number(v.speed);
+        if (!isNaN(speed)) {
+          if (speed < 1.0) {
+            action = "SETTLE_VOYAGE"; // Stopped/Moored/Anchor
+            if (v.nav_status === "Unknown" || !v.nav_status) v.nav_status = `Stopped (${speed}kn)`;
+          } else {
+            action = "EMIT_MARKET"; // Moving
+            if (v.nav_status === "Unknown" || !v.nav_status) v.nav_status = `Moving (${speed}kn)`;
+          }
+        }
+      }
+
+      return {
+        imo: v.imo,
+        name: v.name,
+        lat: v.lat,
+        lon: v.lon,
+        status: v.nav_status || "Unknown",
+        status_code: code,
+        suggested_action: action
+      };
+    });
+
+    res.json({
+      meta: { location: "Rotterdam (Seed List)", count: marketCandidates.length },
+      candidates: marketCandidates
+    });
+
   } catch (e: any) {
     res.status(500).json({ error: e.message });
   }
