@@ -1,218 +1,208 @@
-# 🌊 Maritime Risk Markets  
-### On-chain prediction markets for real-world maritime events, powered by Flare FDC
+# Maritime Risk Markets on Flare
+
+A decentralized prediction market system for maritime operational risk, enabling transparent, oracle-backed trading on shipping events such as vessel casualties, regulatory clearance delays, and voyage duration.
+
+Built during a hackathon with a focus on clean system architecture, oracle reliability, and Web2 → Web3 interoperability using Flare’s FDC protocol.
 
 ---
 
-## 🧠 Overview
+## Problem
 
-Maritime logistics underpins global trade, yet risk around vessel operations remains opaque, fragmented, and difficult to hedge. This project introduces **on-chain risk markets for maritime events**, enabling transparent, real-time price discovery around vessel-specific risks.
+Maritime logistics faces significant uncertainty:
+- Vessel casualties and sinkings
+- Delays due to port and FCS clearance
+- Voyage time overruns caused by congestion, weather, or rerouting
 
-Using **Flare’s Flare Data Connector (FDC)**, we bridge Web2 maritime data into Web3 markets, allowing users to trade on outcomes such as:
-
-- 🚢 **Casualty / Sinking Risk**
-- 🛂 **FCS (Port & Customs) Clearance Risk**
-- ⏱ **Voyage Time Risk**
-
-Each vessel has its own set of risk markets, traded via a **CLOB-style market interface**, with settlement handled on-chain once verified real-world data is available.
-
-This system is designed for:
-- Traders and hedgers exposed to maritime risk  
-- Logistics firms seeking transparent risk pricing  
-- Insurers and reinsurers exploring on-chain primitives  
-- Data-driven DeFi users interacting with real-world outcomes  
+These risks are currently opaque, difficult to hedge, and inaccessible to most market participants.
 
 ---
 
-## 🧩 Core Idea
+## Solution
 
-> **Real-world maritime events → verifiable data → on-chain settlement**
+We introduce vessel-specific risk markets where users can trade on the probability of defined maritime events using oracle-backed settlement on Flare.
 
-The key challenge is trustless verification of off-chain events. We solve this by anchoring maritime data to Flare using **FDC attestations**, enabling smart contracts to settle markets based on externally verified outcomes.
+Each vessel has three active risk markets:
+1. Casualty / Sinking Risk
+2. FCS (Port / Regulatory) Clearance Risk
+3. Voyage Time Risk
+
+Markets are powered by off-chain maritime data and resolved on-chain using Flare Data Connector (FDC).
 
 ---
 
-## 🏗 System Architecture
+## High-Level Architecture
 
-### High-Level Flow
+The system is modular and layered to separate concerns clearly. A more visually-friendly version of this flowchart will be shown in the presentation.
 
-Frontend (Web UI)
+UI / Frontend (Web2)
 ↓
-Market Adapter (CLOB Interface)
+Market Adapter (Order-Book UI Abstraction)
 ↓
-Oracle Request (Flare FDC)
+Oracle Request Layer (Flare FDC)
 ↓
-Data Attestation (DA Layer)
+Data Availability & Verification (DA)
 ↓
-Core Market Logic
+Pure Core Logic (Deterministic)
 ↓
-Backend / Settlement Layer
+Effectual Backend Layer
 ↓
-Smart Contracts
+Smart Contracts (Flare)
 ↓
-Token Collateral & Payouts
-
-yaml
-Copy code
-
-### Component Breakdown
-
-#### 1. Frontend (Web2)
-- Vessel selection (name, IMO number)
-- Risk market selection (3 markets per vessel)
-- Order placement (limit & market orders)
-- Price ladder and order book (CLOB-style)
-- Vessel map and metadata display
-
-The frontend is intentionally decoupled from backend logic, allowing seamless integration once oracle-backed settlement is live.
+Token Collateral & Settlement
 
 ---
 
-#### 2. Market Adapter
-Acts as a translation layer between UI actions and on-chain logic:
-- Normalizes orders
-- Routes market interactions
-- Abstracts oracle dependencies from the UI
+## Architecture Breakdown
+
+### 1. Frontend (Web2)
+
+The frontend provides a CLOB-style market interface as a UI abstraction.
+
+**Clarification:**
+> This is not an on-chain CLOB, because it doesn't need to be. The frontend implements order-book-style UX only and outputs normalized user intents.
+
+Features:
+- Vessel selector (name, IMO)
+- Three risk markets per vessel
+- Price ladder and depth display
+- Market and limit order inputs
+- Vessel location map (lat/lon)
+- Real-time market state rendering
 
 ---
 
-#### 3. Flare Data Connector (FDC)
-FDC is used to securely bridge Web2 maritime data into the blockchain environment.
+### 2. Market Adapter
 
-**Role of FDC in our system:**
-- Requests verifiable maritime data (e.g. vessel position, timestamps, clearance status)
-- Produces cryptographic attestations
-- Enables deterministic on-chain settlement logic
+- Translates frontend actions into structured market intents
+- Normalizes orders across risk markets
+- Prepares oracle queries and settlement parameters
 
-This is the core Web2 → Web3 bridge in the architecture.
+No trade matching occurs here.
 
 ---
 
-#### 4. Data Attestation (DA) Layer
-The DA layer verifies that:
-- The data source is authentic
-- The data matches the requested schema
-- The attestation can be trusted by smart contracts
+### 3. Oracle Layer (Flare Data Connector – FDC)
 
-Only verified data is allowed to influence settlement.
+FDC bridges off-chain maritime data into Web3 settlement logic.
 
----
+Responsibilities:
+- Fetch vessel data (location, speed, status, timestamps)
+- Validate responses via FDC attestation
+- Provide cryptographically verifiable inputs to smart contracts
 
-#### 5. Core Logic & Settlement
-Once attestations are confirmed:
-- Market outcomes are resolved
-- Winning positions are calculated
-- Settlement instructions are passed to smart contracts
+**Oracle Fallback Strategy**
+- Primary: Live API data routed through FDC
+- Fallback: Static JSON submitted through the same FDC schema
 
----
-
-#### 6. Smart Contracts & Collateral Layer
-- Manages collateral
-- Enforces payout rules
-- Guarantees non-custodial settlement
-- Ensures deterministic resolution
+Fallback preserves:
+- Oracle verification
+- Contract interface
+- Easy swap to live APIs without architectural changes
 
 ---
 
-## 🔁 Feedback Loops
+### 4. Data Availability & Verification (DA)
 
-The architecture intentionally includes feedback loops:
+- Validates oracle payloads
+- Ensures completeness and schema correctness
+- Prevents malformed data from reaching settlement logic
 
-- Oracle updates can trigger market resolution
-- Settlement events update frontend state
-- Prices reflect collective risk perception over time
-
-This mirrors real-world markets rather than static prediction bets.
+This layer can use Web2 or Web3 primitives depending on deployment.
 
 ---
 
-## 📊 Data Handling Strategy
+### 5. Core Logic (Pure Functions)
 
-### Current Implementation
-Due to hackathon time constraints and API limits, the system currently uses **structured JSON dummy data** that mirrors live maritime API responses.
+- Risk probability calculations
+- Payout multiplier computation
+- Market resolution conditions
 
-### Design Intention
-The data layer is fully abstracted. Switching from dummy data to live APIs requires:
-- Replacing the data provider module
-- Keeping schemas unchanged
-- Plugging FDC requests into the same interface
-
-This makes the transition from mock → production trivial.
+**Properties:**
+- Stateless
+- Deterministic
+- Auditable and testable
 
 ---
 
-## 🧪 Effectual Design Philosophy
+### 6. Effectual Backend Layer
 
-The project follows an **effectual engineering approach**:
+Handles side effects only:
+- UI updates
+- Logging
+- Oracle request coordination
+- Contract calls
 
-- Build the smallest credible end-to-end flow
-- Design for replaceability, not perfection
-- Prioritize verifiability over completeness
-- Optimize for demo realism under constraints
-
-Every mocked component has a clearly defined production counterpart.
-
----
-
-## 🔗 Web2 ↔ Web3 Boundary
-
-| Layer | Domain |
-|-----|------|
-| UI | Web2 |
-| Market Adapter | Hybrid |
-| FDC & DA | Web3 |
-| Core Logic | Web3 |
-| Smart Contracts | Web3 |
-| Collateral | Web3 |
-
-Flare FDC is the **critical trust boundary**, eliminating the need for centralized oracles.
+Business logic resides in the pure core logic layer.
 
 ---
 
-## 🔥 Why Flare?
+### 7. Smart Contracts (Flare)
 
-Flare is uniquely suited for this use case because:
-- Native oracle infrastructure
-- Deterministic data attestations
-- Seamless smart contract integration
-- Designed for real-world data
+- Market creation
+- User positions
+- Oracle-based resolution
+- Payout settlement
+
+Contracts consume **FDC-verified data only**, ensuring trust-minimized settlement.
 
 ---
 
-## 🧠 Flare FDC: Developer Feedback
+### 8. Token Collateral Layer
 
-### What Worked Well
-- Clear conceptual model for data attestations  
-- Strong separation between data providers and smart contracts  
-- FDC’s design makes oracle logic auditable and composable  
-- Well-suited for non-financial real-world data  
+- Users post collateral to enter markets
+- Funds are escrowed until resolution
+- Payouts distributed based on outcomes
+
+---
+
+## Data Sources
+
+### Hackathon Status
+- Static JSON fixtures emulate API responses
+- Hot-swappable for live API integration without refactoring
+
+### Production Mode
+- Replace JSON with live maritime APIs
+- No changes required to oracle flow, core logic, or contracts
+
+---
+
+## Security & Market Integrity
+
+- Oracle-based settlement reduces manipulation
+- Deterministic core logic prevents discretionary resolution
+- DA layer protects against malformed data
+- Architecture limits insider influence from vessel operators
+
+---
+
+## Flare Protocol Usage & Feedback (Bounty Section)
+
+### Strengths
+- FDC attestation model fits prediction markets naturally
+- Clear separation of data retrieval and settlement
+- Easy to mock JSON and later swap real data without contract changes
 
 ### Challenges
-- Documentation could benefit from more end-to-end examples
-- More reference architectures would help new teams onboard faster
-- Testing flows involving attestations can be non-trivial under time pressure
+- FDC documentation could use more end-to-end examples
+- Fallback patterns are not fully detailed
+- More local FDC simulation tooling would speed development
 
-### Overall Impression
-Flare FDC is one of the most production-ready approaches to decentralized data verification we’ve seen. It significantly lowers the barrier to building serious Web2-integrated dApps without sacrificing trust assumptions.
-
-We would strongly consider Flare for any future project requiring real-world data settlement.
+**Overall Assessment:**  
+FDC is a strong primitive for real-world event settlement. It encourages clean architecture and reduces oracle trust assumptions, especially suitable for physical-world events like shipping.
 
 ---
 
-## 🚀 Future Work
-- Live integration with maritime data providers
-- Full oracle-backed settlement
-- Advanced market types
-- Insurance-native risk instruments
-- Cross-chain settlement extensions
+## Future Work
+
+- Live API integration
+- On-chain order matching
+- Expanded risk categories
+- Liquidity incentives
+- DAO-based market governance
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 
-This project demonstrates how **real-world maritime risk can be priced, traded, and settled on-chain** using Flare’s oracle infrastructure.
-
-Even under hackathon constraints, the system is architected for realism, extensibility, and production viability.
-
----
-
-Built with ❤️ for Flare.
+This project demonstrates how real-world maritime risk can be transformed into transparent, oracle-backed financial markets using Flare’s infrastructure. By cleanly separating UI, data, logic, and settlement, the system is hackathon-ready and production-capable.
