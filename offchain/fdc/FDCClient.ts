@@ -68,7 +68,7 @@ export async function postRequestToDALayer(
 /**
  * Retrieve data and proof from DA Layer (matches Flare example: retrieveDataAndProofBase)
  */
-async function retrieveDataAndProofBase(
+export async function retrieveDataAndProofBase(
     url: string,
     abiEncodedRequest: string,
     roundId: number
