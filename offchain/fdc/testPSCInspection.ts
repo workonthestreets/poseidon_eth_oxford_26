@@ -1,15 +1,20 @@
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 import * as path from "path";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import {
   COSTON2_RPC,
   COSTON2_DA_LAYER_URL,
-  prepareAttestationRequest,
+  prepareWeb2JsonRequest,
+  prepareAddressValidityRequest,
   submitAttestationRequest,
-  retrieveDataAndProofBase,
-} from "./Base";
+  retrieveDataAndProofBaseWithRetry
+} from "./FDCClient.js";
 
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 /**
  * Test script for PSC Inspection attestation workflow
@@ -30,14 +35,14 @@ async function main() {
   // Setup provider and signer
   const provider = new ethers.JsonRpcProvider(COSTON2_RPC);
   const privateKey = process.env.PRIVATE_KEY;
-  
+
   if (!privateKey) {
     throw new Error("PRIVATE_KEY not found in .env file");
   }
-  
+
   const wallet = new ethers.Wallet(privateKey, provider);
   console.log(`\n👤 Using wallet: ${wallet.address}`);
-  
+
   const balance = await provider.getBalance(wallet.address);
   console.log(`💰 Balance: ${ethers.formatEther(balance)} C2FLR\n`);
 
@@ -50,34 +55,43 @@ async function main() {
   }
 
   // Step 1: Define data source and processing
-  const imo = "9703318"; // MSC Oscar
-  const apiUrl = `http://localhost:3000/api/proxy/risk/psc/${imo}`;
-  
+  const imo = "9749544"; // User specified vessel (from Seed List)
+
+  // Use GitHub Raw URL (Bypasses Vercel/ngrok blocking entirely)
+  // Requires: git push origin main
+  const githubUser = "joakimtallingsmith";
+  const repo = "eth-oxford";
+  const branch = "main";
+  const apiUrl = `https://raw.githubusercontent.com/${githubUser}/${repo}/${branch}/offchain/data/psc/${imo}.json`;
+
   console.log("📋 Attestation Configuration:");
   console.log(`   IMO: ${imo}`);
   console.log(`   API: ${apiUrl}\n`);
 
-  // JQ filter to extract PSC inspection data
+  // JQ filter - Updated for Nested JSON structure (full profile)
+  // The file contains { psc: {...}, drydock: {...} }
   const postProcessJq = `{
-    imo: .imo,
-    vessel_name: .vessel_name,
-    inspection_date: .last_inspection_date,
-    detention: (if .risk_detected then "TRUE" else "FALSE" end),
-    deficiency_count: .deficiency_count,
-    inspection_port: .last_inspection_port,
-    inspection_authority: .inspection_authority
+    imo: .psc.imo,
+    risk_detected: (if .psc.risk_detected then "true" else "false" end),
+    detention_count: (.psc.detention_count | tostring),
+    deficiency_count: (.psc.deficiency_count | tostring),
+    inspection_authority: .psc.inspection_authority,
+    inspection_port: .psc.inspection_port,
+    inspection_date: .psc.inspection_date,
+    detention: .psc.detention
   }`;
 
-  // ABI signature matching Solidity struct
+  // ABI signature - all strings for maximum compatibility
   const abiSignature = JSON.stringify({
     components: [
       { internalType: "string", name: "imo", type: "string" },
-      { internalType: "string", name: "vessel_name", type: "string" },
-      { internalType: "string", name: "inspection_date", type: "string" },
-      { internalType: "string", name: "detention", type: "string" },
-      { internalType: "uint256", name: "deficiency_count", type: "uint256" },
+      { internalType: "string", name: "risk_detected", type: "string" },
+      { internalType: "string", name: "detention_count", type: "string" },
+      { internalType: "string", name: "deficiency_count", type: "string" },
+      { internalType: "string", name: "inspection_authority", type: "string" },
       { internalType: "string", name: "inspection_port", type: "string" },
-      { internalType: "string", name: "inspection_authority", type: "string" }
+      { internalType: "string", name: "inspection_date", type: "string" },
+      { internalType: "string", name: "detention", type: "string" }
     ],
     name: "PSCInspectionData",
     type: "tuple"
@@ -88,18 +102,35 @@ async function main() {
     console.log("━".repeat(60));
     console.log("STEP 1: Prepare Attestation Request");
     console.log("━".repeat(60));
-    
-    const preparedData = await prepareAttestationRequest(
+
+    // Prepare Web2Json Request
+    const preparedData = await prepareWeb2JsonRequest(
       apiUrl,
       postProcessJq,
       abiSignature
     );
 
+    console.log("   (Web2Json Request Prepared)");
+
+    // Log the API data for user verification
+    try {
+      const res = await fetch(apiUrl);
+      if (res.ok) {
+        const data = await res.json();
+        console.log("\n   📦 API Response Payload (Local Fetch):");
+        console.log(JSON.stringify(data, null, 2).replace(/^/gm, "      "));
+      } else {
+        console.warn(`   ⚠️  Failed to fetch data locally: ${res.status}`);
+      }
+    } catch (e: any) {
+      console.warn(`   ⚠️  Could not fetch data locally: ${e.message}`);
+    }
+
     // Step 3: Submit to FDC Hub
     console.log("━".repeat(60));
-    console.log("STEP 2: Submit to FDC Hub");
+    console.log("STEP 2: Submit to FDC Hub (Web2Json)");
     console.log("━".repeat(60));
-    
+
     const roundId = await submitAttestationRequest(
       preparedData.abiEncodedRequest,
       wallet
@@ -109,13 +140,14 @@ async function main() {
     console.log("━".repeat(60));
     console.log("STEP 3: Retrieve Proof from DA Layer");
     console.log("━".repeat(60));
-    
-    const url = `${COSTON2_DA_LAYER_URL}api/v1/fdc/proof-by-request-round-raw`;
-    const proof = await retrieveDataAndProofBase(
-      url,
+
+    // Use the DA Layer URL (matches Flare example pattern)
+    const daLayerUrl = COSTON2_DA_LAYER_URL;
+
+    const proof = await retrieveDataAndProofBaseWithRetry(
+      daLayerUrl,
       preparedData.abiEncodedRequest,
-      roundId,
-      provider
+      roundId
     );
 
     console.log("📦 Proof retrieved:");
@@ -139,18 +171,24 @@ async function main() {
     const responseType = [
       "tuple(bytes32,bytes32,uint64,uint64,tuple(string,string,string,string,string,string,string),tuple(bytes))"
     ];
-    
+
     const decodedResponse = abiCoder.decode(responseType, proof.response_hex)[0];
 
+    // Map proof to struct expected by Oracle
+    // Oracle expects: Proof { merkleProof, data { ... } }
     const proofStruct = {
       merkleProof: proof.proof || [],
       data: decodedResponse,
     };
 
     console.log("📤 Submitting proof to oracle...");
+    // Check gas first just in case
+    // const gas = await oracle.submitPSCInspectionWithProof.estimateGas(proofStruct);
+    // console.log(`   Estimated Gas: ${gas}`);
+
     const tx = await oracle.submitPSCInspectionWithProof(proofStruct);
     console.log(`   Tx: ${tx.hash}`);
-    
+
     await tx.wait();
     console.log("✅ Proof submitted and verified!\n");
 
