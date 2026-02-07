@@ -237,3 +237,55 @@ server.listen(PORT, () => {
     initDemoMarkets();
     console.log('Demo markets initialized');
 });
+// Terminal49 Proxy for Flare FDC
+app.get('/api/proxy/demurrage/:containerId', async (req, res) => {
+    const containerId = req.params.containerId;
+    const apiKey = process.env.TERMINAL49_API_KEY;
+    // In a real scenario, we would fetch from Terminal49 API
+    // const response = await fetch(`https://api.terminal49.com/v2/containers/${containerId}?include=shipment`, {
+    //   headers: { 'Authorization': `Token ${apiKey}` }
+    // });
+    // const data = await response.json();
+    // MOCK DATA for Hackathon/Testing purposes
+    // Simulating a response that would come from T49
+    const mockT49Data = {
+        data: {
+            id: containerId,
+            attributes: {
+                number: containerId,
+                fees: [
+                    { type: 'Demurrage', amount: 150.00, currency: 'USD' }, // Example fee
+                    { type: 'Exam', amount: 50.00, currency: 'USD' }
+                ],
+                pod_arrived_at: "2023-10-27T10:00:00Z",
+            },
+            relationships: {
+                shipment: {
+                    data: {
+                        attributes: {
+                            pod_locode: "USNYC", // New York
+                            vessel_imo: "9703318" // MSC Oscar (from our demo market)
+                        }
+                    }
+                }
+            }
+        }
+    };
+    // Logic to process the data for FDC
+    const attrs = mockT49Data.data.attributes;
+    const shipmentAttrs = mockT49Data.data.relationships.shipment.data.attributes;
+    // 1. Check for Demurrage Fee
+    const demurrageFee = attrs.fees.find((f) => f.type === 'Demurrage' && f.amount > 0);
+    const isDemurrage = !!demurrageFee;
+    // 2. data construction
+    const fdcResponse = {
+        container_id: attrs.number,
+        vessel_imo: shipmentAttrs.vessel_imo,
+        pod_locode: shipmentAttrs.pod_locode,
+        demurrage_fee_detected: isDemurrage,
+        demurrage_amount: demurrageFee ? demurrageFee.amount : 0,
+        arrival_ts: attrs.pod_arrived_at,
+        timestamp: new Date().toISOString()
+    };
+    res.json(fdcResponse);
+});

@@ -6,22 +6,38 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/api/server.js",
-    "dev": "ts-node src/api/server.ts",
-    "test": "ts-node src/test/clob.test.ts"
+    "dev": "tsx src/api/server.ts",
+    "test": "tsx src/test/clob.test.ts"
   },
-  "keywords": ["prediction-market", "maritime", "insurance", "clob", "defi"],
+  "keywords": [
+    "prediction-market",
+    "maritime",
+    "insurance",
+    "clob",
+    "defi"
+  ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.2.1",
     "@types/uuid": "^10.0.0",
     "@types/ws": "^8.18.1",
+    "dotenv": "^17.2.4",
     "express": "^5.2.1",
+    "hardhat": "^2.22.17",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "uuid": "^13.0.0",
+    "uuid": "^9.0.1",
     "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@flarenetwork/flare-periphery-contract-artifacts": "^0.1.40",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
+    "tsx": "^4.21.0"
   }
 }

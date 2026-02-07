@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { CLOBEngine } from './OrderBook';
-import { Market, Order, Trade, CreateOrderRequest } from '../types';
+import { CLOBEngine } from './OrderBook.js';
+import { Market, Order, Trade, CreateOrderRequest } from '../types/index.js';
 
 export class MarketManager {
   private markets: Map<string, Market> = new Map();

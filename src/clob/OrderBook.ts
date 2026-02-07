@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Order, Trade, Side, OrderType, OrderStatus, PriceLevel, CreateOrderRequest } from '../types';
+import { Order, Trade, Side, OrderType, OrderStatus, PriceLevel, CreateOrderRequest } from '../types/index.js';
 
 interface OrderNode {
   order: Order;
@@ -79,7 +79,7 @@ export class CLOBEngine {
   private lastPrice: number | null = null;
   private lastTradeTime: number | null = null;
 
-  constructor(public readonly marketId: string) {}
+  constructor(public readonly marketId: string) { }
 
   submitOrder(request: CreateOrderRequest): { order: Order; trades: Trade[] } {
     const order: Order = {
@@ -118,7 +118,7 @@ export class CLOBEngine {
 
     while (order.remainingQuantity > 0 && oppositePrices.length > 0) {
       const bestPrice = oppositePrices[0];
-      
+
       // Check price compatibility
       if (order.side === 'BUY' && bestPrice > order.price) break;
       if (order.side === 'SELL' && bestPrice < order.price) break;
