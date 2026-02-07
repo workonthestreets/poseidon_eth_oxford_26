@@ -67,7 +67,7 @@ async function processVesselRisk(imo: string, wallet: ethers.Wallet) {
   const githubUser = "joakimtallingsmith";
   const repo = "eth-oxford";
   const branch = "main"; // Production data
-  const apiUrl = `https://cdn.jsdelivr.net/gh/${githubUser}/${repo}@${branch}/offchain/data/psc/${imo}.json`;
+  const apiUrl = `https://cdn.jsdelivr.net/gh/${githubUser}/${repo}@${branch}/offchain/data/risk_data/${imo}.json`;
 
   console.log(`[INFO] Source: ${apiUrl}`);
 
