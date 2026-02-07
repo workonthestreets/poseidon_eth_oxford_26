@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaritimeShield | Prediction Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --card-hover: #1a1a1a;
+      --input: #1e1e1e;
+      --border: #2a2a2a;
+      --text: #ffffff;
+      --text-secondary: #a0a0a0;
+      --yes: #00d26a;
+      --yes-bg: rgba(0, 210, 106, 0.1);
+      --no: #ff4444;
+      --no-bg: rgba(255, 68, 68, 0.1);
+      --blue: #3b82f6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    
+    /* Header */
+    .header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+    .logo-icon { font-size: 24px; }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .balance-box {
+      background: var(--input);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .balance-label { color: var(--text-secondary); font-size: 12px; }
+
+    /* Main Layout */
+    .main {
+      display: grid;
+      grid-template-columns: 280px 1fr 380px;
+      gap: 0;
+      min-height: calc(100vh - 57px);
+    }
+
+    /* Sidebar - Markets */
+    .sidebar {
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+    }
+    .markets-list { flex: 1; overflow-y: auto; }
+    .market-card {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .market-card:hover { background: var(--card-hover); }
+    .market-card.active { 
+      background: var(--input); 
+      border-left: 3px solid var(--blue);
+    }
+    .market-vessel { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+    .market-route { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+    .market-stats { display: flex; gap: 16px; font-size: 11px; }
+    .market-stat { color: var(--text-secondary); }
+    .market-stat span { color: var(--yes); font-weight: 600; }
+
+    /* Center - Market Detail */
+    .content {
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .market-header {
+      margin-bottom: 24px;
+    }
+    .market-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .market-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .market-info {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+    }
+    .info-item { color: var(--text-secondary); }
+    .info-item strong { color: var(--text); font-weight: 600; }
+
+    /* Outcome Cards - Polymarket Style */
+    .outcomes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .outcome-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+    .outcome-card:hover { border-color: #444; }
+    .outcome-card.yes { }
+    .outcome-card.no { }
+    
+    .outcome-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .outcome-label {
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .outcome-label.yes { color: var(--yes); }
+    .outcome-label.no { color: var(--no); }
+    
+    .outcome-prob {
+      font-size: 32px;
+      font-weight: 800;
+    }
+    
+    .outcome-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    
+    .outcome-prices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .price-btn {
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .price-btn .label { font-size: 11px; font-weight: 600; opacity: 0.8; }
+    .price-btn .price { font-size: 18px; }
+    
+    .price-btn.buy-yes {
+      background: var(--yes-bg);
+      color: var(--yes);
+    }
+    .price-btn.buy-yes:hover { background: rgba(0, 210, 106, 0.2); }
+    
+    .price-btn.sell-yes {
+      background: var(--input);
+      color: var(--text-secondary);
+    }
+    .price-btn.sell-yes:hover { background: #252525; color: var(--text); }
+    
+    .price-btn.buy-no {
+      background: var(--no-bg);
+      color: var(--no);
+    }
+    .price-btn.buy-no:hover { background: rgba(255, 68, 68, 0.2); }
+    
+    .price-btn.sell-no {
+      background: var(--input);
+      color: var(--text-secondary);
+    }
+    .price-btn.sell-no:hover { background: #252525; color: var(--text); }
+
+    /* Orderbook Section */
+    .orderbook-section {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .orderbook-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    .orderbook-tab {
+      flex: 1;
+      padding: 14px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .orderbook-tab:hover { background: var(--input); }
+    .orderbook-tab.active { 
+      color: var(--text);
+      background: var(--input);
+    }
+    .orderbook-tab.active.yes { color: var(--yes); }
+    .orderbook-tab.active.no { color: var(--no); }
+    
+    .orderbook-content {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .orderbook-content::-webkit-scrollbar { width: 6px; }
+    .orderbook-content::-webkit-scrollbar-track { background: var(--bg); }
+    .orderbook-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    
+    .book-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      background: var(--input);
+      position: sticky;
+      top: 0;
+    }
+    .book-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .book-row:hover { background: rgba(255,255,255,0.03); }
+    .book-row .price { font-weight: 700; }
+    .book-row .price.bid { color: var(--yes); }
+    .book-row .price.ask { color: var(--no); }
+    .book-row .size { text-align: center; }
+    .book-row .total { text-align: right; color: var(--text-secondary); }
+    .book-row .depth {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      opacity: 0.1;
+    }
+    .book-row .depth.bid { background: var(--yes); }
+    .book-row .depth.ask { background: var(--no); }
+    
+    .book-section-label {
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .book-section-label.asks { color: var(--no); background: var(--no-bg); }
+    .book-section-label.bids { color: var(--yes); background: var(--yes-bg); }
+    
+    .book-empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    
+    .book-spread {
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .book-spread strong { color: var(--text); font-weight: 700; }
+
+    /* Right Panel - Trading */
+    .trading-panel {
+      background: var(--card);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .panel-body {
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Order Type Toggle */
+    .order-type-toggle {
+      display: flex;
+      background: var(--input);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+    .order-type-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .order-type-btn:hover { color: var(--text); }
+    .order-type-btn.active {
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Token Selection */
+    .token-select {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .token-btn {
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .token-btn:hover { border-color: #444; }
+    .token-btn .name {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .token-btn .desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .token-btn.yes .name { color: var(--yes); }
+    .token-btn.no .name { color: var(--no); }
+    .token-btn.yes.active { 
+      background: var(--yes-bg); 
+      border-color: var(--yes);
+    }
+    .token-btn.no.active { 
+      background: var(--no-bg); 
+      border-color: var(--no);
+    }
+
+    /* Side Selection */
+    .side-select {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .side-btn {
+      padding: 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .side-btn:hover { border-color: #444; color: var(--text); }
+    .side-btn.buy.active { 
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .side-btn.sell.active { 
+      background: rgba(251, 191, 36, 0.1);
+      border-color: #fbbf24;
+      color: #fbbf24;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--input);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    /* Quick Amount Buttons */
+    .quick-amounts {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .quick-btn {
+      flex: 1;
+      padding: 10px;
+      background: var(--input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quick-btn:hover {
+      background: var(--card-hover);
+      color: var(--text);
+      border-color: #444;
+    }
+
+    /* Order Preview */
+    .preview-box {
+      background: var(--input);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .preview-row:last-child { margin-bottom: 0; }
+    .preview-row .label { color: var(--text-secondary); }
+    .preview-row .value { font-weight: 600; }
+    .preview-row .value.profit { color: var(--yes); }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn.yes { background: var(--yes); color: #000; }
+    .submit-btn.no { background: var(--no); color: #fff; }
+
+    /* Position Display */
+    .position-box {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--input);
+      border-radius: 12px;
+    }
+    .position-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .position-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .position-row:last-child { margin-bottom: 0; }
+    .position-row .label { color: var(--text-secondary); }
+    .position-row .value { font-weight: 700; }
+    .position-row .value.yes { color: var(--yes); }
+    .position-row .value.no { color: var(--no); }
+
+    /* Token Operations */
+    .ops-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .ops-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .ops-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .op-btn {
+      padding: 12px;
+      background: var(--input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .op-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--blue);
+    }
+
+    /* Market Hint */
+    .market-hint {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* Notifications */
+    .notif {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      z-index: 1000;
+      animation: slideIn 0.2s ease;
+      max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .notif.yes { background: var(--yes); color: #000; }
+    .notif.no { background: var(--no); color: #fff; }
+    .notif.error { background: var(--card); border: 1px solid var(--no); color: var(--no); }
+    .notif-title { font-weight: 700; margin-bottom: 4px; }
+    .notif-body { opacity: 0.85; font-size: 13px; }
+    @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">⚓</span>
+      <span>MaritimeShield</span>
+    </div>
+    <div class="header-right">
+      <div class="balance-box">
+        <span class="balance-label">Balance: </span>
+        <span>$<span id="balance">10,000.00</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Sidebar: Markets -->
+    <aside class="sidebar">
+      <div class="sidebar-header">Markets</div>
+      <div class="markets-list" id="marketsList">
+        <div class="book-empty">Loading...</div>
+      </div>
+    </aside>
+
+    <!-- Center: Market Detail -->
+    <section class="content">
+      <div class="market-header">
+        <h1 class="market-title" id="marketTitle">Select a Market</h1>
+        <p class="market-subtitle" id="marketSubtitle">Will this vessel experience demurrage?</p>
+        <div class="market-info">
+          <div class="info-item">Volume: <strong id="marketVol">$0</strong></div>
+          <div class="info-item">ETA: <strong id="marketEta">--</strong></div>
+          <div class="info-item">Route: <strong id="marketRoute">--</strong></div>
+        </div>
+      </div>
+
+      <!-- Outcome Cards -->
+      <div class="outcomes">
+        <div class="outcome-card yes">
+          <div class="outcome-header">
+            <span class="outcome-label yes">YES</span>
+            <span class="outcome-prob" id="yesProb">50%</span>
+          </div>
+          <p class="outcome-desc">Demurrage will occur (vessel delayed beyond allowance)</p>
+          <div class="outcome-prices">
+            <button class="price-btn buy-yes" onclick="quickTrade('YES','BUY')">
+              <span class="label">Buy Yes</span>
+              <span class="price" id="yesBuyPrice">50¢</span>
+            </button>
+            <button class="price-btn sell-yes" onclick="quickTrade('YES','SELL')">
+              <span class="label">Sell Yes</span>
+              <span class="price" id="yesSellPrice">49¢</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="outcome-card no">
+          <div class="outcome-header">
+            <span class="outcome-label no">NO</span>
+            <span class="outcome-prob" id="noProb">50%</span>
+          </div>
+          <p class="outcome-desc">On-time arrival (no demurrage occurs)</p>
+          <div class="outcome-prices">
+            <button class="price-btn buy-no" onclick="quickTrade('NO','BUY')">
+              <span class="label">Buy No</span>
+              <span class="price" id="noBuyPrice">50¢</span>
+            </button>
+            <button class="price-btn sell-no" onclick="quickTrade('NO','SELL')">
+              <span class="label">Sell No</span>
+              <span class="price" id="noSellPrice">49¢</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orderbook -->
+      <div class="orderbook-section">
+        <div class="orderbook-tabs">
+          <button class="orderbook-tab yes active" onclick="switchBook('YES')">YES Book</button>
+          <button class="orderbook-tab no" onclick="switchBook('NO')">NO Book</button>
+        </div>
+        <div class="orderbook-content" id="orderbookContent">
+          <div class="book-header">
+            <span>Price</span>
+            <span style="text-align:center">Size</span>
+            <span style="text-align:right">Total</span>
+          </div>
+          <div id="bookBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Trading Panel -->
+    <aside class="trading-panel">
+      <div class="panel-header">Place Order</div>
+      <div class="panel-body">
+        <!-- Order Type -->
+        <div class="order-type-toggle">
+          <button class="order-type-btn active" onclick="setOrderType('LIMIT')">Limit</button>
+          <button class="order-type-btn" onclick="setOrderType('MARKET')">Market</button>
+        </div>
+
+        <div class="market-hint" id="marketHint" style="display:none">
+          <strong>Market Order:</strong> Executes immediately at best available price.
+        </div>
+
+        <!-- Token Selection -->
+        <div class="token-select">
+          <button class="token-btn yes active" onclick="setToken('YES')">
+            <div class="name">YES</div>
+            <div class="desc">Demurrage Occurs</div>
+          </button>
+          <button class="token-btn no" onclick="setToken('NO')">
+            <div class="name">NO</div>
+            <div class="desc">On-Time Arrival</div>
+          </button>
+        </div>
+
+        <!-- Side Selection -->
+        <div class="side-select">
+          <button class="side-btn buy active" onclick="setSide('BUY')">Buy</button>
+          <button class="side-btn sell" onclick="setSide('SELL')">Sell</button>
+        </div>
+
+        <!-- Price Input -->
+        <div class="form-group" id="priceGroup">
+          <label class="form-label">Price (1-99¢)</label>
+          <input type="number" class="form-input" id="price" min="1" max="99" value="50">
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+          <label class="form-label">Amount (Shares)</label>
+          <input type="number" class="form-input" id="qty" min="1" value="100">
+        </div>
+
+        <!-- Quick Amounts -->
+        <div class="quick-amounts">
+          <button class="quick-btn" onclick="setQty(10)">+10</button>
+          <button class="quick-btn" onclick="setQty(50)">+50</button>
+          <button class="quick-btn" onclick="setQty(100)">+100</button>
+          <button class="quick-btn" onclick="setQty(500)">+500</button>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-box">
+          <div class="preview-row">
+            <span class="label">Est. Cost</span>
+            <span class="value" id="cost">$50.00</span>
+          </div>
+          <div class="preview-row">
+            <span class="label">Potential Return</span>
+            <span class="value" id="payout">$100.00</span>
+          </div>
+          <div class="preview-row">
+            <span class="label">Profit if Correct</span>
+            <span class="value profit" id="profit">+$50.00</span>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button class="submit-btn yes" id="submitBtn" onclick="submit()">
+          Buy YES @ 50¢
+        </button>
+
+        <!-- Position -->
+        <div class="position-box">
+          <div class="position-title">Your Position</div>
+          <div class="position-row">
+            <span class="label">YES Shares</span>
+            <span class="value yes" id="yesTokens">0</span>
+          </div>
+          <div class="position-row">
+            <span class="label">NO Shares</span>
+            <span class="value no" id="noTokens">0</span>
+          </div>
+        </div>
+
+        <!-- Token Ops -->
+        <div class="ops-section">
+          <div class="ops-title">Token Operations</div>
+          <div class="ops-btns">
+            <button class="op-btn" onclick="splitTokens()">Split $1 → Y+N</button>
+            <button class="op-btn" onclick="mergeTokens()">Merge Y+N → $1</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const API = '';
+    let currentMarket = null;
+    let currentToken = 'YES';
+    let currentSide = 'BUY';
+    let currentOrderType = 'LIMIT';
+    let currentBookView = 'YES';
+    let ws = null;
+    let markets = [];
+    let orderbook = null;
+    const userId = 'user-' + Math.random().toString(36).slice(2, 8);
+
+    function notify(title, body, type = 'yes') {
+      document.querySelectorAll('.notif').forEach(n => n.remove());
+      const el = document.createElement('div');
+      el.className = `notif ${type}`;
+      el.innerHTML = `<div class="notif-title">${title}</div><div class="notif-body">${body}</div>`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+
+    async function init() {
+      await fetch(`${API}/api/users/${userId}/deposit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 10000 })
+      });
+      await loadMarkets();
+      updateBalance();
+    }
+
+    async function updateBalance() {
+      try {
+        const r = await fetch(`${API}/api/users/${userId}/balance`);
+        const d = await r.json();
+        const bal = d.data?.balance ?? d.balance ?? 0;
+        document.getElementById('balance').textContent = Number(bal).toLocaleString('en-US', {minimumFractionDigits: 2});
+      } catch(e) {}
+    }
+
+    async function updatePosition() {
+      if (!currentMarket) return;
+      try {
+        const r = await fetch(`${API}/api/users/${userId}/positions`);
+        const d = await r.json();
+        const positions = d.data || d;
+        const pos = positions[currentMarket] || { yes_tokens: 0, no_tokens: 0 };
+        document.getElementById('yesTokens').textContent = pos.yes_tokens || 0;
+        document.getElementById('noTokens').textContent = pos.no_tokens || 0;
+      } catch(e) {}
+    }
+
+    async function loadMarkets() {
+      const r = await fetch(`${API}/api/markets`);
+      const d = await r.json();
+      markets = d.data || d;
+      document.getElementById('marketsList').innerHTML = markets.map(m => `
+        <div class="market-card" data-id="${m.id}" onclick="selectMarket('${m.id}')">
+          <div class="market-vessel">${m.vessel_name}</div>
+          <div class="market-route">${m.route}</div>
+          <div class="market-stats">
+            <span class="market-stat">ETA: ${new Date(m.expected_arrival).toLocaleDateString()}</span>
+            <span class="market-stat">Vol: <span>$--</span></span>
+          </div>
+        </div>
+      `).join('');
+      if (markets.length > 0) selectMarket(markets[0].id);
+    }
+
+    async function selectMarket(id) {
+      currentMarket = id;
+      document.querySelectorAll('.market-card').forEach(el => el.classList.toggle('active', el.dataset.id === id));
+      const m = markets.find(x => x.id === id);
+      if (m) {
+        document.getElementById('marketTitle').textContent = m.vessel_name;
+        document.getElementById('marketSubtitle').textContent = 'Will this vessel experience demurrage?';
+        document.getElementById('marketEta').textContent = new Date(m.expected_arrival).toLocaleDateString();
+        document.getElementById('marketRoute').textContent = m.route;
+      }
+      await refresh();
+      updatePosition();
+      connectWS(id);
+    }
+
+    async function refresh() {
+      if (!currentMarket) return;
+      try {
+        const r = await fetch(`${API}/api/markets/${currentMarket}`);
+        const d = await r.json();
+        const info = d.data || d;
+        if (info.orderbook) {
+          orderbook = info.orderbook;
+          updateUI();
+        }
+      } catch(e) {}
+    }
+
+    function updateUI() {
+      if (!orderbook) return;
+      
+      const yes = orderbook.yes || {};
+      const no = orderbook.no || {};
+      
+      // Update outcome card prices
+      const yesBestAsk = yes.asks?.[0]?.price || 50;
+      const yesBestBid = yes.bids?.[0]?.price || 50;
+      const noBestAsk = no.asks?.[0]?.price || 50;
+      const noBestBid = no.bids?.[0]?.price || 50;
+      
+      document.getElementById('yesBuyPrice').textContent = yesBestAsk + '¢';
+      document.getElementById('yesSellPrice').textContent = yesBestBid + '¢';
+      document.getElementById('noBuyPrice').textContent = noBestAsk + '¢';
+      document.getElementById('noSellPrice').textContent = noBestBid + '¢';
+      
+      document.getElementById('yesProb').textContent = yesBestAsk + '%';
+      document.getElementById('noProb').textContent = noBestAsk + '%';
+      
+      // Update orderbook view
+      renderBook();
+      updatePreview();
+    }
+
+    function renderBook() {
+      const book = currentBookView === 'YES' ? (orderbook?.yes || {}) : (orderbook?.no || {});
+      const asks = book.asks || [];
+      const bids = book.bids || [];
+      const allQty = [...asks, ...bids].map(x => x.quantity);
+      const maxQty = Math.max(...allQty, 1);
+      
+      let html = '';
+      
+      // Asks section
+      html += '<div class="book-section-label asks">Sell Orders (Asks)</div>';
+      if (asks.length) {
+        [...asks].reverse().forEach(l => {
+          const pct = (l.quantity / maxQty) * 100;
+          html += `<div class="book-row" onclick="fillPrice(${l.price})">
+            <span class="price ask">${l.price}¢</span>
+            <span class="size">${l.quantity.toLocaleString()}</span>
+            <span class="total">$${(l.price * l.quantity / 100).toFixed(0)}</span>
+            <div class="depth ask" style="width:${pct}%"></div>
+          </div>`;
+        });
+      } else {
+        html += '<div class="book-empty">No sell orders</div>';
+      }
+      
+      // Spread
+      const spread = book.spread ?? '--';
+      html += `<div class="book-spread">Spread: <strong>${spread}¢</strong></div>`;
+      
+      // Bids section
+      html += '<div class="book-section-label bids">Buy Orders (Bids)</div>';
+      if (bids.length) {
+        bids.forEach(l => {
+          const pct = (l.quantity / maxQty) * 100;
+          html += `<div class="book-row" onclick="fillPrice(${l.price})">
+            <span class="price bid">${l.price}¢</span>
+            <span class="size">${l.quantity.toLocaleString()}</span>
+            <span class="total">$${(l.price * l.quantity / 100).toFixed(0)}</span>
+            <div class="depth bid" style="width:${pct}%"></div>
+          </div>`;
+        });
+      } else {
+        html += '<div class="book-empty">No buy orders</div>';
+      }
+      
+      document.getElementById('bookBody').innerHTML = html;
+    }
+
+    function switchBook(token) {
+      currentBookView = token;
+      document.querySelectorAll('.orderbook-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.orderbook-tab.${token.toLowerCase()}`).classList.add('active');
+      renderBook();
+    }
+
+    function fillPrice(p) {
+      document.getElementById('price').value = p;
+      updatePreview();
+    }
+
+    function setQty(amount) {
+      const current = parseInt(document.getElementById('qty').value) || 0;
+      document.getElementById('qty').value = current + amount;
+      updatePreview();
+    }
+
+    function quickTrade(token, side) {
+      setToken(token);
+      setSide(side);
+    }
+
+    function connectWS(id) {
+      if (ws) ws.close();
+      try {
+        ws = new WebSocket(`ws://${location.host}/ws`);
+        ws.onopen = () => ws.send(JSON.stringify({ type: 'SUBSCRIBE', market_id: id }));
+        ws.onmessage = e => {
+          try {
+            const msg = JSON.parse(e.data);
+            if (msg.OrderBook) {
+              orderbook = msg.OrderBook;
+              updateUI();
+            }
+          } catch(err) {}
+        };
+      } catch(e) {}
+    }
+
+    function setOrderType(type) {
+      currentOrderType = type;
+      document.querySelectorAll('.order-type-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('priceGroup').style.display = type === 'MARKET' ? 'none' : 'block';
+      document.getElementById('marketHint').style.display = type === 'MARKET' ? 'block' : 'none';
+      updatePreview();
+    }
+
+    function setToken(t) {
+      currentToken = t;
+      document.querySelectorAll('.token-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.token-btn.${t.toLowerCase()}`).classList.add('active');
+      updateBtn();
+    }
+
+    function setSide(s) {
+      currentSide = s;
+      document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.side-btn.${s.toLowerCase()}`).classList.add('active');
+      updateBtn();
+    }
+
+    function updateBtn() {
+      const btn = document.getElementById('submitBtn');
+      const price = document.getElementById('price').value;
+      
+      btn.textContent = currentOrderType === 'MARKET' 
+        ? `${currentSide} ${currentToken} (Market)` 
+        : `${currentSide} ${currentToken} @ ${price}¢`;
+      
+      btn.className = 'submit-btn ' + currentToken.toLowerCase();
+    }
+
+    function updatePreview() {
+      let price = parseInt(document.getElementById('price').value) || 50;
+      const qty = parseInt(document.getElementById('qty').value) || 0;
+      
+      if (currentOrderType === 'MARKET' && orderbook) {
+        const tokenBook = currentToken === 'YES' ? orderbook.yes : orderbook.no;
+        if (currentSide === 'BUY' && tokenBook?.asks?.length) price = tokenBook.asks[0].price;
+        else if (currentSide === 'SELL' && tokenBook?.bids?.length) price = tokenBook.bids[0].price;
+      }
+      
+      const cost = price * qty / 100;
+      document.getElementById('cost').textContent = `$${cost.toFixed(2)}`;
+      document.getElementById('payout').textContent = `$${qty.toFixed(2)}`;
+      document.getElementById('profit').textContent = `+$${(qty - cost).toFixed(2)}`;
+      updateBtn();
+    }
+
+    document.getElementById('price').addEventListener('input', updatePreview);
+    document.getElementById('qty').addEventListener('input', updatePreview);
+
+    async function submit() {
+      if (!currentMarket) return notify('Error', 'Select a market', 'error');
+      
+      const price = currentOrderType === 'MARKET' ? 99 : parseInt(document.getElementById('price').value);
+      const quantity = parseInt(document.getElementById('qty').value);
+      
+      if (currentOrderType === 'LIMIT' && (price < 1 || price > 99)) return notify('Error', 'Price must be 1-99', 'error');
+      if (quantity < 1) return notify('Error', 'Quantity must be > 0', 'error');
+
+      try {
+        const r = await fetch(`${API}/api/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            market_id: currentMarket,
+            user_id: userId,
+            token_side: currentToken,
+            order_side: currentSide,
+            order_type: currentOrderType,
+            price,
+            quantity
+          })
+        });
+        
+        const text = await r.text();
+        if (!r.ok) return notify('Order Failed', text, 'error');
+        
+        const data = JSON.parse(text);
+        const result = data.data || data;
+        const trades = result.trades || [];
+        
+        const notifType = currentToken === 'YES' ? 'yes' : 'no';
+        
+        if (trades.length > 0) {
+          const filled = trades.reduce((s, t) => s + t.quantity, 0);
+          const avgPrice = trades.reduce((s, t) => s + t.price * t.quantity, 0) / filled;
+          notify(`${currentSide} ${currentToken} Filled!`, `${filled} shares @ ${avgPrice.toFixed(0)}¢`, notifType);
+        } else if (currentOrderType === 'LIMIT') {
+          notify(`Order Placed`, `${quantity} ${currentToken} @ ${price}¢`, notifType);
+        } else {
+          notify('No Liquidity', 'No orders to match against', 'error');
+        }
+        
+        await updateBalance();
+        await updatePosition();
+        await refresh();
+      } catch(e) { notify('Error', e.message, 'error'); }
+    }
+
+    async function splitTokens() {
+      if (!currentMarket) return notify('Error', 'Select market', 'error');
+      const amount = prompt('Split amount ($1 = 1 YES + 1 NO):', '10');
+      if (!amount) return;
+      try {
+        const r = await fetch(`${API}/api/users/${userId}/split`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ market_id: currentMarket, amount: parseInt(amount) })
+        });
+        const d = await r.json();
+        if (d.success) {
+          notify('Split Complete', `${d.data.yes_tokens} YES + ${d.data.no_tokens} NO`, 'yes');
+          await updateBalance(); await updatePosition();
+        } else notify('Failed', d.error, 'error');
+      } catch(e) { notify('Error', e.message, 'error'); }
+    }
+
+    async function mergeTokens() {
+      if (!currentMarket) return notify('Error', 'Select market', 'error');
+      const amount = prompt('Merge amount (1 YES + 1 NO = $1):', '10');
+      if (!amount) return;
+      try {
+        const r = await fetch(`${API}/api/users/${userId}/merge`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ market_id: currentMarket, amount: parseInt(amount) })
+        });
+        const d = await r.json();
+        if (d.success) {
+          notify('Merge Complete', `Balance: $${d.data.balance}`, 'yes');
+          await updateBalance(); await updatePosition();
+        } else notify('Failed', d.error, 'error');
+      } catch(e) { notify('Error', e.message, 'error'); }
+    }
+
+    init();
+    updatePreview();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

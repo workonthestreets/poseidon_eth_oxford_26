@@ -1,8 +1,10 @@
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 import * as fs from "fs";
+import * as path from "path";
 
-dotenv.config();
+// Load .env from project root
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // FDC Constants (Coston2)
 const FLARE_CONTRACT_REGISTRY_ADDRESS = "0xaD67FE66660Fb8dFE9d6b1b4240d8650e30F6019";
@@ -49,11 +51,20 @@ const WEB2JSON_REQUEST_ABI = [
     "string"  // abiSignature
 ];
 
-const DISCOVERY_FILE = "discovered_vessels.json";
+const DISCOVERY_FILE = path.resolve(__dirname, "../data/discovered_vessels.json");
+const PROOFS_DIR = path.resolve(__dirname, "../proofs");
+
 const PORT_LAT = "51.90";
 const PORT_LON = "4.50";
 
 async function main() {
+    // Ensure data directory exists
+    const dataDir = path.dirname(DISCOVERY_FILE);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+
+    // Ensure proof directory exists
+    if (!fs.existsSync(PROOFS_DIR)) fs.mkdirSync(PROOFS_DIR, { recursive: true });
+
     if (!process.env.PUBLIC_APP_URL) {
         console.warn("⚠️  WARNING: PUBLIC_APP_URL not set in .env.");
         console.warn("   FDC Verifiers need a reachabale URL. Using 'ngrok' is recommended.");
@@ -187,9 +198,9 @@ async function runBatchProcessing() {
 
             if (proof && proof.data) {
                 console.log("      🎉 Proof Retrieved Successfully!");
-                if (!fs.existsSync("proofs")) fs.mkdirSync("proofs");
-                fs.writeFileSync(`proofs/proof_${v.imo}_${roundId}.json`, JSON.stringify(proof, null, 2));
-                console.log(`      Saved to proofs/proof_${v.imo}_${roundId}.json`);
+                const pPath = path.join(PROOFS_DIR, `proof_${v.imo}_${roundId}.json`);
+                fs.writeFileSync(pPath, JSON.stringify(proof, null, 2));
+                console.log(`      Saved to ${pPath}`);
             } else {
                 console.error("      ⚠️ Proof not found (Consensus might have rejected invalid data/URL).");
             }
