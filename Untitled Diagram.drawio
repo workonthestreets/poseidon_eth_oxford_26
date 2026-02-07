@@ -87,7 +87,7 @@
           <mxGeometry height="60" width="120" x="425" y="190" as="geometry" />
         </mxCell>
         <mxCell id="4KWQ-z5AnoqI9zOPar04-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;missing piece (web2)&lt;/b&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="60" width="120" x="170" y="410" as="geometry" />
+          <mxGeometry height="60" width="120" x="160" y="410" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
