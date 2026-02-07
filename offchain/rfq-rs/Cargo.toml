@@ -1,0 +1,57 @@
+[package]
+name = "maritime_rfq"
+version = "0.1.0"
+edition = "2021"
+description = "High-performance RFQ engine for Maritime Prediction Market"
+authors = ["MaritimeShield"]
+
+[dependencies]
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Unique IDs
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+
+# Web framework
+axum = { version = "0.7", features = ["ws"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# WebSocket
+futures = "0.3"
+
+# Decimal arithmetic (avoid floating point issues)
+rust_decimal = { version = "1.0", features = ["serde"] }
+
+# Fast HashMap
+rustc-hash = "1.1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Parking lot for faster mutexes
+parking_lot = "0.12"
+
+# Environment
+dotenvy = "0.15"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "quote_bench"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

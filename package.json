@@ -4,9 +4,22 @@
   "description": "Maritime Demurrage Insurance Prediction Market (FDC Integration)",
   "main": "offchain/fdc/testPSCInspection.ts",
   "scripts": {
+<<<<<<< HEAD
     "test": "npx hardhat test",
     "fdc:test": "tsx offchain/fdc/testPSCInspection.ts",
     "data:fetch": "tsx offchain/data/fetchFullVesselProfile.ts"
+=======
+    "build": "tsc",
+    "start": "node dist/src/rfq/server.js",
+    "dev": "tsx src/rfq/server.ts",
+    "dev:rust": "cd offchain/rfq-rs && cargo run --release",
+    "dev:clob": "tsx src/api/server.ts",
+    "dev:ui": "vite --config ui/vite.config.ts ui",
+    "build:ui": "vite build --config ui/vite.config.ts ui",
+    "build:rust": "cd offchain/rfq-rs && cargo build --release",
+    "test": "tsx src/test/clob.test.ts",
+    "test:rfq": "tsx src/test/rfq.test.ts"
+>>>>>>> ad4dfbc (Vault)
   },
   "keywords": [
     "prediction-market",
@@ -21,17 +34,52 @@
   "dependencies": {
     "@flarenetwork/flare-periphery-contracts": "^0.1.40",
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@reown/appkit": "^1.8.17",
+    "@reown/appkit-adapter-wagmi": "^1.8.17",
+    "@tanstack/react-query": "^5.90.20",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/node": "^25.2.1",
+<<<<<<< HEAD
     "dotenv": "^17.2.4",
+=======
+    "@types/uuid": "^10.0.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.1.3",
+    "@web3modal/ethers": "^5.1.11",
+    "dotenv": "^17.2.4",
+    "ethers": "^6.16.0",
+    "express": "^5.2.1",
+>>>>>>> ad4dfbc (Vault)
     "hardhat": "^2.22.17",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "ts-node": "^10.9.2",
+<<<<<<< HEAD
     "typescript": "^5.9.3"
+=======
+    "typescript": "^5.9.3",
+    "uuid": "^9.0.1",
+    "viem": "^2.45.1",
+    "vite": "^7.3.1",
+    "wagmi": "^3.4.2",
+    "ws": "^8.19.0"
+>>>>>>> ad4dfbc (Vault)
   },
   "devDependencies": {
     "@flarenetwork/flare-periphery-contract-artifacts": "^0.1.40",
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
-    "tsx": "^4.21.0"
+    "@nomicfoundation/hardhat-ethers": "^3.1.3",
+    "@nomicfoundation/hardhat-ignition": "^0.15.16",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.17",
+    "@nomicfoundation/hardhat-network-helpers": "^1.1.2",
+    "@nomicfoundation/hardhat-verify": "^2.1.3",
+    "@nomicfoundation/ignition-core": "^0.15.15",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.5.0",
+    "hardhat-gas-reporter": "^2.3.0",
+    "solidity-coverage": "^0.8.17",
+    "tsx": "^4.21.0",
+    "typechain": "^8.3.2"
   }
 }

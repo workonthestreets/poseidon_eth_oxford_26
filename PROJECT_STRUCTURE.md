@@ -107,6 +107,15 @@ cd offchain && ./test_clob.sh
 PORT=3000
 PRIVATE_KEY=your_wallet_private_key
 DATALASTIC_API_KEY=your_api_key
+WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 ORACLE_ADDRESS=deployed_oracle_address
 MARKET_ADDRESS=deployed_market_address
 ```
+
+## Wallet Connection Setup
+
+1. **Get WalletConnect Project ID**: https://cloud.walletconnect.com
+2. **Edit `public/js/wallet.js`** - paste your project ID on line 8
+3. **After deploying contracts** - update `CONTRACTS.oracle` and `CONTRACTS.market` in wallet.js
+4. **Run server**: `npm run dev`
+5. **Open demo**: http://localhost:3000/demo.html

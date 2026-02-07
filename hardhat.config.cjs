@@ -16,7 +16,7 @@ const config = {
     networks: {
         coston2: {
             url: "https://coston2-api.flare.network/ext/bc/C/rpc",
-            accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+            accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY.length >= 64 ? [process.env.PRIVATE_KEY] : [],
             chainId: 114,
             gasPrice: 25000000000 // 25 gwei
         },
