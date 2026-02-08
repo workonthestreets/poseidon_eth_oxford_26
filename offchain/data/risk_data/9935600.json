@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:34.088Z",
+    "timestamp": "2026-02-08T00:02:45.772Z",
     "imo": "9935600",
     "name": "SEA SAPPHIRE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9935600",
     "voyage_completed": false,
-    "current_lat": 53.846859,
-    "current_lon": 4.4655852,
+    "current_lat": 54.153488,
+    "current_lon": 4.6935534,
     "destination": "SE GOT",
     "navigation_status": "Unknown"
   },
@@ -224,7 +224,7 @@
         }
       ],
       "meta": {
-        "duration": 0.081269114,
+        "duration": 0.071379137,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -232,7 +232,7 @@
     "drydock": {
       "data": [],
       "meta": {
-        "duration": 0.01684337,
+        "duration": 0.021130671,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -240,7 +240,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.0075066,
+        "duration": 0.008745166,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -255,20 +255,20 @@
         "country_iso": "GR",
         "type": "Tanker",
         "type_specific": "Crude Oil Tanker",
-        "lat": 53.846859,
-        "lon": 4.4655852,
-        "speed": 12.8,
-        "course": 42,
+        "lat": 54.153488,
+        "lon": 4.6935534,
+        "speed": 12.6,
+        "course": 10,
         "heading": null,
         "navigation_status": null,
         "destination": "SE GOT",
-        "last_position_epoch": 1770501420,
-        "last_position_UTC": "2026-02-07T21:57:00Z",
+        "last_position_epoch": 1770507300,
+        "last_position_UTC": "2026-02-07T23:35:00Z",
         "eta_epoch": 1770638400,
         "eta_UTC": "2026-02-09T12:00:00Z"
       },
       "meta": {
-        "duration": 0.002645534,
+        "duration": 0.002162851,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

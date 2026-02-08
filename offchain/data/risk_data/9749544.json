@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:31.347Z",
+    "timestamp": "2026-02-08T00:02:43.086Z",
     "imo": "9749544",
     "name": "ELANDRA GULF",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9749544",
     "voyage_completed": false,
-    "current_lat": 51.967615,
-    "current_lon": 4.073776666666666,
+    "current_lat": 51.96764,
+    "current_lon": 4.073775,
     "destination": "RUULU>NLRTM",
     "navigation_status": "Unknown"
   },
@@ -202,7 +202,7 @@
         }
       ],
       "meta": {
-        "duration": 0.089116276,
+        "duration": 0.07933566,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -229,7 +229,7 @@
         }
       ],
       "meta": {
-        "duration": 0.015304082,
+        "duration": 0.017470092,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -237,7 +237,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.007276759,
+        "duration": 0.01331583,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -252,20 +252,20 @@
         "country_iso": "LR",
         "type": "Tanker",
         "type_specific": "Crude Oil Tanker",
-        "lat": 51.967615,
-        "lon": 4.073776666666666,
+        "lat": 51.96764,
+        "lon": 4.073775,
         "speed": 0,
-        "course": 358.9,
+        "course": 359.8,
         "heading": 153,
         "navigation_status": "Moored",
         "destination": "RUULU>NLRTM",
-        "last_position_epoch": 1770502958,
-        "last_position_UTC": "2026-02-07T22:22:38Z",
+        "last_position_epoch": 1770508539,
+        "last_position_UTC": "2026-02-07T23:55:39Z",
         "eta_epoch": 1770478200,
         "eta_UTC": "2026-02-07T15:30:00Z"
       },
       "meta": {
-        "duration": 0.001708929,
+        "duration": 0.001428928,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

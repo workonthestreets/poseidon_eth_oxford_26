@@ -12,7 +12,7 @@ const DATA_API = "https://api.datalastic.com/api";
 // Helper to delay between API calls to avoid rate limits
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
-async function fetchData(url: string) {
+async function fetchData(url: string): Promise<any> {
     try {
         console.log(`fetching ${url}...`);
         const res = await fetch(url);
@@ -208,7 +208,7 @@ async function processVessel(vessel: any) {
     };
 
     // Save
-    const outDir = path.join(process.cwd(), 'offchain/data/psc');
+    const outDir = path.join(process.cwd(), 'offchain/data/risk_data');
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
     const outFile = path.join(outDir, `${IMO}.json`);

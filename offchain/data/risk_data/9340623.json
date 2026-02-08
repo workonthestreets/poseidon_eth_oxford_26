@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:41.636Z",
+    "timestamp": "2026-02-08T00:02:53.682Z",
     "imo": "9340623",
     "name": "BRO NISSUM",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9340623",
     "voyage_completed": false,
-    "current_lat": 52.45636833333333,
-    "current_lon": 4.099241666666667,
+    "current_lat": 52.45394833333334,
+    "current_lon": 4.097701666666667,
     "destination": "NL AMS",
     "navigation_status": "Unknown"
   },
@@ -268,7 +268,7 @@
         }
       ],
       "meta": {
-        "duration": 0.09168781,
+        "duration": 0.072216061,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -295,7 +295,7 @@
         }
       ],
       "meta": {
-        "duration": 0.021089632,
+        "duration": 0.020659709,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -303,7 +303,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.010896778,
+        "duration": 0.012180504,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -318,20 +318,20 @@
         "country_iso": "DK",
         "type": "Tanker",
         "type_specific": "Oil or Chemical Tanker",
-        "lat": 52.45636833333333,
-        "lon": 4.099241666666667,
-        "speed": 0.1,
-        "course": 129.1,
-        "heading": 174,
+        "lat": 52.45394833333334,
+        "lon": 4.097701666666667,
+        "speed": 0,
+        "course": 154,
+        "heading": 64,
         "navigation_status": "At anchor",
         "destination": "NL AMS",
-        "last_position_epoch": 1770502964,
-        "last_position_UTC": "2026-02-07T22:22:44Z",
+        "last_position_epoch": 1770508545,
+        "last_position_UTC": "2026-02-07T23:55:45Z",
         "eta_epoch": 1770472080,
         "eta_UTC": "2026-02-07T13:48:00Z"
       },
       "meta": {
-        "duration": 0.002015611,
+        "duration": 0.001521968,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

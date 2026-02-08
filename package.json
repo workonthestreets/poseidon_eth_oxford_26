@@ -27,10 +27,16 @@
     "dotenv": "^17.2.4",
     "ethers": "^6.16.0",
     "hardhat": "^2.22.17",
+    "express": "^4.21.0",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/uuid": "^10.0.0",
+    "@types/ws": "^8.5.0",
     "@flarenetwork/flare-periphery-contract-artifacts": "^0.1.40",
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
     "@nomicfoundation/hardhat-ethers": "^3.1.3",

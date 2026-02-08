@@ -18,6 +18,7 @@
   "include": [
     "onchain/**/*",
     "offchain/**/*",
+    "src/**/*",
     "hardhat.config.ts"
   ],
   "exclude": [

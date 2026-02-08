@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:38.654Z",
+    "timestamp": "2026-02-08T00:02:50.819Z",
     "imo": "9375616",
     "name": "TORM LAURA",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9375616",
     "voyage_completed": false,
-    "current_lat": 52.411561666666664,
-    "current_lon": 4.844898333333333,
+    "current_lat": 52.41155666666667,
+    "current_lon": 4.84488,
     "destination": "NLAMS",
     "navigation_status": "Unknown"
   },
@@ -268,7 +268,7 @@
         }
       ],
       "meta": {
-        "duration": 0.085264775,
+        "duration": 0.076037442,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -295,7 +295,7 @@
         }
       ],
       "meta": {
-        "duration": 0.016733289,
+        "duration": 0.016755088,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -313,7 +313,7 @@
         }
       ],
       "meta": {
-        "duration": 0.007576401,
+        "duration": 0.007337679,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -328,20 +328,20 @@
         "country_iso": "DK",
         "type": "Tanker",
         "type_specific": "Oil or Chemical Tanker",
-        "lat": 52.411561666666664,
-        "lon": 4.844898333333333,
+        "lat": 52.41155666666667,
+        "lon": 4.84488,
         "speed": 0,
         "course": 8.7,
         "heading": 344,
         "navigation_status": "Moored",
         "destination": "NLAMS",
-        "last_position_epoch": 1770502981,
-        "last_position_UTC": "2026-02-07T22:23:01Z",
+        "last_position_epoch": 1770508532,
+        "last_position_UTC": "2026-02-07T23:55:32Z",
         "eta_epoch": 1770473520,
         "eta_UTC": "2026-02-07T14:12:00Z"
       },
       "meta": {
-        "duration": 0.001291527,
+        "duration": 0.001617769,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

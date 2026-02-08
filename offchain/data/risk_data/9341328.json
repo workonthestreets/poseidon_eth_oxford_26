@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:35.449Z",
+    "timestamp": "2026-02-08T00:02:47.181Z",
     "imo": "9341328",
     "name": "ATLANTIC TWIN",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9341328",
     "voyage_completed": false,
-    "current_lat": 51.70393833333333,
-    "current_lon": 2.153995,
+    "current_lat": 51.530516666666664,
+    "current_lon": 1.73755,
     "destination": "GB LWT",
     "navigation_status": "Unknown"
   },
@@ -202,7 +202,7 @@
         }
       ],
       "meta": {
-        "duration": 0.088503273,
+        "duration": 0.075152237,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -229,7 +229,7 @@
         }
       ],
       "meta": {
-        "duration": 0.016253247,
+        "duration": 0.014500236,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -237,7 +237,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.010084174,
+        "duration": 0.010482575,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -252,20 +252,20 @@
         "country_iso": "GI",
         "type": "Tanker",
         "type_specific": "Oil or Chemical Tanker",
-        "lat": 51.70393833333333,
-        "lon": 2.153995,
-        "speed": 11.6,
-        "course": 233.9,
-        "heading": 234,
+        "lat": 51.530516666666664,
+        "lon": 1.73755,
+        "speed": 11.8,
+        "course": 270.3,
+        "heading": 278,
         "navigation_status": "Under way using engine",
         "destination": "GB LWT",
-        "last_position_epoch": 1770502930,
-        "last_position_UTC": "2026-02-07T22:22:10Z",
+        "last_position_epoch": 1770508599,
+        "last_position_UTC": "2026-02-07T23:56:39Z",
         "eta_epoch": 1770499800,
         "eta_UTC": "2026-02-07T21:30:00Z"
       },
       "meta": {
-        "duration": 0.00202989,
+        "duration": 0.00187397,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

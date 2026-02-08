@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:32.698Z",
+    "timestamp": "2026-02-08T00:02:44.430Z",
     "imo": "9803687",
     "name": "BG JADE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9803687",
     "voyage_completed": false,
-    "current_lat": 53.631424,
-    "current_lon": 0.85070503,
+    "current_lat": 53.915816666666665,
+    "current_lon": 0.5277666666666667,
     "destination": "GBGRG",
     "navigation_status": "Unknown"
   },
@@ -224,7 +224,7 @@
         }
       ],
       "meta": {
-        "duration": 0.087604267,
+        "duration": 0.075983281,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -251,7 +251,7 @@
         }
       ],
       "meta": {
-        "duration": 0.013808074,
+        "duration": 0.015509042,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -278,7 +278,7 @@
         }
       ],
       "meta": {
-        "duration": 0.012239185,
+        "duration": 0.011687782,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -293,20 +293,20 @@
         "country_iso": "CY",
         "type": "Cargo - Hazard A (Major)",
         "type_specific": "Container Ship",
-        "lat": 53.631424,
-        "lon": 0.85070503,
-        "speed": 10.5,
-        "course": 326,
-        "heading": 324,
-        "navigation_status": null,
+        "lat": 53.915816666666665,
+        "lon": 0.5277666666666667,
+        "speed": 11.9,
+        "course": 323.6,
+        "heading": 322,
+        "navigation_status": "Under way using engine",
         "destination": "GBGRG",
-        "last_position_epoch": 1770501900,
-        "last_position_UTC": "2026-02-07T22:05:00Z",
+        "last_position_epoch": 1770508597,
+        "last_position_UTC": "2026-02-07T23:56:37Z",
         "eta_epoch": 1770567300,
         "eta_UTC": "2026-02-08T16:15:00Z"
       },
       "meta": {
-        "duration": 0.001604089,
+        "duration": 0.002050171,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

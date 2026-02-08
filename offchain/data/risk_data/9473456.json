@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:36.881Z",
+    "timestamp": "2026-02-08T00:02:48.634Z",
     "imo": "9473456",
     "name": "CITY OF ST.PETERSBURG",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9473456",
     "voyage_completed": false,
-    "current_lat": 51.117021666666666,
-    "current_lon": 1.5447066666666667,
+    "current_lat": 50.91777,
+    "current_lon": 1.1548916,
     "destination": "PTSET",
     "navigation_status": "Unknown"
   },
@@ -180,7 +180,7 @@
         }
       ],
       "meta": {
-        "duration": 0.073529473,
+        "duration": 0.079690221,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -207,7 +207,7 @@
         }
       ],
       "meta": {
-        "duration": 0.013714833,
+        "duration": 0.019563583,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -225,7 +225,7 @@
         }
       ],
       "meta": {
-        "duration": 0.00556023,
+        "duration": 0.00552155,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -240,20 +240,20 @@
         "country_iso": "PA",
         "type": "Cargo",
         "type_specific": "Ro-Ro Cargo",
-        "lat": 51.117021666666666,
-        "lon": 1.5447066666666667,
-        "speed": 16.9,
-        "course": 231.2,
-        "heading": 231,
-        "navigation_status": "Under way using engine",
+        "lat": 50.91777,
+        "lon": 1.1548916,
+        "speed": 15.5,
+        "course": 230,
+        "heading": 228,
+        "navigation_status": null,
         "destination": "PTSET",
-        "last_position_epoch": 1770503024,
-        "last_position_UTC": "2026-02-07T22:23:44Z",
+        "last_position_epoch": 1770507420,
+        "last_position_UTC": "2026-02-07T23:37:00Z",
         "eta_epoch": 1770793200,
         "eta_UTC": "2026-02-11T07:00:00Z"
       },
       "meta": {
-        "duration": 0.001961571,
+        "duration": 0.001934771,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

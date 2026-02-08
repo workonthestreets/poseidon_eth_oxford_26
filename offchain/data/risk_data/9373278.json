@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:40.060Z",
+    "timestamp": "2026-02-08T00:02:52.230Z",
     "imo": "9373278",
     "name": "GT PIKE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9373278",
     "voyage_completed": false,
-    "current_lat": 53.619525,
-    "current_lon": 5.756778333333333,
+    "current_lat": 53.73718,
+    "current_lon": 6.33019,
     "destination": "DEHAM",
     "navigation_status": "Unknown"
   },
@@ -268,7 +268,7 @@
         }
       ],
       "meta": {
-        "duration": 0.09918493,
+        "duration": 0.076230563,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -295,7 +295,7 @@
         }
       ],
       "meta": {
-        "duration": 0.017537613,
+        "duration": 0.017506892,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -313,7 +313,7 @@
         }
       ],
       "meta": {
-        "duration": 0.010917938,
+        "duration": 0.013028749,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -328,20 +328,20 @@
         "country_iso": "AG",
         "type": "Cargo",
         "type_specific": "General Cargo",
-        "lat": 53.619525,
-        "lon": 5.756778333333333,
-        "speed": 11.5,
-        "course": 72.1,
-        "heading": 70,
+        "lat": 53.73718,
+        "lon": 6.33019,
+        "speed": 11.8,
+        "course": 76,
+        "heading": 74,
         "navigation_status": "Under way using engine",
         "destination": "DEHAM",
-        "last_position_epoch": 1770501801,
-        "last_position_UTC": "2026-02-07T22:03:21Z",
+        "last_position_epoch": 1770508599,
+        "last_position_UTC": "2026-02-07T23:56:39Z",
         "eta_epoch": 1770591600,
         "eta_UTC": "2026-02-08T23:00:00Z"
       },
       "meta": {
-        "duration": 0.001644689,
+        "duration": 0.002546053,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

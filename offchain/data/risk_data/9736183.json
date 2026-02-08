@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:42.990Z",
+    "timestamp": "2026-02-08T00:02:55.319Z",
     "imo": "9736183",
     "name": "MICK",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9736183",
     "voyage_completed": false,
-    "current_lat": 54.27795,
-    "current_lon": 5.5124035,
+    "current_lat": 54.415272,
+    "current_lon": 5.8351617,
     "destination": "DKEBJ",
     "navigation_status": "Unknown"
   },
@@ -334,7 +334,7 @@
         }
       ],
       "meta": {
-        "duration": 0.083984609,
+        "duration": 0.074370313,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -361,7 +361,7 @@
         }
       ],
       "meta": {
-        "duration": 0.014140116,
+        "duration": 0.016766768,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -379,7 +379,7 @@
         }
       ],
       "meta": {
-        "duration": 0.008304644,
+        "duration": 0.008410125,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -394,20 +394,20 @@
         "country_iso": "AG",
         "type": "Cargo",
         "type_specific": "Heavy Lift Vessel",
-        "lat": 54.27795,
-        "lon": 5.5124035,
-        "speed": 9.1,
-        "course": 55,
-        "heading": 54,
+        "lat": 54.415272,
+        "lon": 5.8351617,
+        "speed": 9.3,
+        "course": 53,
+        "heading": 51,
         "navigation_status": null,
         "destination": "DKEBJ",
-        "last_position_epoch": 1770501900,
-        "last_position_UTC": "2026-02-07T22:05:00Z",
+        "last_position_epoch": 1770507180,
+        "last_position_UTC": "2026-02-07T23:33:00Z",
         "eta_epoch": 1770530400,
         "eta_UTC": "2026-02-08T06:00:00Z"
       },
       "meta": {
-        "duration": 0.002315973,
+        "duration": 0.002300572,
         "endpoint": "/api/v0/vessel",
         "success": true
       }

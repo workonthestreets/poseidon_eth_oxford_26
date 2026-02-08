@@ -88,5 +88,23 @@
     "status": "Moving (9.8kn)",
     "status_code": -1,
     "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9371086",
+    "name": "POSIDANA",
+    "lat": 51.893948333333334,
+    "lon": 4.448725,
+    "status": "Moored",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
+  },
+  {
+    "imo": "9412737",
+    "name": "BOW COMPASS",
+    "lat": 51.895005,
+    "lon": 4.426266666666667,
+    "status": "Moored",
+    "status_code": -1,
+    "suggested_action": "EMIT_MARKET"
   }
 ]

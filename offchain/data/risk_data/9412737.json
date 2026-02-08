@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "timestamp": "2026-02-08T00:03:02.096Z",
+    "imo": "9412737",
+    "name": "BOW COMPASS",
+    "source": "Datalastic API via eth-oxford fetcher"
+  },
+  "psc": {
+    "imo": "9412737",
+    "risk_detected": false,
+    "detention_count": 0,
+    "deficiency_count": 0,
+    "deficiency_description": "",
+    "inspection_authority": "Spain",
+    "inspection_port": "Algeciras",
+    "inspection_date": "2021-05-04",
+    "detention": "0"
+  },
+  "drydock": {
+    "imo": "9412737",
+    "next_due_date": null,
+    "dry_dock_from": null,
+    "dry_dock_to": null,
+    "is_overdue": false
+  },
+  "casualty": {
+    "imo": "9412737",
+    "casualty_detected": false,
+    "casualty_type": "",
+    "casualty_date": null,
+    "casualty_details": "",
+    "vessel_name": ""
+  },
+  "voyage": {
+    "imo": "9412737",
+    "voyage_completed": false,
+    "current_lat": 51.895005,
+    "current_lon": 4.426266666666667,
+    "destination": "NLRTM",
+    "navigation_status": "Unknown"
+  },
+  "congestion": {
+    "vessel_count": 0,
+    "anchored_count": 0
+  },
+  "raw": {
+    "psc": {
+      "data": [
+        {
+          "id": 75753,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2021-05-04",
+          "inspection_authority": "Spain",
+          "inspection_port": "Algeciras",
+          "inspection_type": "Follow-up",
+          "detention": "0",
+          "ship_deficiencies": null,
+          "deficiency_description": null,
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": "CRT",
+          "website": "https://www.thome.com.sg/",
+          "email": "croatia@thome.com.sg",
+          "phone": "+385 23 400 050",
+          "address": "ulica 7 Domobranske Pukovnije 1, HR-23000 Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2023-01-03T00:00:00Z"
+        },
+        {
+          "id": 75754,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2021-12-22",
+          "inspection_authority": "Spain",
+          "inspection_port": "Algeciras",
+          "inspection_type": "Follow-up",
+          "detention": "0",
+          "ship_deficiencies": null,
+          "deficiency_description": null,
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": null,
+          "website": null,
+          "email": null,
+          "phone": null,
+          "address": "ulica 7 Domobranske Pukovnije, Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2021-12-23T00:00:00Z"
+        },
+        {
+          "id": 75755,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2023-01-09",
+          "inspection_authority": "Finland",
+          "inspection_port": "Bjorneborg (Pori)",
+          "inspection_type": "Follow-up",
+          "detention": "0",
+          "ship_deficiencies": null,
+          "deficiency_description": null,
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": null,
+          "website": null,
+          "email": null,
+          "phone": null,
+          "address": "ulica 7 Domobranske Pukovnije, Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2023-01-10T00:00:00Z"
+        },
+        {
+          "id": 75756,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2023-12-12",
+          "inspection_authority": "Belgium",
+          "inspection_port": "Antwerpen",
+          "inspection_type": "Detailed",
+          "detention": "0",
+          "ship_deficiencies": "7",
+          "deficiency_description": "Fire safety 07117 - Jacketed high pressure lines and oil leakage alarm Not as required; Structural Conditions 02105 - Steering gear Not as required; Fire safety 07105 - Fire doors/openings in fire-resisting divisions Malfunctioning; Life saving appliances 11112 - Launching arrangements for survival craft Not properly maintained; Labour conditions - Accommodation, recreational facilities, food and catering 18316 - Water, pipes, tanks Not as required; Emergency Systems 04101 - Public address system Missing; Emergency Systems 04107 - Emergency towing arrangements and procedures Corroded",
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": "CRT",
+          "website": "https://www.thome.com.sg/",
+          "email": "croatia@thome.com.sg",
+          "phone": "+385 23 400 050",
+          "address": "ulica 7 Domobranske Pukovnije 1, HR-23000 Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2023-12-13T00:00:00Z"
+        },
+        {
+          "id": 75757,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2024-09-25",
+          "inspection_authority": "China",
+          "inspection_port": "Yangpu Pt",
+          "inspection_type": "Initial",
+          "detention": "0",
+          "ship_deficiencies": null,
+          "deficiency_description": null,
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": "CRT",
+          "website": "https://www.thome.com.sg/",
+          "email": "croatia@thome.com.sg",
+          "phone": "+385 23 400 050",
+          "address": "ulica 7 Domobranske Pukovnije 1, HR-23000 Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2024-09-26T00:00:00Z"
+        },
+        {
+          "id": 75758,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "vessel_type_code": "Chem",
+          "flag_code": "NIS",
+          "inspection_date": "2025-07-05",
+          "inspection_authority": "Spain",
+          "inspection_port": "Bilbao",
+          "inspection_type": "Follow-up",
+          "detention": "0",
+          "ship_deficiencies": null,
+          "deficiency_description": null,
+          "technical_ism_manager": "Thome Croatia doo",
+          "country_code": null,
+          "website": null,
+          "email": null,
+          "phone": null,
+          "address": "ulica 7 Domobranske Pukovnije, Zadar, Croatia",
+          "company_imo": "6124829",
+          "modified_at": "2025-08-03T00:00:00Z"
+        }
+      ],
+      "meta": {
+        "duration": 0.072939185,
+        "endpoint": "/api/maritime_reports/inspections",
+        "success": true
+      }
+    },
+    "drydock": {
+      "data": [
+        {
+          "id": 33797,
+          "imo": "9412737",
+          "vessel_name": "BOW COMPASS",
+          "special_survey_date": "2029-11-03",
+          "dry_dock_date": "2027-11-03",
+          "iopp_issue_date": "2024-10-29",
+          "iopp_exp_date": "2029-11-03",
+          "country_name": null,
+          "technical_manager": "Thome Croatia doo",
+          "country_code": "CRT",
+          "website": "https://www.thome.com.sg/",
+          "email": "croatia@thome.com.sg",
+          "phone": "+385 23 400 050",
+          "address": "ulica 7 Domobranske Pukovnije 1, HR-23000 Zadar, Croatia",
+          "linkedin": null,
+          "modified_at": "2026-01-19T00:00:00Z"
+        }
+      ],
+      "meta": {
+        "duration": 0.018550458,
+        "endpoint": "/api/maritime_reports/dry_dock_dates",
+        "success": true
+      }
+    },
+    "casualty": {
+      "data": [],
+      "meta": {
+        "duration": 0.005508869,
+        "endpoint": "/api/maritime_reports/casualty",
+        "success": true
+      }
+    },
+    "voyage": {
+      "data": {
+        "uuid": "669925d1-d815-541b-1f49-89e3e13af5e9",
+        "name": "BOW COMPASS",
+        "mmsi": "257199000",
+        "imo": "9412737",
+        "eni": null,
+        "country_iso": "NO",
+        "type": "Tanker",
+        "type_specific": "Oil or Chemical Tanker",
+        "lat": 51.895005,
+        "lon": 4.426266666666667,
+        "speed": 0,
+        "course": 8.8,
+        "heading": 243,
+        "navigation_status": "Moored",
+        "destination": "NLRTM",
+        "last_position_epoch": 1770508541,
+        "last_position_UTC": "2026-02-07T23:55:41Z",
+        "eta_epoch": 1770055080,
+        "eta_UTC": "2026-02-02T17:58:00Z"
+      },
+      "meta": {
+        "duration": 0.002109731,
+        "endpoint": "/api/v0/vessel",
+        "success": true
+      }
+    }
+  }
+}

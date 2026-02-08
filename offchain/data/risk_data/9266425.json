@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2026-02-07T22:30:44.746Z",
+    "timestamp": "2026-02-08T00:02:58.159Z",
     "imo": "9266425",
     "name": "THUN GRANITE",
     "source": "Datalastic API via eth-oxford fetcher"
@@ -34,8 +34,8 @@
   "voyage": {
     "imo": "9266425",
     "voyage_completed": false,
-    "current_lat": 51.91738333333333,
-    "current_lon": 4.215446666666667,
+    "current_lat": 51.91737333333333,
+    "current_lon": 4.2154,
     "destination": "NL RTM",
     "navigation_status": "Unknown"
   },
@@ -136,7 +136,7 @@
         }
       ],
       "meta": {
-        "duration": 0.089493518,
+        "duration": 0.076202162,
         "endpoint": "/api/maritime_reports/inspections",
         "success": true
       }
@@ -163,7 +163,7 @@
         }
       ],
       "meta": {
-        "duration": 0.019253743,
+        "duration": 0.016094885,
         "endpoint": "/api/maritime_reports/dry_dock_dates",
         "success": true
       }
@@ -171,7 +171,7 @@
     "casualty": {
       "data": [],
       "meta": {
-        "duration": 0.010707858,
+        "duration": 0.014714918,
         "endpoint": "/api/maritime_reports/casualty",
         "success": true
       }
@@ -186,20 +186,20 @@
         "country_iso": "NL",
         "type": "Tanker",
         "type_specific": "Oil or Chemical Tanker",
-        "lat": 51.91738333333333,
-        "lon": 4.215446666666667,
+        "lat": 51.91737333333333,
+        "lon": 4.2154,
         "speed": 0,
         "course": 295.6,
         "heading": 0,
         "navigation_status": "Moored",
         "destination": "NL RTM",
-        "last_position_epoch": 1770502375,
-        "last_position_UTC": "2026-02-07T22:12:55Z",
+        "last_position_epoch": 1770508487,
+        "last_position_UTC": "2026-02-07T23:54:47Z",
         "eta_epoch": 1770468300,
         "eta_UTC": "2026-02-07T12:45:00Z"
       },
       "meta": {
-        "duration": 0.002200571,
+        "duration": 0.001162166,
         "endpoint": "/api/v0/vessel",
         "success": true
       }
