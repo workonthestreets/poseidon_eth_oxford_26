@@ -1,0 +1,438 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00d4ff;
+}
+
+.wallet-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.network-badge {
+  background: #7c3aed;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Wallet Button Styles */
+.wallet-btn {
+  background: #00d4ff;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.wallet-btn:hover {
+  background: #00b8e6;
+  transform: translateY(-2px);
+}
+
+.wallet-btn.connected {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wallet-btn.connected:hover {
+  background: rgba(0, 212, 255, 0.2);
+}
+
+.wallet-btn.loading {
+  background: rgba(255, 255, 255, 0.1);
+  min-width: 150px;
+}
+
+.loading-placeholder {
+  width: 100px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse 2s infinite;
+}
+
+.address {
+  font-family: monospace;
+}
+
+.balance {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Wallet Dropdown */
+.wallet-connected-wrapper {
+  position: relative;
+}
+
+.wallet-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  width: 280px;
+  background: rgba(26, 26, 46, 0.98);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-section {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #10b981;
+}
+
+.address-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.address-row .address {
+  font-size: 14px;
+  color: #fff;
+}
+
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: #00d4ff;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.copy-btn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.balance-display {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.chain-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chain-name {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.dropdown-actions {
+  padding: 8px;
+}
+
+.action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  color: #d1d5db;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.action-btn:hover {
+  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.action-btn.disconnect {
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+.action-btn.disconnect:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.action-btn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.stat-label {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Markets */
+.markets-section {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #00d4ff;
+}
+
+.market-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.market-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.market-description {
+  color: #aaa;
+}
+
+.market-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.market-status.open {
+  background: #10b981;
+  color: #000;
+}
+
+.market-status.closed {
+  background: #ef4444;
+  color: #fff;
+}
+
+.odds-bar {
+  display: flex;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.odds-yes {
+  background: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  transition: width 0.5s;
+}
+
+.odds-no {
+  background: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  transition: width 0.5s;
+}
+
+.trade-section {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.amount-input {
+  flex: 1;
+  max-width: 150px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 16px;
+}
+
+.amount-input:focus {
+  outline: none;
+  border-color: #00d4ff;
+}
+
+.trade-btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.trade-btn.yes {
+  background: #10b981;
+  color: #000;
+}
+
+.trade-btn.no {
+  background: #ef4444;
+  color: #fff;
+}
+
+.trade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  color: #666;
+}
+
+footer a {
+  color: #00d4ff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

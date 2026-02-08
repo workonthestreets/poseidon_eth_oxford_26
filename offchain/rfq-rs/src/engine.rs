@@ -735,8 +735,8 @@ impl AuctionEngine {
 
     fn distribute_payouts(&self, market_id: Uuid, outcome: bool) {
         let vault = self.vaults.read().get(&market_id).cloned();
-        let total_collateral = vault.map(|v| v.emitted_collateral).unwrap_or(0);
-        let total_shares = vault.map(|v| v.emitted_shares).unwrap_or(0);
+        let total_collateral = vault.as_ref().map(|v| v.emitted_collateral).unwrap_or(0);
+        let total_shares = vault.as_ref().map(|v| v.emitted_shares).unwrap_or(0);
 
         if total_shares == 0 {
             return;

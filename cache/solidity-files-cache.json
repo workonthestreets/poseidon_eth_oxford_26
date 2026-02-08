@@ -3674,8 +3674,8 @@
       ]
     },
     "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimePredictionMarket.sol": {
-      "lastModificationDate": 1770468729961,
-      "contentHash": "9a6bb6b5354e6c0d714d61066059badc",
+      "lastModificationDate": 1770515958507,
+      "contentHash": "b6233843ee53f8122b33a0f010119752",
       "sourceName": "onchain/contracts/MaritimePredictionMarket.sol",
       "solcConfig": {
         "version": "0.8.25",
@@ -3709,12 +3709,13 @@
         "^0.8.25"
       ],
       "artifacts": [
+        "IMaritimeRiskOracle",
         "MaritimePredictionMarket"
       ]
     },
     "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimeRiskOracle.sol": {
-      "lastModificationDate": 1770470781386,
-      "contentHash": "dfb2bf978432aa0956c5be26b947ccd3",
+      "lastModificationDate": 1770515958509,
+      "contentHash": "e0419b3a24d4e28ffda4b71ebeb7b977",
       "sourceName": "onchain/contracts/MaritimeRiskOracle.sol",
       "solcConfig": {
         "version": "0.8.25",
@@ -3741,11 +3742,7 @@
           }
         }
       },
-      "imports": [
-        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
-        "@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol",
-        "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.25"
       ],
@@ -3794,8 +3791,8 @@
       ]
     },
     "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimeRFQVault.sol": {
-      "lastModificationDate": 1770504598960,
-      "contentHash": "510508e998ac85519f730b0afc6ad23f",
+      "lastModificationDate": 1770515958508,
+      "contentHash": "0599018167d4f67ecea5c477b842d837",
       "sourceName": "onchain/contracts/MaritimeRFQVault.sol",
       "solcConfig": {
         "version": "0.8.25",
@@ -4140,6 +4137,46 @@
       ],
       "artifacts": [
         "StorageSlot"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/VoyageAuction.sol": {
+      "lastModificationDate": 1770515958509,
+      "contentHash": "1df34d3185bf29eac3fa9b53bbb4023b",
+      "sourceName": "onchain/contracts/VoyageAuction.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./MaritimeRiskOracle.sol",
+        "./MaritimeRFQVault.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "VoyageAuction"
       ]
     }
   }

@@ -7,11 +7,6 @@ import { quoteEngine } from './QuoteEngine.js';
 import { positionManager } from './PositionManager.js';
 import { QuoteRequest, ShareSide, Direction } from './types.js';
 
-// Route param types
-type IdParams = { id: string };
-type ImoParams = { imo: string };
-type UserIdParams = { userId: string };
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -105,7 +100,7 @@ app.get('/api/markets', (_req: Request, res: Response) => {
 });
 
 // Get market details
-app.get('/api/markets/:id', (req: Request<IdParams>, res: Response) => {
+app.get('/api/markets/:id', (req: Request, res: Response) => {
   const stats = quoteEngine.getMarketStats(req.params.id);
   if (!stats) {
     res.status(404).json({ error: 'Market not found' });
@@ -130,7 +125,7 @@ app.post('/api/markets', (req: Request, res: Response) => {
 });
 
 // Settle market (admin/oracle)
-app.post('/api/markets/:id/settle', (req: Request<IdParams>, res: Response) => {
+app.post('/api/markets/:id/settle', (req: Request, res: Response) => {
   const { outcome } = req.body; // true = YES wins, false = NO wins
   const marketId = req.params.id;
 
@@ -189,7 +184,7 @@ app.post('/api/quotes/request', (req: Request, res: Response) => {
 });
 
 // Get quote by ID
-app.get('/api/quotes/:id', (req: Request<IdParams>, res: Response) => {
+app.get('/api/quotes/:id', (req: Request, res: Response) => {
   const quote = quoteEngine.getQuote(req.params.id);
   if (!quote) {
     res.status(404).json({ error: 'Quote not found' });
@@ -199,7 +194,7 @@ app.get('/api/quotes/:id', (req: Request<IdParams>, res: Response) => {
 });
 
 // Accept a quote
-app.post('/api/quotes/:id/accept', (req: Request<IdParams>, res: Response) => {
+app.post('/api/quotes/:id/accept', (req: Request, res: Response) => {
   const userId = req.body.userId;
   if (!userId) {
     res.status(400).json({ error: 'userId required' });
@@ -240,7 +235,7 @@ app.post('/api/quotes/:id/accept', (req: Request<IdParams>, res: Response) => {
 });
 
 // Reject a quote
-app.post('/api/quotes/:id/reject', (req: Request<IdParams>, res: Response) => {
+app.post('/api/quotes/:id/reject', (req: Request, res: Response) => {
   const userId = req.body.userId;
   if (!userId) {
     res.status(400).json({ error: 'userId required' });
@@ -261,25 +256,25 @@ app.post('/api/quotes/:id/reject', (req: Request<IdParams>, res: Response) => {
 // ==========================================
 
 // Get user summary (balance + positions)
-app.get('/api/users/:userId', (req: Request<UserIdParams>, res: Response) => {
+app.get('/api/users/:userId', (req: Request, res: Response) => {
   const summary = positionManager.getUserSummary(req.params.userId);
   res.json(summary);
 });
 
 // Get user positions
-app.get('/api/users/:userId/positions', (req: Request<UserIdParams>, res: Response) => {
+app.get('/api/users/:userId/positions', (req: Request, res: Response) => {
   const positions = positionManager.getAllPositions(req.params.userId);
   res.json(positions);
 });
 
 // Get user trades
-app.get('/api/users/:userId/trades', (req: Request<UserIdParams>, res: Response) => {
+app.get('/api/users/:userId/trades', (req: Request, res: Response) => {
   const trades = quoteEngine.getUserTrades(req.params.userId);
   res.json(trades);
 });
 
 // Add funds (demo)
-app.post('/api/users/:userId/fund', (req: Request<UserIdParams>, res: Response) => {
+app.post('/api/users/:userId/fund', (req: Request, res: Response) => {
   const amount = parseInt(req.body.amount) || 10000; // Default $100
   const newBalance = positionManager.addFunds(req.params.userId, amount);
   res.json({ balanceUSD: newBalance });
@@ -298,7 +293,7 @@ app.get('/api/leaderboard', (_req: Request, res: Response) => {
 const DATA_API = "https://api.datalastic.com/api";
 
 // 1. PSC DETENTION & DEFICIENCIES
-app.get('/api/proxy/risk/psc/:imo', async (req: Request<ImoParams>, res: Response) => {
+app.get('/api/proxy/risk/psc/:imo', async (req: Request, res: Response) => {
   const imo = req.params.imo;
   const apiKey = process.env.DATALASTIC_API_KEY;
 
@@ -351,7 +346,7 @@ app.get('/api/proxy/risk/psc/:imo', async (req: Request<ImoParams>, res: Respons
 });
 
 // 2. DRY DOCK MAINTENANCE
-app.get('/api/proxy/risk/drydock/:imo', async (req: Request<ImoParams>, res: Response) => {
+app.get('/api/proxy/risk/drydock/:imo', async (req: Request, res: Response) => {
   const imo = req.params.imo;
   const apiKey = process.env.DATALASTIC_API_KEY;
 
@@ -385,7 +380,7 @@ app.get('/api/proxy/risk/drydock/:imo', async (req: Request<ImoParams>, res: Res
 });
 
 // 3. CASUALTY / SINKING
-app.get('/api/proxy/risk/casualty/:imo', async (req: Request<ImoParams>, res: Response) => {
+app.get('/api/proxy/risk/casualty/:imo', async (req: Request, res: Response) => {
   const imo = req.params.imo;
   const apiKey = process.env.DATALASTIC_API_KEY;
 
@@ -421,7 +416,7 @@ app.get('/api/proxy/risk/casualty/:imo', async (req: Request<ImoParams>, res: Re
 });
 
 // 4. VOYAGE COMPLETION
-app.get('/api/proxy/risk/voyage/:imo', async (req: Request<ImoParams>, res: Response) => {
+app.get('/api/proxy/risk/voyage/:imo', async (req: Request, res: Response) => {
   const imo = req.params.imo;
   const targetLat = parseFloat(req.query.lat as string) || 0;
   const targetLon = parseFloat(req.query.lon as string) || 0;

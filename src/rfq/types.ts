@@ -5,8 +5,6 @@ export type Direction = 'BUY' | 'SELL';
 export interface Quote {
   id: string;
   marketId: string;
-  odId: string;
-  visitorId: string;
   userId: string;
   side: ShareSide;
   direction: Direction;
