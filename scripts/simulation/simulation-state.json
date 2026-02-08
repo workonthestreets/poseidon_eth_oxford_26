@@ -1,0 +1,77 @@
+{
+  "phase": "SETTLED",
+  "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "markets": [
+    {
+      "id": 0,
+      "imo": "9876543",
+      "name": "MV Pacific Sentinel",
+      "state": "SETTLED",
+      "yesWins": true
+    },
+    {
+      "id": 1,
+      "imo": "9876544",
+      "name": "MV Atlantic Voyager",
+      "state": "SETTLED",
+      "yesWins": false
+    },
+    {
+      "id": 2,
+      "imo": "9876545",
+      "name": "MV Nordic Spirit",
+      "state": "SETTLED",
+      "yesWins": true
+    },
+    {
+      "id": 3,
+      "imo": "9876546",
+      "name": "MV Eastern Promise",
+      "state": "SETTLED",
+      "yesWins": false
+    },
+    {
+      "id": 4,
+      "imo": "9876547",
+      "name": "MV Southern Cross",
+      "state": "SETTLED",
+      "yesWins": true
+    },
+    {
+      "id": 5,
+      "imo": "9876548",
+      "name": "MV Golden Horizon",
+      "state": "SETTLED",
+      "yesWins": false
+    },
+    {
+      "id": 6,
+      "imo": "9876549",
+      "name": "MV Blue Mariner",
+      "state": "SETTLED",
+      "yesWins": false
+    },
+    {
+      "id": 7,
+      "imo": "9876550",
+      "name": "MV Star Navigator",
+      "state": "SETTLED",
+      "yesWins": false
+    },
+    {
+      "id": 8,
+      "imo": "9876551",
+      "name": "MV Ocean Pioneer",
+      "state": "SETTLED",
+      "yesWins": true
+    },
+    {
+      "id": 9,
+      "imo": "9876552",
+      "name": "MV Trade Wind",
+      "state": "SETTLED",
+      "yesWins": true
+    }
+  ],
+  "lastRun": "2026-02-08T09:02:33.230Z"
+}

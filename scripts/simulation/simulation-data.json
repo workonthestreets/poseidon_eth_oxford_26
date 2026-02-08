@@ -1,0 +1,420 @@
+{
+  "metadata": {
+    "description": "Poseidon Maritime Risk Simulation - 10 Vessels",
+    "version": "1.0.0",
+    "network": "coston2",
+    "createdAt": "2026-02-08"
+  },
+  "timestamps": {
+    "t_minus_1_base": 1738368000,
+    "notes": {
+      "t_minus_1": "Commitment deadline (T-1 ends)",
+      "t0_departure": "Vessel departs, shares emit",
+      "t2_arrival": "Market closes, oracle data submitted",
+      "t3_settlement": "Settlement executed, claims enabled"
+    }
+  },
+  "vessels": [
+    {
+      "id": 1,
+      "imo": "9876543",
+      "name": "MV Pacific Sentinel",
+      "route": "Shanghai → Rotterdam",
+      "riskType": 0,
+      "riskTypeName": "PSC_DETENTION",
+      "timestamps": {
+        "t_minus_1_deadline": 1738368000,
+        "t0_departure": 1738713600,
+        "t2_arrival": 1740067200,
+        "t3_settlement": 1740081600
+      },
+      "hedger": {
+        "address": "0x1111111111111111111111111111111111111111",
+        "amountToHedge": "50000000000000000000000",
+        "minBidSize": "5000000000000000000000",
+        "yesPrice": "850000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x2222222222222222222222222222222222222222",
+          "bidAmount": "20000000000000000000000",
+          "noPrice": "150000000000000000"
+        },
+        {
+          "address": "0x3333333333333333333333333333333333333333",
+          "bidAmount": "15000000000000000000000",
+          "noPrice": "140000000000000000"
+        },
+        {
+          "address": "0x4444444444444444444444444444444444444444",
+          "bidAmount": "15000000000000000000000",
+          "noPrice": "160000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "detained": true,
+        "yesWins": true,
+        "dataHash": "0x1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "id": 2,
+      "imo": "9876544",
+      "name": "MV Atlantic Voyager",
+      "route": "Singapore → Hamburg",
+      "riskType": 1,
+      "riskTypeName": "CASUALTY",
+      "timestamps": {
+        "t_minus_1_deadline": 1738454400,
+        "t0_departure": 1738800000,
+        "t2_arrival": 1740153600,
+        "t3_settlement": 1740168000
+      },
+      "hedger": {
+        "address": "0x1111111111111111111111111111111111111111",
+        "amountToHedge": "75000000000000000000000",
+        "minBidSize": "10000000000000000000000",
+        "yesPrice": "920000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x5555555555555555555555555555555555555555",
+          "bidAmount": "30000000000000000000000",
+          "noPrice": "80000000000000000"
+        },
+        {
+          "address": "0x6666666666666666666666666666666666666666",
+          "bidAmount": "25000000000000000000000",
+          "noPrice": "75000000000000000"
+        },
+        {
+          "address": "0x7777777777777777777777777777777777777777",
+          "bidAmount": "20000000000000000000000",
+          "noPrice": "85000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "casualtyOccurred": false,
+        "yesWins": false,
+        "dataHash": "0x2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    {
+      "id": 3,
+      "imo": "9876545",
+      "name": "MV Nordic Spirit",
+      "route": "Dubai → Felixstowe",
+      "riskType": 2,
+      "riskTypeName": "VOYAGE_COMPLETION",
+      "timestamps": {
+        "t_minus_1_deadline": 1738540800,
+        "t0_departure": 1738886400,
+        "t2_arrival": 1740240000,
+        "t3_settlement": 1740254400
+      },
+      "hedger": {
+        "address": "0x2222222222222222222222222222222222222222",
+        "amountToHedge": "30000000000000000000000",
+        "minBidSize": "3000000000000000000000",
+        "yesPrice": "780000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x8888888888888888888888888888888888888888",
+          "bidAmount": "15000000000000000000000",
+          "noPrice": "220000000000000000"
+        },
+        {
+          "address": "0x9999999999999999999999999999999999999999",
+          "bidAmount": "15000000000000000000000",
+          "noPrice": "210000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "arrivedOnTime": true,
+        "yesWins": true,
+        "dataHash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    {
+      "id": 4,
+      "imo": "9876546",
+      "name": "MV Eastern Promise",
+      "route": "Busan → Los Angeles",
+      "riskType": 0,
+      "riskTypeName": "PSC_DETENTION",
+      "timestamps": {
+        "t_minus_1_deadline": 1738627200,
+        "t0_departure": 1738972800,
+        "t2_arrival": 1740326400,
+        "t3_settlement": 1740340800
+      },
+      "hedger": {
+        "address": "0x3333333333333333333333333333333333333333",
+        "amountToHedge": "100000000000000000000000",
+        "minBidSize": "15000000000000000000000",
+        "yesPrice": "820000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "bidAmount": "40000000000000000000000",
+          "noPrice": "180000000000000000"
+        },
+        {
+          "address": "0xBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "bidAmount": "35000000000000000000000",
+          "noPrice": "175000000000000000"
+        },
+        {
+          "address": "0xCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+          "bidAmount": "25000000000000000000000",
+          "noPrice": "185000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "detained": false,
+        "yesWins": false,
+        "dataHash": "0x4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    },
+    {
+      "id": 5,
+      "imo": "9876547",
+      "name": "MV Southern Cross",
+      "route": "Santos → Antwerp",
+      "riskType": 1,
+      "riskTypeName": "CASUALTY",
+      "timestamps": {
+        "t_minus_1_deadline": 1738713600,
+        "t0_departure": 1739059200,
+        "t2_arrival": 1740412800,
+        "t3_settlement": 1740427200
+      },
+      "hedger": {
+        "address": "0x4444444444444444444444444444444444444444",
+        "amountToHedge": "25000000000000000000000",
+        "minBidSize": "2500000000000000000000",
+        "yesPrice": "950000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+          "bidAmount": "12000000000000000000000",
+          "noPrice": "50000000000000000"
+        },
+        {
+          "address": "0xEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+          "bidAmount": "13000000000000000000000",
+          "noPrice": "55000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "casualtyOccurred": true,
+        "casualtyType": "Collision",
+        "yesWins": true,
+        "dataHash": "0x5555555555555555555555555555555555555555555555555555555555555555"
+      }
+    },
+    {
+      "id": 6,
+      "imo": "9876548",
+      "name": "MV Golden Horizon",
+      "route": "Mumbai → Southampton",
+      "riskType": 2,
+      "riskTypeName": "VOYAGE_COMPLETION",
+      "timestamps": {
+        "t_minus_1_deadline": 1738800000,
+        "t0_departure": 1739145600,
+        "t2_arrival": 1740499200,
+        "t3_settlement": 1740513600
+      },
+      "hedger": {
+        "address": "0x5555555555555555555555555555555555555555",
+        "amountToHedge": "45000000000000000000000",
+        "minBidSize": "5000000000000000000000",
+        "yesPrice": "800000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x1111111111111111111111111111111111111111",
+          "bidAmount": "20000000000000000000000",
+          "noPrice": "200000000000000000"
+        },
+        {
+          "address": "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+          "bidAmount": "25000000000000000000000",
+          "noPrice": "195000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "arrivedOnTime": false,
+        "delayed": true,
+        "yesWins": false,
+        "dataHash": "0x6666666666666666666666666666666666666666666666666666666666666666"
+      }
+    },
+    {
+      "id": 7,
+      "imo": "9876549",
+      "name": "MV Blue Mariner",
+      "route": "Yokohama → Seattle",
+      "riskType": 0,
+      "riskTypeName": "PSC_DETENTION",
+      "timestamps": {
+        "t_minus_1_deadline": 1738886400,
+        "t0_departure": 1739232000,
+        "t2_arrival": 1740585600,
+        "t3_settlement": 1740600000
+      },
+      "hedger": {
+        "address": "0x6666666666666666666666666666666666666666",
+        "amountToHedge": "60000000000000000000000",
+        "minBidSize": "8000000000000000000000",
+        "yesPrice": "860000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x2222222222222222222222222222222222222222",
+          "bidAmount": "30000000000000000000000",
+          "noPrice": "140000000000000000"
+        },
+        {
+          "address": "0x4444444444444444444444444444444444444444",
+          "bidAmount": "30000000000000000000000",
+          "noPrice": "135000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "detained": false,
+        "yesWins": false,
+        "dataHash": "0x7777777777777777777777777777777777777777777777777777777777777777"
+      }
+    },
+    {
+      "id": 8,
+      "imo": "9876550",
+      "name": "MV Star Navigator",
+      "route": "Cape Town → Barcelona",
+      "riskType": 1,
+      "riskTypeName": "CASUALTY",
+      "timestamps": {
+        "t_minus_1_deadline": 1738972800,
+        "t0_departure": 1739318400,
+        "t2_arrival": 1740672000,
+        "t3_settlement": 1740686400
+      },
+      "hedger": {
+        "address": "0x7777777777777777777777777777777777777777",
+        "amountToHedge": "35000000000000000000000",
+        "minBidSize": "4000000000000000000000",
+        "yesPrice": "940000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x3333333333333333333333333333333333333333",
+          "bidAmount": "18000000000000000000000",
+          "noPrice": "60000000000000000"
+        },
+        {
+          "address": "0x5555555555555555555555555555555555555555",
+          "bidAmount": "17000000000000000000000",
+          "noPrice": "65000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "casualtyOccurred": false,
+        "yesWins": false,
+        "dataHash": "0x8888888888888888888888888888888888888888888888888888888888888888"
+      }
+    },
+    {
+      "id": 9,
+      "imo": "9876551",
+      "name": "MV Ocean Pioneer",
+      "route": "Hong Kong → Long Beach",
+      "riskType": 2,
+      "riskTypeName": "VOYAGE_COMPLETION",
+      "timestamps": {
+        "t_minus_1_deadline": 1739059200,
+        "t0_departure": 1739404800,
+        "t2_arrival": 1740758400,
+        "t3_settlement": 1740772800
+      },
+      "hedger": {
+        "address": "0x8888888888888888888888888888888888888888",
+        "amountToHedge": "80000000000000000000000",
+        "minBidSize": "10000000000000000000000",
+        "yesPrice": "780000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0x6666666666666666666666666666666666666666",
+          "bidAmount": "40000000000000000000000",
+          "noPrice": "220000000000000000"
+        },
+        {
+          "address": "0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "bidAmount": "40000000000000000000000",
+          "noPrice": "215000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "arrivedOnTime": true,
+        "yesWins": true,
+        "dataHash": "0x9999999999999999999999999999999999999999999999999999999999999999"
+      }
+    },
+    {
+      "id": 10,
+      "imo": "9876552",
+      "name": "MV Trade Wind",
+      "route": "Colombo → Valencia",
+      "riskType": 0,
+      "riskTypeName": "PSC_DETENTION",
+      "timestamps": {
+        "t_minus_1_deadline": 1739145600,
+        "t0_departure": 1739491200,
+        "t2_arrival": 1740844800,
+        "t3_settlement": 1740859200
+      },
+      "hedger": {
+        "address": "0x9999999999999999999999999999999999999999",
+        "amountToHedge": "40000000000000000000000",
+        "minBidSize": "5000000000000000000000",
+        "yesPrice": "880000000000000000"
+      },
+      "counterparties": [
+        {
+          "address": "0xBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "bidAmount": "20000000000000000000000",
+          "noPrice": "120000000000000000"
+        },
+        {
+          "address": "0xCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+          "bidAmount": "20000000000000000000000",
+          "noPrice": "125000000000000000"
+        }
+      ],
+      "syntheticOutcome": {
+        "detained": true,
+        "yesWins": true,
+        "dataHash": "0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    }
+  ],
+  "summary": {
+    "totalVessels": 10,
+    "riskTypeBreakdown": {
+      "PSC_DETENTION": 4,
+      "CASUALTY": 3,
+      "VOYAGE_COMPLETION": 3
+    },
+    "outcomes": {
+      "yesWins": 5,
+      "noWins": 5
+    },
+    "yesWinMarkets": [1, 3, 5, 9, 10],
+    "noWinMarkets": [2, 4, 6, 7, 8]
+  }
+}

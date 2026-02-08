@@ -4178,6 +4178,157 @@
       "artifacts": [
         "VoyageAuction"
       ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/PoseidonVault.sol": {
+      "lastModificationDate": 1770541323962,
+      "contentHash": "9d072d5868e87a720f78249b6f184238",
+      "sourceName": "onchain/contracts/PoseidonVault.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
+        "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "PoseidonVault"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/DemoAuction.sol": {
+      "lastModificationDate": 1770544930765,
+      "contentHash": "f077cb91da93847f79da4e6e81ebf904",
+      "sourceName": "onchain/contracts/DemoAuction.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "DemoAuction"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/PoseidonDemo.sol": {
+      "lastModificationDate": 1770545972320,
+      "contentHash": "65c0c1b0dffb1b1f9aaaaa67fd5a1662",
+      "sourceName": "onchain/contracts/PoseidonDemo.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "PoseidonDemo"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/PoseidonAuction.sol": {
+      "lastModificationDate": 1770546406607,
+      "contentHash": "373b926d53a94f52146237577e451042",
+      "sourceName": "onchain/contracts/PoseidonAuction.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "PoseidonAuction"
+      ]
     }
   }
 }

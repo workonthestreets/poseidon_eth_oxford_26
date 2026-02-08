@@ -1,0 +1,10 @@
+{
+  "network": "coston2",
+  "chainId": 114,
+  "deployer": "0x33f08D0D7A40827cac4699AAf3b59479E5C1E35E",
+  "timestamp": "2026-02-08T09:27:02.661Z",
+  "contracts": {
+    "PoseidonVault": "0x2fD07411EE31025aF3F3B4C7a2ea407A66913141"
+  },
+  "explorer": "https://coston2-explorer.flare.network/address/0x2fD07411EE31025aF3F3B4C7a2ea407A66913141"
+}
