@@ -6,7 +6,13 @@
   "scripts": {
     "test": "npx hardhat test",
     "fdc:run": "tsx offchain/fdc/FDCDataReflector.ts",
-    "data:fetch": "tsx offchain/data/fetchVesselRiskProfile.ts"
+    "data:fetch": "tsx offchain/data/fetchVesselRiskProfile.ts",
+    "build": "tsc",
+    "start": "node dist/src/rfq/server.js",
+    "dev": "tsx src/rfq/server.ts",
+    "dev:rust": "cd offchain/rfq-rs && cargo run --release",
+    "build:rust": "cd offchain/rfq-rs && cargo build --release",
+    "test:rfq": "tsx src/test/rfq.test.ts"
   },
   "keywords": [
     "prediction-market",
@@ -24,6 +30,8 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/node": "^25.2.1",
+    "@types/uuid": "^10.0.0",
+    "@types/ws": "^8.18.1",
     "dotenv": "^17.2.4",
     "ethers": "^6.16.0",
     "hardhat": "^2.22.17",
@@ -31,12 +39,12 @@
     "uuid": "^11.1.0",
     "ws": "^8.18.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "viem": "^2.45.1",
+    "wagmi": "^3.4.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/uuid": "^10.0.0",
-    "@types/ws": "^8.5.0",
     "@flarenetwork/flare-periphery-contract-artifacts": "^0.1.40",
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
     "@nomicfoundation/hardhat-ethers": "^3.1.3",

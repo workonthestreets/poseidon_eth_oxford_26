@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/onchain/contracts/MaritimePredictionMarket.sol": {
-      "lastModificationDate": 1770515320103,
-      "contentHash": "b6233843ee53f8122b33a0f010119752",
-      "sourceName": "onchain/contracts/MaritimePredictionMarket.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol": {
+      "lastModificationDate": 1770467656371,
+      "contentHash": "c3c41aedd61fd29a6903a1f4d67c84a0",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -31,217 +31,24 @@
         }
       },
       "imports": [
-        "./MaritimeRiskOracle.sol"
+        "./IRelay.sol",
+        "./IAddressValidityVerification.sol",
+        "./IBalanceDecreasingTransactionVerification.sol",
+        "./IConfirmedBlockHeightExistsVerification.sol",
+        "./IEVMTransactionVerification.sol",
+        "./IPaymentVerification.sol",
+        "./IReferencedPaymentNonexistenceVerification.sol",
+        "./IWeb2JsonVerification.sol"
       ],
       "versionPragmas": [
-        "^0.8.25"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IMaritimeRiskOracle",
-        "MaritimePredictionMarket"
+        "IFdcVerification"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/onchain/contracts/MaritimeRiskOracle.sol": {
-      "lastModificationDate": 1770515213671,
-      "contentHash": "e0419b3a24d4e28ffda4b71ebeb7b977",
-      "sourceName": "onchain/contracts/MaritimeRiskOracle.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.25"
-      ],
-      "artifacts": [
-        "MaritimeRiskOracle"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/onchain/contracts/VoyageAuction.sol": {
-      "lastModificationDate": 1770514016460,
-      "contentHash": "1df34d3185bf29eac3fa9b53bbb4023b",
-      "sourceName": "onchain/contracts/VoyageAuction.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./MaritimeRiskOracle.sol",
-        "./MaritimeRFQVault.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.25"
-      ],
-      "artifacts": [
-        "VoyageAuction"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/onchain/contracts/MaritimeRFQVault.sol": {
-      "lastModificationDate": 1770513818594,
-      "contentHash": "0599018167d4f67ecea5c477b842d837",
-      "sourceName": "onchain/contracts/MaritimeRFQVault.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
-        "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol",
-        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-        "@openzeppelin/contracts/utils/cryptography/EIP712.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.25"
-      ],
-      "artifacts": [
-        "MaritimeRFQVault"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/cryptography/EIP712.sol": {
-      "lastModificationDate": 1770477518256,
-      "contentHash": "459aeb9cc3fc3c6d67d30ffefb724aba",
-      "sourceName": "@openzeppelin/contracts/utils/cryptography/EIP712.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./ECDSA.sol",
-        "../ShortStrings.sol",
-        "../../interfaces/IERC5267.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.8"
-      ],
-      "artifacts": [
-        "EIP712"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
-      "lastModificationDate": 1770477518253,
-      "contentHash": "d822a8a9468649cab463f29f5decf5cc",
-      "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../Strings.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ECDSA"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol": {
-      "lastModificationDate": 1770477518308,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol": {
+      "lastModificationDate": 1770467656219,
       "contentHash": "51bb3e3acfc65f5396d6119342b486fa",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
       "solcConfig": {
@@ -319,10 +126,10 @@
         "ContractRegistry"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol": {
-      "lastModificationDate": 1770477518308,
-      "contentHash": "28b1791ae69d0e5e28ca2a54f3b5ad64",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol": {
+      "lastModificationDate": 1770467656771,
+      "contentHash": "545d61572e73d372477dfc186c227d6d",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -353,13 +160,13 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "FtsoV2Interface"
+        "IWeb2Json"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/ShortStrings.sol": {
-      "lastModificationDate": 1770477518667,
-      "contentHash": "8dde288da49722a70f34ee369be4bfba",
-      "sourceName": "@openzeppelin/contracts/utils/ShortStrings.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExistsVerification.sol": {
+      "lastModificationDate": 1770467656356,
+      "contentHash": "99881e600414a5dac1333c14200359d2",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExistsVerification.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -386,56 +193,19 @@
         }
       },
       "imports": [
-        "./StorageSlot.sol"
+        "./IConfirmedBlockHeightExists.sol"
       ],
       "versionPragmas": [
-        "^0.8.8"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "ShortStrings"
+        "IConfirmedBlockHeightExistsVerification"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/interfaces/IERC5267.sol": {
-      "lastModificationDate": 1770477518575,
-      "contentHash": "b1756048024350a162c3be27c04aa652",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC5267.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC5267"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1770477518667,
-      "contentHash": "48686fc32a22a3754b8e63321857dd2a",
-      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRelay.sol": {
+      "lastModificationDate": 1770467656711,
+      "contentHash": "88170e87ed04e1cf154cbf6ca2bcee6b",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRelay.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -462,20 +232,253 @@
         }
       },
       "imports": [
-        "./math/Math.sol",
-        "./math/SignedMath.sol"
+        "./RandomNumberV2Interface.sol"
       ],
       "versionPragmas": [
-        "^0.8.0"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "Strings"
+        "IRelay"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
-      "lastModificationDate": 1770477518667,
-      "contentHash": "9488ebd4daacfee8ad04811600d7d061",
-      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransactionVerification.sol": {
+      "lastModificationDate": 1770467656311,
+      "contentHash": "1cdc49f6ae2db7365adc6fb9e7d8da6d",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransactionVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IBalanceDecreasingTransaction.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IBalanceDecreasingTransactionVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistenceVerification.sol": {
+      "lastModificationDate": 1770467656710,
+      "contentHash": "108c1b44cd60556d0a9b40ffdfeaf567",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistenceVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IReferencedPaymentNonexistence.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IReferencedPaymentNonexistenceVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEVMTransactionVerification.sol": {
+      "lastModificationDate": 1770467656364,
+      "contentHash": "57ec6e2ad9b5dfd8079d441971313ea7",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IEVMTransactionVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IEVMTransaction.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IEVMTransactionVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPaymentVerification.sol": {
+      "lastModificationDate": 1770467656547,
+      "contentHash": "0578de4f101434110ea833e86b916d6f",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPaymentVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IPayment.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IPaymentVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAddressValidityVerification.sol": {
+      "lastModificationDate": 1770467656227,
+      "contentHash": "06692793a03893a2a033a1e344da6adc",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAddressValidityVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IAddressValidity.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IAddressValidityVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWeb2JsonVerification.sol": {
+      "lastModificationDate": 1770467656771,
+      "contentHash": "6837f2fdd4f2a460a6a1a9ee0abd8429",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWeb2JsonVerification.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IWeb2Json.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IWeb2JsonVerification"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExists.sol": {
+      "lastModificationDate": 1770467656356,
+      "contentHash": "93d757d8da7acd75bd3e2082bd0f2ef4",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExists.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -503,16 +506,16 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.0"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "SignedMath"
+        "IConfirmedBlockHeightExists"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1770477518581,
-      "contentHash": "fe63409d8a06818b926cf89e0ea88b1b",
-      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/RandomNumberV2Interface.sol": {
+      "lastModificationDate": 1770467656810,
+      "contentHash": "438e0f4ef75412659abca6a825fddd93",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/RandomNumberV2Interface.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -540,16 +543,16 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.0"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "Math"
+        "RandomNumberV2Interface"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
-      "lastModificationDate": 1770477518667,
-      "contentHash": "682f7dd1f2e1147c8390e7575deceb2d",
-      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransaction.sol": {
+      "lastModificationDate": 1770467656311,
+      "contentHash": "deae3a1d919e15820266987ed34558b9",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransaction.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -577,14 +580,162 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.0"
+        ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "StorageSlot"
+        "IBalanceDecreasingTransaction"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareContractRegistry.sol": {
-      "lastModificationDate": 1770477518387,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistence.sol": {
+      "lastModificationDate": 1770467656710,
+      "contentHash": "81acac296932b60a6e8a0142831d514f",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistence.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IReferencedPaymentNonexistence"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEVMTransaction.sol": {
+      "lastModificationDate": 1770467656363,
+      "contentHash": "fb2b51352a42caf7d84d143a5cef37f9",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IEVMTransaction.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IEVMTransaction"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPayment.sol": {
+      "lastModificationDate": 1770467656546,
+      "contentHash": "3387e523124247aabf032ca2b59e1c44",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPayment.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IPayment"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAddressValidity.sol": {
+      "lastModificationDate": 1770467656222,
+      "contentHash": "dc80a1768f9b2eec5d01bcbdbf6a75a3",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAddressValidity.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IAddressValidity"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareContractRegistry.sol": {
+      "lastModificationDate": 1770467656381,
       "contentHash": "884fc283535bb30c4f72c648eb560523",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareContractRegistry.sol",
       "solcConfig": {
@@ -620,8 +771,45 @@
         "IFlareContractRegistry"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPriceSubmitter.sol": {
-      "lastModificationDate": 1770477518746,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWNat.sol": {
+      "lastModificationDate": 1770467656771,
+      "contentHash": "a1d63c576e6858ec65ed993d21d71eaa",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWNat.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IWNat"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPriceSubmitter.sol": {
+      "lastModificationDate": 1770467656707,
       "contentHash": "bcdcc66e2f0b8c5a37950e35b4ed6d44",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPriceSubmitter.sol",
       "solcConfig": {
@@ -661,8 +849,45 @@
         "IPriceSubmitter"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRegistry.sol": {
-      "lastModificationDate": 1770477518392,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardManager.sol": {
+      "lastModificationDate": 1770467656391,
+      "contentHash": "b514d90aab3972dc2f314bb19f19ded2",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardManager.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFtsoRewardManager"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRegistry.sol": {
+      "lastModificationDate": 1770467656390,
       "contentHash": "ec5b904d43586007141d8db4aa32da99",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoRegistry.sol",
       "solcConfig": {
@@ -701,10 +926,10 @@
         "IFtsoRegistry"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGovernanceSettings.sol": {
-      "lastModificationDate": 1770477518399,
-      "contentHash": "f6967b01b555ac75de626dcadc1e2a8e",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IGovernanceSettings.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVoterWhitelister.sol": {
+      "lastModificationDate": 1770467656730,
+      "contentHash": "7b3f8f1bb60ceb5486e6256fbefce15e",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IVoterWhitelister.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -735,48 +960,11 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IGovernanceSettings"
+        "IVoterWhitelister"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardManager.sol": {
-      "lastModificationDate": 1770477518398,
-      "contentHash": "b514d90aab3972dc2f314bb19f19ded2",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardManager.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoRewardManager"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoManager.sol": {
-      "lastModificationDate": 1770477518391,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoManager.sol": {
+      "lastModificationDate": 1770467656389,
       "contentHash": "05cc3aaec3accd79df88bb35f56be841",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoManager.sol",
       "solcConfig": {
@@ -815,156 +1003,8 @@
         "IFtsoManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVoterWhitelister.sol": {
-      "lastModificationDate": 1770477518904,
-      "contentHash": "7b3f8f1bb60ceb5486e6256fbefce15e",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IVoterWhitelister.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IVoterWhitelister"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWNat.sol": {
-      "lastModificationDate": 1770477518922,
-      "contentHash": "a1d63c576e6858ec65ed993d21d71eaa",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWNat.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IWNat"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGovernanceVotePower.sol": {
-      "lastModificationDate": 1770477518409,
-      "contentHash": "d1aa604eafcddc5e69db7217982dd1a7",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IGovernanceVotePower.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IGovernanceVotePower"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareAssetRegistry.sol": {
-      "lastModificationDate": 1770477518387,
-      "contentHash": "01450977964762aa4ba88cd6ba87c2b9",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareAssetRegistry.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFlareAssetRegistry"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IClaimSetupManager.sol": {
-      "lastModificationDate": 1770477518336,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IClaimSetupManager.sol": {
+      "lastModificationDate": 1770467656351,
       "contentHash": "8962aec4ed8897a95ebd59694692614d",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IClaimSetupManager.sol",
       "solcConfig": {
@@ -1003,8 +1043,119 @@
         "IClaimSetupManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEntityManager.sol": {
-      "lastModificationDate": 1770477518371,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGovernanceVotePower.sol": {
+      "lastModificationDate": 1770467656504,
+      "contentHash": "d1aa604eafcddc5e69db7217982dd1a7",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IGovernanceVotePower.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IGovernanceVotePower"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareAssetRegistry.sol": {
+      "lastModificationDate": 1770467656380,
+      "contentHash": "01450977964762aa4ba88cd6ba87c2b9",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareAssetRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFlareAssetRegistry"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGovernanceSettings.sol": {
+      "lastModificationDate": 1770467656392,
+      "contentHash": "f6967b01b555ac75de626dcadc1e2a8e",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IGovernanceSettings.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IGovernanceSettings"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEntityManager.sol": {
+      "lastModificationDate": 1770467656362,
       "contentHash": "4c43f0ecfd79d02e5034386750bdc7c2",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IEntityManager.sol",
       "solcConfig": {
@@ -1040,8 +1191,45 @@
         "IEntityManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ISubmission.sol": {
-      "lastModificationDate": 1770477518895,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsCalculator.sol": {
+      "lastModificationDate": 1770467656382,
+      "contentHash": "d874222e6a8ff461d3fa09bc0e68c20d",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsCalculator.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFlareSystemsCalculator"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ISubmission.sol": {
+      "lastModificationDate": 1770467656726,
       "contentHash": "91ece5bdc9c54e00394b5af07c65de2c",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ISubmission.sol",
       "solcConfig": {
@@ -1079,121 +1267,8 @@
         "ISubmission"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWNatDelegationFee.sol": {
-      "lastModificationDate": 1770477518922,
-      "contentHash": "23edc7aaf0bf546e8de9ab42764b0baf",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWNatDelegationFee.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IWNatDelegationFee"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRelay.sol": {
-      "lastModificationDate": 1770477518876,
-      "contentHash": "88170e87ed04e1cf154cbf6ca2bcee6b",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRelay.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./RandomNumberV2Interface.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IRelay"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsCalculator.sol": {
-      "lastModificationDate": 1770477518388,
-      "contentHash": "d874222e6a8ff461d3fa09bc0e68c20d",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsCalculator.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFlareSystemsCalculator"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsManager.sol": {
-      "lastModificationDate": 1770477518389,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsManager.sol": {
+      "lastModificationDate": 1770467656382,
       "contentHash": "ae19f2c5b344d6210d04e5ad5c9853c6",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFlareSystemsManager.sol",
       "solcConfig": {
@@ -1231,269 +1306,8 @@
         "IFlareSystemsManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardOffersManager.sol": {
-      "lastModificationDate": 1770477518399,
-      "contentHash": "c98ce967a8ff37de7d402a4a9bab14b7",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardOffersManager.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoRewardOffersManager"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRewardManager.sol": {
-      "lastModificationDate": 1770477518877,
-      "contentHash": "cdace4c2bcb36fc79d2e260adb5dce75",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRewardManager.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./RewardsV2Interface.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IRewardManager"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedPublisher.sol": {
-      "lastModificationDate": 1770477518390,
-      "contentHash": "3a45805efd661713bcce1de3891eec5f",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedPublisher.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoFeedPublisher"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoInflationConfigurations.sol": {
-      "lastModificationDate": 1770477518391,
-      "contentHash": "dc601f20a4c9c2a6943d7de95613c3fb",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoInflationConfigurations.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoInflationConfigurations"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedIdConverter.sol": {
-      "lastModificationDate": 1770477518390,
-      "contentHash": "e5989139f4e1d213ca20f1f74698c67c",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedIdConverter.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoFeedIdConverter"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedDecimals.sol": {
-      "lastModificationDate": 1770477518390,
-      "contentHash": "7600aab7f7c3b76632914fe5f606e597",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedDecimals.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFtsoFeedDecimals"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFeeCalculator.sol": {
-      "lastModificationDate": 1770477518378,
-      "contentHash": "01ec4eed426e4f9f97700a32dccb2f33",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFeeCalculator.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFeeCalculator"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVoterRegistry.sol": {
-      "lastModificationDate": 1770477518904,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVoterRegistry.sol": {
+      "lastModificationDate": 1770467656730,
       "contentHash": "3f8b859eca0862908ba4f22aac424eef",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IVoterRegistry.sol",
       "solcConfig": {
@@ -1529,10 +1343,10 @@
         "IVoterRegistry"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdatesConfiguration.sol": {
-      "lastModificationDate": 1770477518377,
-      "contentHash": "4889ee18752546cb33c638b1ed036ad4",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFastUpdatesConfiguration.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoInflationConfigurations.sol": {
+      "lastModificationDate": 1770467656389,
+      "contentHash": "dc601f20a4c9c2a6943d7de95613c3fb",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoInflationConfigurations.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1563,13 +1377,13 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IFastUpdatesConfiguration"
+        "IFtsoInflationConfigurations"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdater.sol": {
-      "lastModificationDate": 1770477518377,
-      "contentHash": "42bd7d6c27251ea2781fdcbf682532d2",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFastUpdater.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedDecimals.sol": {
+      "lastModificationDate": 1770467656387,
+      "contentHash": "7600aab7f7c3b76632914fe5f606e597",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedDecimals.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1595,18 +1409,127 @@
           }
         }
       },
-      "imports": [
-        "./ISortition.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IFastUpdater"
+        "IFtsoFeedDecimals"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdateIncentiveManager.sol": {
-      "lastModificationDate": 1770477518372,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardOffersManager.sol": {
+      "lastModificationDate": 1770467656392,
+      "contentHash": "c98ce967a8ff37de7d402a4a9bab14b7",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoRewardOffersManager.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFtsoRewardOffersManager"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedPublisher.sol": {
+      "lastModificationDate": 1770467656388,
+      "contentHash": "3a45805efd661713bcce1de3891eec5f",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedPublisher.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFtsoFeedPublisher"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedIdConverter.sol": {
+      "lastModificationDate": 1770467656387,
+      "contentHash": "e5989139f4e1d213ca20f1f74698c67c",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtsoFeedIdConverter.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFtsoFeedIdConverter"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdateIncentiveManager.sol": {
+      "lastModificationDate": 1770467656364,
       "contentHash": "7d0b80ac1bea3bd0f68129daa3cd9666",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFastUpdateIncentiveManager.sol",
       "solcConfig": {
@@ -1646,10 +1569,10 @@
         "IFastUpdateIncentiveManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ProtocolsV2Interface.sol": {
-      "lastModificationDate": 1770477518959,
-      "contentHash": "b8539f1e222aaa9e1cdd64b0b5caf3c5",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ProtocolsV2Interface.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdatesConfiguration.sol": {
+      "lastModificationDate": 1770467656370,
+      "contentHash": "4889ee18752546cb33c638b1ed036ad4",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFastUpdatesConfiguration.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1680,13 +1603,13 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "ProtocolsV2Interface"
+        "IFastUpdatesConfiguration"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/RandomNumberV2Interface.sol": {
-      "lastModificationDate": 1770477518960,
-      "contentHash": "438e0f4ef75412659abca6a825fddd93",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/RandomNumberV2Interface.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFeeCalculator.sol": {
+      "lastModificationDate": 1770467656371,
+      "contentHash": "01ec4eed426e4f9f97700a32dccb2f33",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFeeCalculator.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1717,11 +1640,124 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "RandomNumberV2Interface"
+        "IFeeCalculator"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/RewardsV2Interface.sol": {
-      "lastModificationDate": 1770477518960,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRewardManager.sol": {
+      "lastModificationDate": 1770467656712,
+      "contentHash": "cdace4c2bcb36fc79d2e260adb5dce75",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRewardManager.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./RewardsV2Interface.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IRewardManager"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol": {
+      "lastModificationDate": 1770467656221,
+      "contentHash": "28b1791ae69d0e5e28ca2a54f3b5ad64",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "FtsoV2Interface"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWNatDelegationFee.sol": {
+      "lastModificationDate": 1770467656809,
+      "contentHash": "23edc7aaf0bf546e8de9ab42764b0baf",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWNatDelegationFee.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IWNatDelegationFee"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/RewardsV2Interface.sol": {
+      "lastModificationDate": 1770467656811,
       "contentHash": "fa1d1831fb77f446199ec3c130d765d8",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/RewardsV2Interface.sol",
       "solcConfig": {
@@ -1757,10 +1793,10 @@
         "RewardsV2Interface"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol": {
-      "lastModificationDate": 1770477518378,
-      "contentHash": "c3c41aedd61fd29a6903a1f4d67c84a0",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFastUpdater.sol": {
+      "lastModificationDate": 1770467656370,
+      "contentHash": "42bd7d6c27251ea2781fdcbf682532d2",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFastUpdater.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1787,26 +1823,58 @@
         }
       },
       "imports": [
-        "./IRelay.sol",
-        "./IAddressValidityVerification.sol",
-        "./IBalanceDecreasingTransactionVerification.sol",
-        "./IConfirmedBlockHeightExistsVerification.sol",
-        "./IEVMTransactionVerification.sol",
-        "./IPaymentVerification.sol",
-        "./IReferencedPaymentNonexistenceVerification.sol",
-        "./IWeb2JsonVerification.sol"
+        "./ISortition.sol"
       ],
       "versionPragmas": [
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IFdcVerification"
+        "IFastUpdater"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/TestFtsoV2Interface.sol": {
-      "lastModificationDate": 1770477518961,
-      "contentHash": "f4ce715217a4a2532fd3f51f09e85679",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/TestFtsoV2Interface.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerController.sol": {
+      "lastModificationDate": 1770467656294,
+      "contentHash": "e7a767338d21e04b8d8963d6b50b4466",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerController.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IAssetManager.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IAssetManagerController"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcRequestFeeConfigurations.sol": {
+      "lastModificationDate": 1770467656371,
+      "contentHash": "529202622bb073a06af89675a3c306bc",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcRequestFeeConfigurations.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1837,11 +1905,48 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "TestFtsoV2Interface"
+        "IFdcRequestFeeConfigurations"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcHub.sol": {
-      "lastModificationDate": 1770477518377,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ProtocolsV2Interface.sol": {
+      "lastModificationDate": 1770467656809,
+      "contentHash": "b8539f1e222aaa9e1cdd64b0b5caf3c5",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ProtocolsV2Interface.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "ProtocolsV2Interface"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcHub.sol": {
+      "lastModificationDate": 1770467656370,
       "contentHash": "e9e464314fd1536516935955ef6ef95a",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcHub.sol",
       "solcConfig": {
@@ -1880,10 +1985,10 @@
         "IFdcHub"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcRequestFeeConfigurations.sol": {
-      "lastModificationDate": 1770477518378,
-      "contentHash": "529202622bb073a06af89675a3c306bc",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcRequestFeeConfigurations.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/TestFtsoV2Interface.sol": {
+      "lastModificationDate": 1770467656812,
+      "contentHash": "f4ce715217a4a2532fd3f51f09e85679",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/TestFtsoV2Interface.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -1914,11 +2019,11 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IFdcRequestFeeConfigurations"
+        "TestFtsoV2Interface"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGenericRewardManager.sol": {
-      "lastModificationDate": 1770477518399,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IGenericRewardManager.sol": {
+      "lastModificationDate": 1770467656392,
       "contentHash": "137b375f98a437c097eba623bec6ead6",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IGenericRewardManager.sol",
       "solcConfig": {
@@ -1954,8 +2059,8 @@
         "IGenericRewardManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IJsonApiVerification.sol": {
-      "lastModificationDate": 1770477518444,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IJsonApiVerification.sol": {
+      "lastModificationDate": 1770467656545,
       "contentHash": "32b984d4888b535d2d1884e88284178c",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IJsonApiVerification.sol",
       "solcConfig": {
@@ -1993,8 +2098,8 @@
         "IJsonApiVerification"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManager.sol": {
-      "lastModificationDate": 1770477518325,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManager.sol": {
+      "lastModificationDate": 1770467656236,
       "contentHash": "c9e8ede022993894857800d4ff77b5a7",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAssetManager.sol",
       "solcConfig": {
@@ -2050,47 +2155,8 @@
         "IAssetManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerController.sol": {
-      "lastModificationDate": 1770477518332,
-      "contentHash": "e7a767338d21e04b8d8963d6b50b4466",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerController.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IAssetManager.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IAssetManagerController"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoGenesis.sol": {
-      "lastModificationDate": 1770477518390,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoGenesis.sol": {
+      "lastModificationDate": 1770467656388,
       "contentHash": "0dbfcf02337920aaeaf05ea78a478e87",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoGenesis.sol",
       "solcConfig": {
@@ -2126,8 +2192,8 @@
         "IFtsoGenesis"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoManagerGenesis.sol": {
-      "lastModificationDate": 1770477518391,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoManagerGenesis.sol": {
+      "lastModificationDate": 1770467656389,
       "contentHash": "83a0d9eb34b25959af12999cfb843038",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoManagerGenesis.sol",
       "solcConfig": {
@@ -2163,8 +2229,8 @@
         "IFtsoManagerGenesis"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoRegistryGenesis.sol": {
-      "lastModificationDate": 1770477518392,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoRegistryGenesis.sol": {
+      "lastModificationDate": 1770467656390,
       "contentHash": "28134afb04085c76bc6f4f1650542131",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/genesis/interfaces/IFtsoRegistryGenesis.sol",
       "solcConfig": {
@@ -2202,8 +2268,8 @@
         "IFtsoRegistryGenesis"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ftso/interfaces/IIFtso.sol": {
-      "lastModificationDate": 1770477518416,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ftso/interfaces/IIFtso.sol": {
+      "lastModificationDate": 1770467656516,
       "contentHash": "e051abb5950181214788812b7575ceea",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ftso/interfaces/IIFtso.sol",
       "solcConfig": {
@@ -2243,8 +2309,8 @@
         "IIFtso"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtso.sol": {
-      "lastModificationDate": 1770477518390,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFtso.sol": {
+      "lastModificationDate": 1770467656387,
       "contentHash": "007a0d51180305cb1ef2fec63c985769",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFtso.sol",
       "solcConfig": {
@@ -2280,8 +2346,8 @@
         "IFtso"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPToken.sol": {
-      "lastModificationDate": 1770477518443,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPToken.sol": {
+      "lastModificationDate": 1770467656545,
       "contentHash": "ad721548c489d99cf75b6dc55d687b2b",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPToken.sol",
       "solcConfig": {
@@ -2323,8 +2389,8 @@
         "IIVPToken"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVPToken.sol": {
-      "lastModificationDate": 1770477518921,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVPToken.sol": {
+      "lastModificationDate": 1770467656770,
       "contentHash": "5a8e290a4f3fc8b90ce62a024d82174e",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IVPToken.sol",
       "solcConfig": {
@@ -2364,8 +2430,8 @@
         "IVPToken"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPContract.sol": {
-      "lastModificationDate": 1770477518443,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPContract.sol": {
+      "lastModificationDate": 1770467656543,
       "contentHash": "9e838ed2615f47122f821442f9089c96",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIVPContract.sol",
       "solcConfig": {
@@ -2405,8 +2471,45 @@
         "IIVPContract"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIGovernanceVotePower.sol": {
-      "lastModificationDate": 1770477518420,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IICleanable.sol": {
+      "lastModificationDate": 1770467656508,
+      "contentHash": "6a65dbc0adb80db3d7db7852ef8be17c",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IICleanable.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IICleanable"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIGovernanceVotePower.sol": {
+      "lastModificationDate": 1770467656521,
       "contentHash": "76e70417d03d1fe64d2e88901a9d9b0d",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IIGovernanceVotePower.sol",
       "solcConfig": {
@@ -2446,45 +2549,8 @@
         "IIGovernanceVotePower"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IICleanable.sol": {
-      "lastModificationDate": 1770477518411,
-      "contentHash": "6a65dbc0adb80db3d7db7852ef8be17c",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/token/interfaces/IICleanable.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IICleanable"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1770477518574,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1770467656963,
       "contentHash": "df36f7051335cd1e748b1b6463b7fdd3",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
@@ -2520,8 +2586,8 @@
         "IERC20"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVPContractEvents.sol": {
-      "lastModificationDate": 1770477518904,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IVPContractEvents.sol": {
+      "lastModificationDate": 1770467656730,
       "contentHash": "824d113e57f78eb441c03bc69172f735",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IVPContractEvents.sol",
       "solcConfig": {
@@ -2557,8 +2623,8 @@
         "IVPContractEvents"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirror.sol": {
-      "lastModificationDate": 1770477518721,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirror.sol": {
+      "lastModificationDate": 1770467656695,
       "contentHash": "5f2cd4eb08de4b09be8999ad3e688eb2",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirror.sol",
       "solcConfig": {
@@ -2597,8 +2663,8 @@
         "IPChainStakeMirror"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainVotePower.sol": {
-      "lastModificationDate": 1770477518723,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainVotePower.sol": {
+      "lastModificationDate": 1770467656697,
       "contentHash": "586c12486b67b9d777b3c385b9075f0a",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPChainVotePower.sol",
       "solcConfig": {
@@ -2634,8 +2700,8 @@
         "IPChainVotePower"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirrorVerifier.sol": {
-      "lastModificationDate": 1770477518723,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirrorVerifier.sol": {
+      "lastModificationDate": 1770467656696,
       "contentHash": "4fcc4823f80006d74243e701c3bf5cb7",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPChainStakeMirrorVerifier.sol",
       "solcConfig": {
@@ -2671,8 +2737,8 @@
         "IPChainStakeMirrorVerifier"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IDelegationAccount.sol": {
-      "lastModificationDate": 1770477518369,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IDelegationAccount.sol": {
+      "lastModificationDate": 1770467656360,
       "contentHash": "09cef4c02caf4a54a4675a03748f15f2",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IDelegationAccount.sol",
       "solcConfig": {
@@ -2711,8 +2777,8 @@
         "IDelegationAccount"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRandomProvider.sol": {
-      "lastModificationDate": 1770477518824,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRandomProvider.sol": {
+      "lastModificationDate": 1770467656709,
       "contentHash": "9982275b4873144c53c662e195ff5eb2",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRandomProvider.sol",
       "solcConfig": {
@@ -2748,80 +2814,8 @@
         "IRandomProvider"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ISortition.sol": {
-      "lastModificationDate": 1770477518894,
-      "contentHash": "3c2a7ab9f54573161317df7e874568e7",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ISortition.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IBn256.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": []
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBn256.sol": {
-      "lastModificationDate": 1770477518335,
-      "contentHash": "e23c8a29c35bb2467b6c4cb7bb71a9b1",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBn256.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": []
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFixedPointArithmetic.sol": {
-      "lastModificationDate": 1770477518378,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFixedPointArithmetic.sol": {
+      "lastModificationDate": 1770467656372,
       "contentHash": "645c8c721d875976a3410b952ee7c979",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFixedPointArithmetic.sol",
       "solcConfig": {
@@ -2855,8 +2849,8 @@
       ],
       "artifacts": []
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IIncreaseManager.sol": {
-      "lastModificationDate": 1770477518422,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IIncreaseManager.sol": {
+      "lastModificationDate": 1770467656526,
       "contentHash": "47af84282709dcad4ba3c29102ce7e4d",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IIncreaseManager.sol",
       "solcConfig": {
@@ -2892,10 +2886,10 @@
         "IIncreaseManager"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEVMTransactionVerification.sol": {
-      "lastModificationDate": 1770477518372,
-      "contentHash": "57ec6e2ad9b5dfd8079d441971313ea7",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IEVMTransactionVerification.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ISortition.sol": {
+      "lastModificationDate": 1770467656726,
+      "contentHash": "3c2a7ab9f54573161317df7e874568e7",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ISortition.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -2922,253 +2916,17 @@
         }
       },
       "imports": [
-        "./IEVMTransaction.sol"
+        "./IBn256.sol"
       ],
       "versionPragmas": [
         ">=0.7.6 <0.9"
       ],
-      "artifacts": [
-        "IEVMTransactionVerification"
-      ]
+      "artifacts": []
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAddressValidityVerification.sol": {
-      "lastModificationDate": 1770477518309,
-      "contentHash": "06692793a03893a2a033a1e344da6adc",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAddressValidityVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IAddressValidity.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IAddressValidityVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExistsVerification.sol": {
-      "lastModificationDate": 1770477518362,
-      "contentHash": "99881e600414a5dac1333c14200359d2",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExistsVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IConfirmedBlockHeightExists.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IConfirmedBlockHeightExistsVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPaymentVerification.sol": {
-      "lastModificationDate": 1770477518445,
-      "contentHash": "0578de4f101434110ea833e86b916d6f",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPaymentVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IPayment.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IPaymentVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransactionVerification.sol": {
-      "lastModificationDate": 1770477518335,
-      "contentHash": "1cdc49f6ae2db7365adc6fb9e7d8da6d",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransactionVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IBalanceDecreasingTransaction.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IBalanceDecreasingTransactionVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistenceVerification.sol": {
-      "lastModificationDate": 1770477518824,
-      "contentHash": "108c1b44cd60556d0a9b40ffdfeaf567",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistenceVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IReferencedPaymentNonexistence.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IReferencedPaymentNonexistenceVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWeb2JsonVerification.sol": {
-      "lastModificationDate": 1770477518922,
-      "contentHash": "6837f2fdd4f2a460a6a1a9ee0abd8429",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWeb2JsonVerification.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IWeb2Json.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IWeb2JsonVerification"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IEVMTransaction.sol": {
-      "lastModificationDate": 1770477518372,
-      "contentHash": "fb2b51352a42caf7d84d143a5cef37f9",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IEVMTransaction.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBn256.sol": {
+      "lastModificationDate": 1770467656349,
+      "contentHash": "e23c8a29c35bb2467b6c4cb7bb71a9b1",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBn256.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -3198,347 +2956,10 @@
       "versionPragmas": [
         ">=0.7.6 <0.9"
       ],
-      "artifacts": [
-        "IEVMTransaction"
-      ]
+      "artifacts": []
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAddressValidity.sol": {
-      "lastModificationDate": 1770477518309,
-      "contentHash": "dc80a1768f9b2eec5d01bcbdbf6a75a3",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAddressValidity.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IAddressValidity"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExists.sol": {
-      "lastModificationDate": 1770477518361,
-      "contentHash": "93d757d8da7acd75bd3e2082bd0f2ef4",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IConfirmedBlockHeightExists.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IConfirmedBlockHeightExists"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IPayment.sol": {
-      "lastModificationDate": 1770477518444,
-      "contentHash": "3387e523124247aabf032ca2b59e1c44",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IPayment.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IPayment"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransaction.sol": {
-      "lastModificationDate": 1770477518335,
-      "contentHash": "deae3a1d919e15820266987ed34558b9",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IBalanceDecreasingTransaction.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IBalanceDecreasingTransaction"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistence.sol": {
-      "lastModificationDate": 1770477518824,
-      "contentHash": "81acac296932b60a6e8a0142831d514f",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IReferencedPaymentNonexistence.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IReferencedPaymentNonexistence"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol": {
-      "lastModificationDate": 1770477518921,
-      "contentHash": "545d61572e73d372477dfc186c227d6d",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IWeb2Json"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcInflationConfigurations.sol": {
-      "lastModificationDate": 1770477518378,
-      "contentHash": "52185746421737cb83526018ab75a997",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcInflationConfigurations.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IFdcInflationConfigurations"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IJsonApi.sol": {
-      "lastModificationDate": 1770477518444,
-      "contentHash": "271558965f7043a7881b6c5c261dc487",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IJsonApi.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IJsonApi"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerEvents.sol": {
-      "lastModificationDate": 1770477518333,
-      "contentHash": "6e066bdada9b5aae486ed22b474aa422",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerEvents.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./data/EmergencyPause.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IAssetManagerEvents"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAgentPing.sol": {
-      "lastModificationDate": 1770477518310,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAgentPing.sol": {
+      "lastModificationDate": 1770467656228,
       "contentHash": "88a4ff418f885f119a3c6f76c1e263ca",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAgentPing.sol",
       "solcConfig": {
@@ -3574,8 +2995,8 @@
         "IAgentPing"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClient.sol": {
-      "lastModificationDate": 1770477518362,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClient.sol": {
+      "lastModificationDate": 1770467656356,
       "contentHash": "8906d1f9fbda9af10efced7c86c04f05",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClient.sol",
       "solcConfig": {
@@ -3613,10 +3034,49 @@
         "ICoreVaultClient"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAgentAlwaysAllowedMinters.sol": {
-      "lastModificationDate": 1770477518310,
-      "contentHash": "508772ebd19807dcd254b9d2536744d3",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAgentAlwaysAllowedMinters.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerEvents.sol": {
+      "lastModificationDate": 1770467656310,
+      "contentHash": "6e066bdada9b5aae486ed22b474aa422",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAssetManagerEvents.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./data/EmergencyPause.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IAssetManagerEvents"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRedemptionTimeExtension.sol": {
+      "lastModificationDate": 1770467656709,
+      "contentHash": "6d21e822eeb763a4a825c07d5c609627",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRedemptionTimeExtension.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -3647,11 +3107,85 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "IAgentAlwaysAllowedMinters"
+        "IRedemptionTimeExtension"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/CollateralType.sol": {
-      "lastModificationDate": 1770477518307,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1770467656962,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC165"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClientSettings.sol": {
+      "lastModificationDate": 1770467656357,
+      "contentHash": "b89c37dfb73a7daec0389dba300ba002",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClientSettings.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "ICoreVaultClientSettings"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/CollateralType.sol": {
+      "lastModificationDate": 1770467656212,
       "contentHash": "5b30c26c176f70f3b677b7e300043a0d",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/CollateralType.sol",
       "solcConfig": {
@@ -3689,121 +3223,8 @@
         "CollateralType"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IRedemptionTimeExtension.sol": {
-      "lastModificationDate": 1770477518824,
-      "contentHash": "6d21e822eeb763a4a825c07d5c609627",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IRedemptionTimeExtension.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "IRedemptionTimeExtension"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1770477518568,
-      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AvailableAgentInfo.sol": {
-      "lastModificationDate": 1770477518303,
-      "contentHash": "d9e89fbc271e0f0ac5edfa3ab535d877",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/AvailableAgentInfo.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./AgentInfo.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "AvailableAgentInfo"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AssetManagerSettings.sol": {
-      "lastModificationDate": 1770477518303,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AssetManagerSettings.sol": {
+      "lastModificationDate": 1770467656210,
       "contentHash": "66ce009829df2405199d29fd26ef0d06",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/AssetManagerSettings.sol",
       "solcConfig": {
@@ -3839,82 +3260,8 @@
         "AssetManagerSettings"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClientSettings.sol": {
-      "lastModificationDate": 1770477518362,
-      "contentHash": "b89c37dfb73a7daec0389dba300ba002",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/ICoreVaultClientSettings.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "ICoreVaultClientSettings"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/CollateralReservationInfo.sol": {
-      "lastModificationDate": 1770477518307,
-      "contentHash": "c36f0bb2735bff0c2dc0243a202770df",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/CollateralReservationInfo.sol",
-      "solcConfig": {
-        "version": "0.8.25",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.6 <0.9"
-      ],
-      "artifacts": [
-        "CollateralReservationInfo"
-      ]
-    },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AgentInfo.sol": {
-      "lastModificationDate": 1770477518301,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AgentInfo.sol": {
+      "lastModificationDate": 1770467656207,
       "contentHash": "df39c6cdd6f59df795566b4a881f655b",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/AgentInfo.sol",
       "solcConfig": {
@@ -3952,10 +3299,10 @@
         "AgentInfo"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionRequestInfo.sol": {
-      "lastModificationDate": 1770477518960,
-      "contentHash": "ce266376c99f7b910370fa9c5f65a479",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionRequestInfo.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IAgentAlwaysAllowedMinters.sol": {
+      "lastModificationDate": 1770467656227,
+      "contentHash": "508772ebd19807dcd254b9d2536744d3",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IAgentAlwaysAllowedMinters.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -3986,11 +3333,11 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "RedemptionRequestInfo"
+        "IAgentAlwaysAllowedMinters"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AgentSettings.sol": {
-      "lastModificationDate": 1770477518302,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AgentSettings.sol": {
+      "lastModificationDate": 1770467656209,
       "contentHash": "3b7e32b4140fb95c2a56beb1e1784efe",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/AgentSettings.sol",
       "solcConfig": {
@@ -4028,10 +3375,49 @@
         "AgentSettings"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/EmergencyPause.sol": {
-      "lastModificationDate": 1770477518308,
-      "contentHash": "83412eee29cc96a9e4b52b02a02d7d43",
-      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/EmergencyPause.sol",
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/AvailableAgentInfo.sol": {
+      "lastModificationDate": 1770467656211,
+      "contentHash": "d9e89fbc271e0f0ac5edfa3ab535d877",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/AvailableAgentInfo.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./AgentInfo.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "AvailableAgentInfo"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionRequestInfo.sol": {
+      "lastModificationDate": 1770467656810,
+      "contentHash": "ce266376c99f7b910370fa9c5f65a479",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionRequestInfo.sol",
       "solcConfig": {
         "version": "0.8.25",
         "settings": {
@@ -4062,11 +3448,11 @@
         ">=0.7.6 <0.9"
       ],
       "artifacts": [
-        "EmergencyPause"
+        "RedemptionRequestInfo"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionTicketInfo.sol": {
-      "lastModificationDate": 1770477518960,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionTicketInfo.sol": {
+      "lastModificationDate": 1770467656811,
       "contentHash": "7df564a6d650b5ab058f6cb569b073a1",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/RedemptionTicketInfo.sol",
       "solcConfig": {
@@ -4102,8 +3488,82 @@
         "RedemptionTicketInfo"
       ]
     },
-    "/Users/joakimtallingsmith/code/eth-oxford/eth-oxford/node_modules/@flarenetwork/flare-periphery-contracts/coston2/diamond/interfaces/IDiamondLoupe.sol": {
-      "lastModificationDate": 1770477518370,
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/CollateralReservationInfo.sol": {
+      "lastModificationDate": 1770467656211,
+      "contentHash": "c36f0bb2735bff0c2dc0243a202770df",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/CollateralReservationInfo.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "CollateralReservationInfo"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/data/EmergencyPause.sol": {
+      "lastModificationDate": 1770467656220,
+      "contentHash": "83412eee29cc96a9e4b52b02a02d7d43",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/data/EmergencyPause.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "EmergencyPause"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/diamond/interfaces/IDiamondLoupe.sol": {
+      "lastModificationDate": 1770467656361,
       "contentHash": "6fd4ab8b357a4971eea00e9d8506d4bd",
       "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/diamond/interfaces/IDiamondLoupe.sol",
       "solcConfig": {
@@ -4137,6 +3597,549 @@
       ],
       "artifacts": [
         "IDiamondLoupe"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IFdcInflationConfigurations.sol": {
+      "lastModificationDate": 1770467656370,
+      "contentHash": "52185746421737cb83526018ab75a997",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IFdcInflationConfigurations.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IFdcInflationConfigurations"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@flarenetwork/flare-periphery-contracts/coston2/IJsonApi.sol": {
+      "lastModificationDate": 1770467656545,
+      "contentHash": "271558965f7043a7881b6c5c261dc487",
+      "sourceName": "@flarenetwork/flare-periphery-contracts/coston2/IJsonApi.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.6 <0.9"
+      ],
+      "artifacts": [
+        "IJsonApi"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimePredictionMarket.sol": {
+      "lastModificationDate": 1770468729961,
+      "contentHash": "9a6bb6b5354e6c0d714d61066059badc",
+      "sourceName": "onchain/contracts/MaritimePredictionMarket.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./MaritimeRiskOracle.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "MaritimePredictionMarket"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimeRiskOracle.sol": {
+      "lastModificationDate": 1770470781386,
+      "contentHash": "dfb2bf978432aa0956c5be26b947ccd3",
+      "sourceName": "onchain/contracts/MaritimeRiskOracle.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
+        "@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol",
+        "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "MaritimeRiskOracle"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimeVault.sol": {
+      "lastModificationDate": 1770504598961,
+      "contentHash": "29b4d6eff50f325d42a46cf0b4845080",
+      "sourceName": "onchain/contracts/MaritimeVault.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
+        "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "MaritimeVault"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/onchain/contracts/MaritimeRFQVault.sol": {
+      "lastModificationDate": 1770504598960,
+      "contentHash": "510508e998ac85519f730b0afc6ad23f",
+      "sourceName": "onchain/contracts/MaritimeRFQVault.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol",
+        "@flarenetwork/flare-periphery-contracts/coston2/FtsoV2Interface.sol",
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "@openzeppelin/contracts/utils/cryptography/EIP712.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.25"
+      ],
+      "artifacts": [
+        "MaritimeRFQVault"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+      "lastModificationDate": 1770467656677,
+      "contentHash": "d822a8a9468649cab463f29f5decf5cc",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../Strings.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ECDSA"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/cryptography/EIP712.sol": {
+      "lastModificationDate": 1770467656677,
+      "contentHash": "459aeb9cc3fc3c6d67d30ffefb724aba",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/EIP712.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ECDSA.sol",
+        "../ShortStrings.sol",
+        "../../interfaces/IERC5267.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "EIP712"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1770467657134,
+      "contentHash": "48686fc32a22a3754b8e63321857dd2a",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./math/Math.sol",
+        "./math/SignedMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
+      "lastModificationDate": 1770467657134,
+      "contentHash": "9488ebd4daacfee8ad04811600d7d061",
+      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SignedMath"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1770467657020,
+      "contentHash": "fe63409d8a06818b926cf89e0ea88b1b",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/interfaces/IERC5267.sol": {
+      "lastModificationDate": 1770467656968,
+      "contentHash": "b1756048024350a162c3be27c04aa652",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC5267.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC5267"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/ShortStrings.sol": {
+      "lastModificationDate": 1770467657134,
+      "contentHash": "8dde288da49722a70f34ee369be4bfba",
+      "sourceName": "@openzeppelin/contracts/utils/ShortStrings.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./StorageSlot.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "ShortStrings"
+      ]
+    },
+    "/Users/matveidanisheuski/hak_2026/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
+      "lastModificationDate": 1770467657134,
+      "contentHash": "682f7dd1f2e1147c8390e7575deceb2d",
+      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
+      "solcConfig": {
+        "version": "0.8.25",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "StorageSlot"
       ]
     }
   }
