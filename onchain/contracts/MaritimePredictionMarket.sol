@@ -3,6 +3,14 @@ pragma solidity ^0.8.25;
 
 import "./MaritimeRiskOracle.sol";
 
+/// @notice Interface for oracle query functions used by this contract
+interface IMaritimeRiskOracle {
+    function wasVesselDetained(string memory imo) external view returns (bool);
+    function hadCasualty(string memory imo, string memory casualtyType) external view returns (bool);
+    function hasVesselArrived(string memory imo) external view returns (bool);
+    function isVesselMoored(string memory imo) external view returns (bool);
+}
+
 /**
  * @title MaritimePredictionMarket
  * @notice Prediction market contract that settles based on verified maritime data
@@ -67,7 +75,7 @@ contract MaritimePredictionMarket {
     
     // ============ Storage ============
     
-    MaritimeRiskOracle public oracle;
+    IMaritimeRiskOracle public oracle;
     
     uint256 public nextMarketId;
     mapping(uint256 => Market) public markets;
@@ -110,7 +118,7 @@ contract MaritimePredictionMarket {
     // ============ Constructor ============
     
     constructor(address _oracle) {
-        oracle = MaritimeRiskOracle(_oracle);
+        oracle = IMaritimeRiskOracle(_oracle);
         owner = msg.sender;
         nextMarketId = 1;
     }
@@ -277,6 +285,7 @@ contract MaritimePredictionMarket {
     
     /**
      * @notice Settle PSC Detention market based on oracle data
+     * @dev Reads PSC record directly — vessel should have arrived at destination
      */
     function settlePSCDetentionMarket(uint256 marketId) external {
         Market storage market = markets[marketId];
@@ -285,12 +294,11 @@ contract MaritimePredictionMarket {
                 "Cannot settle");
         require(market.marketType == MarketType.PSC_DETENTION, "Wrong market type");
         
-        // Check oracle for detention
-        bool wasDetained = oracle.wasVesselDetained(
-            market.vesselIMO,
-            "", // fromDate - simplified
-            ""  // toDate - simplified
-        );
+        // Vessel must have arrived at destination before PSC settlement
+        require(oracle.hasVesselArrived(market.vesselIMO), "Vessel must have arrived");
+        
+        // Check detention status via dedicated query
+        bool wasDetained = oracle.wasVesselDetained(market.vesselIMO);
         
         market.outcome = wasDetained ? Outcome.YES : Outcome.NO;
         market.status = MarketStatus.SETTLED;
@@ -301,6 +309,7 @@ contract MaritimePredictionMarket {
     
     /**
      * @notice Settle Casualty market based on oracle data
+     * @dev Can settle mid-voyage if casualty detected (early settlement)
      */
     function settleCasualtyMarket(uint256 marketId) external {
         Market storage market = markets[marketId];
@@ -309,10 +318,17 @@ contract MaritimePredictionMarket {
                 "Cannot settle");
         require(market.marketType == MarketType.CASUALTY, "Wrong market type");
         
-        // Check oracle for casualty
+        // Check if the specific casualty type occurred via dedicated query
         bool hadCasualty = oracle.hadCasualty(market.vesselIMO, market.casualtyType);
         
-        market.outcome = hadCasualty ? Outcome.YES : Outcome.NO;
+        if (hadCasualty) {
+            market.outcome = Outcome.YES;
+        } else {
+            // No casualty — can only settle as NO after arrival
+            require(oracle.hasVesselArrived(market.vesselIMO), "Wait for arrival or casualty detection");
+            market.outcome = Outcome.NO;
+        }
+        
         market.status = MarketStatus.SETTLED;
         market.settledAt = block.timestamp;
         
@@ -321,6 +337,7 @@ contract MaritimePredictionMarket {
     
     /**
      * @notice Settle Voyage Completion market based on oracle data
+     * @dev Uses hasVesselArrived() to check if vessel reached destination
      */
     function settleVoyageCompletionMarket(uint256 marketId) external {
         Market storage market = markets[marketId];
@@ -329,11 +346,9 @@ contract MaritimePredictionMarket {
                 "Cannot settle");
         require(market.marketType == MarketType.VOYAGE_COMPLETION, "Wrong market type");
         
-        // Check if vessel arrived (is moored at destination)
-        bool arrived = oracle.isVesselMoored(market.vesselIMO);
+        // Check if vessel has arrived at destination
+        bool arrived = oracle.hasVesselArrived(market.vesselIMO);
         
-        // For simplicity, if moored = arrived on time (YES wins)
-        // In production, you'd compare timestamps
         market.outcome = arrived ? Outcome.YES : Outcome.NO;
         market.status = MarketStatus.SETTLED;
         market.settledAt = block.timestamp;
@@ -429,6 +444,6 @@ contract MaritimePredictionMarket {
     
     function updateOracle(address newOracle) external {
         require(msg.sender == owner, "Only owner");
-        oracle = MaritimeRiskOracle(newOracle);
+        oracle = IMaritimeRiskOracle(newOracle);
     }
 }

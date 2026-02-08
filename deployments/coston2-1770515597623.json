@@ -1,0 +1,13 @@
+{
+  "network": "coston2",
+  "chainId": 114,
+  "deployer": "0x33f08D0D7A40827cac4699AAf3b59479E5C1E35E",
+  "timestamp": "2026-02-08T01:53:17.623Z",
+  "contracts": {
+    "MaritimeRiskOracle": "0xbA6135Ba020c170AC05EC8653c693A4d37f5322A",
+    "MaritimeRFQVault": "0xf67c37199D9c512e6678Dd9B1A71872E49B01743",
+    "VoyageAuction": "0x488489c3b7AE7931b8746754C732f5ef9c94393b",
+    "MaritimePredictionMarket": "0x13c3d42Ba85df4705389422eeB68A6B846757Acb"
+  },
+  "vesselCount": 12
+}

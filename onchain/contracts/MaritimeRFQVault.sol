@@ -76,6 +76,9 @@ contract MaritimeRFQVault is EIP712 {
     address public owner;
     address public operator;  // Signs emissions from off-chain RFQ engine
     address public oracle;    // Settles markets with outcome
+    
+    /// @notice Authorized auction contracts that can deduct/credit user balances
+    mapping(address => bool) public authorizedAuctions;
 
     uint256 public marketCount;
     
@@ -551,8 +554,47 @@ contract MaritimeRFQVault is EIP712 {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
+    // AUCTION INTEGRATION
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    modifier onlyAuction() {
+        require(authorizedAuctions[msg.sender], "Not authorized auction");
+        _;
+    }
+
+    /**
+     * @notice Deduct FLR from a user's deposit balance and transfer to the auction contract
+     * @dev Called by VoyageAuction when hedger creates market or bidder submits bid.
+     *      The FLR is transferred to the calling auction contract to hold as collateral.
+     * @param user The user whose balance to deduct from
+     * @param amount The amount of FLR to deduct and transfer
+     */
+    function deductForAuction(address user, uint256 amount) external onlyAuction {
+        require(deposits[user] >= amount, "Insufficient balance");
+        deposits[user] -= amount;
+        // Transfer FLR to the auction contract
+        payable(msg.sender).transfer(amount);
+    }
+
+    /**
+     * @notice Credit FLR to a user's deposit balance (sent by auction contract)
+     * @dev Called by VoyageAuction when refunding unfilled bids, returning excess
+     *      hedger premium, or crediting settlement payouts.
+     *      The auction contract sends FLR along with this call (msg.value).
+     * @param user The user whose balance to credit
+     */
+    function creditFromAuction(address user) external payable onlyAuction {
+        require(msg.value > 0, "Zero credit");
+        deposits[user] += msg.value;
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
     // ADMIN
     // ═══════════════════════════════════════════════════════════════════════════
+
+    function setAuthorizedAuction(address auction, bool authorized) external onlyOwner {
+        authorizedAuctions[auction] = authorized;
+    }
 
     function setOperator(address _operator) external onlyOwner {
         operator = _operator;

@@ -1,460 +1,442 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.25;
 
-import {ContractRegistry} from "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol";
-import {IFdcVerification} from "@flarenetwork/flare-periphery-contracts/coston2/IFdcVerification.sol";
-import {IWeb2Json} from "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol";
-
 /**
  * @title MaritimeRiskOracle
- * @notice Core contract for receiving and verifying maritime data from Flare Data Connector (FDC)
- * @dev Supports PSC Detention, Casualty, Dry Dock, and Vessel tracking data from Datalastic API
+ * @notice On-chain vessel data store for maritime risk data
+ * @dev FDC Web2Json verification could not be made to work (DA layer validation failures
+ *      on both proxy API and static GitHub JSON pages). This contract serves as a fallback:
+ *      an authorized submitter pushes pre-fetched data (from offchain/data/risk_data/) directly
+ *      on-chain so that VoyageAuction.sol can read it without any external oracle call.
+ *
+ *      Data flow:  Datalastic API → fetchVesselRiskProfile.ts → risk_data/*.json → 
+ *                  deploy script reads JSON → submitVesselData() → on-chain storage
+ *
+ *      Voyage data comes from the Datalastic /vessel_pro endpoint which provides:
+ *        - atd_epoch / atd_UTC  (Actual Time of Departure)
+ *        - eta_epoch / eta_UTC  (Estimated Time of Arrival)
+ *        - dep_port_unlocode    (Departure port UN/LOCODE)
+ *        - destination          (Destination port)
  */
 contract MaritimeRiskOracle {
-    
+
     // ============ Data Structures ============
-    
-    struct PSCInspection {
-        string imo;
-        string vesselName;
-        string inspectionDate;
-        bool detained;
+
+    enum NavigationStatus {
+        Unknown,
+        Moored,
+        AtAnchor,
+        UnderWay,
+        Aground
+    }
+
+    /// @notice Core vessel record — one per IMO, updated by authorized submitter
+    struct VesselData {
+        string  imo;
+        string  name;
+        int256  latitude;          // Scaled by 1e6
+        int256  longitude;         // Scaled by 1e6
+        NavigationStatus navStatus;
+        string  destination;
+        uint256 lastUpdated;       // block.timestamp of last update
+    }
+
+    /// @notice Voyage-specific data from /vessel_pro endpoint
+    struct VoyageData {
+        string  departurePort;     // UN/LOCODE of departure port (e.g. "AEJEA")
+        string  destinationPort;   // UN/LOCODE or name of destination
+        uint256 atdEpoch;          // Actual Time of Departure (0 = not departed yet)
+        uint256 etaEpoch;          // Estimated Time of Arrival
+        uint256 ataEpoch;          // Actual Time of Arrival (0 = not arrived yet)
+        uint256 lastUpdated;
+    }
+
+    /// @notice PSC inspection snapshot
+    struct PSCRecord {
+        bool    detained;
         uint256 deficiencyCount;
-        string inspectionPort;
-        string inspectionAuthority;
-        uint256 timestamp;
+        string  inspectionPort;
+        string  inspectionDate;
+        string  inspectionAuthority;
     }
-    
-    struct Casualty {
-        string imo;
-        string vesselName;
+
+    /// @notice Casualty record
+    struct CasualtyRecord {
+        bool   detected;
+        string casualtyType;       // e.g. "Collision", "Grounding", "Fire"
         string casualtyDate;
-        string casualtyType;
-        string casualtyDetails;
-        uint256 timestamp;
+        string details;
     }
-    
-    struct DryDock {
-        string imo;
-        string vesselName;
-        string dryDockFrom;
-        string dryDockTo;
-        string status; // "planned" or "completed"
-        uint256 timestamp;
+
+    /// @notice Dry dock record
+    struct DryDockRecord {
+        string nextDueDate;
+        bool   isOverdue;
     }
-    
-    struct VesselPosition {
-        string imo;
-        string vesselName;
-        int256 latitude;  // Scaled by 1e6
-        int256 longitude; // Scaled by 1e6
-        string navigationStatus;
-        string destination;
-        uint256 timestamp;
-    }
-    
+
     // ============ Storage ============
-    
-    mapping(string => PSCInspection[]) public pscInspections; // imo => inspections
-    mapping(string => Casualty[]) public casualties;          // imo => casualties
-    mapping(string => DryDock[]) public dryDocks;             // imo => dry docks
-    mapping(string => VesselPosition) public vesselPositions; // imo => latest position
-    
+
     address public owner;
     mapping(address => bool) public authorizedSubmitters;
-    
+
+    /// @notice IMO → vessel core data
+    mapping(string => VesselData)     public vessels;
+    /// @notice IMO → voyage data (ATD, ETA, ports)
+    mapping(string => VoyageData)     public voyages;
+    /// @notice IMO → latest PSC record
+    mapping(string => PSCRecord)      public pscRecords;
+    /// @notice IMO → latest casualty record
+    mapping(string => CasualtyRecord) public casualtyRecords;
+    /// @notice IMO → latest dry dock record
+    mapping(string => DryDockRecord)  public dryDockRecords;
+
+    /// @notice All known IMOs (for enumeration)
+    string[] public knownIMOs;
+    mapping(string => bool) public imoExists;
+
     // ============ Events ============
-    
-    event PSCInspectionRecorded(
-        string indexed imo,
-        bool detained,
-        uint256 deficiencyCount,
-        string inspectionPort
-    );
-    
-    event CasualtyRecorded(
-        string indexed imo,
-        string casualtyType,
-        string casualtyDate
-    );
-    
-    event DryDockRecorded(
-        string indexed imo,
-        string dryDockFrom,
-        string dryDockTo
-    );
-    
-    event VesselPositionUpdated(
-        string indexed imo,
-        int256 latitude,
-        int256 longitude,
-        string navigationStatus
-    );
-    
-    event ProofVerificationSuccess(
-        bytes32 indexed attestationType,
-        bytes32 indexed sourceId,
-        uint64 votingRound
-    );
-    
-    event ProofVerificationFailed(
-        bytes32 indexed attestationType,
-        bytes32 indexed sourceId,
-        string reason
-    );
-    
+
+    event VesselDataUpdated(string indexed imo, string name, NavigationStatus navStatus);
+    event VoyageDataUpdated(string indexed imo, uint256 atdEpoch, uint256 etaEpoch);
+    event PSCRecordUpdated(string indexed imo, bool detained, uint256 deficiencyCount);
+    event CasualtyRecordUpdated(string indexed imo, bool detected, string casualtyType);
+    event DryDockRecordUpdated(string indexed imo, bool isOverdue);
+    event NavigationStatusChanged(string indexed imo, NavigationStatus oldStatus, NavigationStatus newStatus);
+
     // ============ Modifiers ============
-    
+
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner");
         _;
     }
-    
+
     modifier onlyAuthorized() {
         require(authorizedSubmitters[msg.sender] || msg.sender == owner, "Not authorized");
         _;
     }
-    
+
     // ============ Constructor ============
-    
+
     constructor() {
         owner = msg.sender;
         authorizedSubmitters[msg.sender] = true;
     }
-    
-    // ============ Admin Functions ============
-    
+
+    // ============ Admin ============
+
     function setAuthorizedSubmitter(address submitter, bool authorized) external onlyOwner {
         authorizedSubmitters[submitter] = authorized;
     }
-    
-    // ============ FDC Verification ============
-    
-    /**
-     * @notice Verifies a Web2Json proof from Flare Data Connector with comprehensive validation
-     * @param _proof The proof structure from FDC
-     * @return True if the proof is valid
-     * @dev Performs multiple validation checks:
-     *      1. Merkle proof array is not empty
-     *      2. Response body contains data
-     *      3. Attestation type is Web2Json
-     *      4. Merkle proof verification via FdcVerification contract
-     */
-    function verifyWeb2JsonProof(IWeb2Json.Proof calldata _proof) public returns (bool) {
-        // Validation 1: Check Merkle proof exists
-        require(_proof.merkleProof.length > 0, "Empty Merkle proof");
-        
-        // Validation 2: Check response body has data
-        require(_proof.data.responseBody.abiEncodedData.length > 0, "Empty response data");
-        
-        // Validation 3: Verify attestation type is Web2Json (0x5765623244617461000000000000000000000000000000000000000000000000)
-        bytes32 expectedAttestationType = 0x5765623244617461000000000000000000000000000000000000000000000000;
-        require(
-            _proof.data.attestationType == expectedAttestationType,
-            "Invalid attestation type - expected Web2Json"
-        );
-        
-        // Validation 4: Verify Merkle proof against DA Layer root
-        IFdcVerification fdcVerification = ContractRegistry.getFdcVerification();
-        bool isValid = fdcVerification.verifyWeb2Json(_proof);
-        
-        if (isValid) {
-            emit ProofVerificationSuccess(
-                _proof.data.attestationType,
-                _proof.data.sourceId,
-                _proof.data.votingRound
-            );
-        } else {
-            emit ProofVerificationFailed(
-                _proof.data.attestationType,
-                _proof.data.sourceId,
-                "Merkle root verification failed"
-            );
-        }
-        
-        return isValid;
+
+    function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Zero address");
+        owner = newOwner;
     }
-    
+
+    // ============ Data Submission ============
+
     /**
-     * @notice Safe proof verification that returns false instead of reverting
-     * @param _proof The proof structure from FDC
-     * @return isValid True if proof is valid, false otherwise
-     * @return errorMessage Error message if validation failed
+     * @notice Submit or update core vessel data (position, nav status, destination)
      */
-    function safeVerifyWeb2JsonProof(IWeb2Json.Proof calldata _proof) 
-        public 
-        view 
-        returns (bool isValid, string memory errorMessage) 
-    {
-        // Check 1: Merkle proof exists
-        if (_proof.merkleProof.length == 0) {
-            return (false, "Empty Merkle proof");
-        }
-        
-        // Check 2: Response body has data
-        if (_proof.data.responseBody.abiEncodedData.length == 0) {
-            return (false, "Empty response data");
-        }
-        
-        // Check 3: Attestation type
-        bytes32 expectedAttestationType = 0x5765623244617461000000000000000000000000000000000000000000000000;
-        if (_proof.data.attestationType != expectedAttestationType) {
-            return (false, "Invalid attestation type");
-        }
-        
-        // Check 4: Merkle proof verification
-        try ContractRegistry.getFdcVerification().verifyWeb2Json(_proof) returns (bool valid) {
-            if (valid) {
-                return (true, "");
-            } else {
-                return (false, "Merkle root verification failed");
-            }
-        } catch Error(string memory reason) {
-            return (false, reason);
-        } catch {
-            return (false, "Unknown verification error");
-        }
-    }
-    
-    // ============ Data Submission with FDC Verification ============
-    
-    /**
-     * @notice Submit PSC inspection data verified by FDC
-     * @param _proof The Web2Json proof from FDC containing inspection data
-     * @dev Expected ABI: {imo: string, vessel_name: string, inspection_date: string, 
-     *                     detention: string, ship_deficiencies: string, inspection_port: string,
-     *                     inspection_authority: string}
-     */
-    function submitPSCInspectionWithProof(IWeb2Json.Proof calldata _proof) external {
-        require(verifyWeb2JsonProof(_proof), "Invalid FDC proof");
-        
-        // Decode the ABI-encoded data from the proof
-        (
-            string memory imo,
-            string memory vesselName,
-            string memory inspectionDate,
-            string memory detentionStr,
-            uint256 deficiencyCount,
-            string memory inspectionPort,
-            string memory inspectionAuthority
-        ) = abi.decode(
-            _proof.data.responseBody.abiEncodedData,
-            (string, string, string, string, uint256, string, string)
-        );
-        
-        bool detained = keccak256(bytes(detentionStr)) == keccak256(bytes("TRUE"));
-        
-        PSCInspection memory inspection = PSCInspection({
+    function submitVesselData(
+        string calldata imo,
+        string calldata name,
+        int256 latitude,
+        int256 longitude,
+        NavigationStatus navStatus,
+        string calldata destination
+    ) external onlyAuthorized {
+        NavigationStatus oldStatus = vessels[imo].navStatus;
+
+        vessels[imo] = VesselData({
             imo: imo,
-            vesselName: vesselName,
-            inspectionDate: inspectionDate,
-            detained: detained,
-            deficiencyCount: deficiencyCount,
-            inspectionPort: inspectionPort,
-            inspectionAuthority: inspectionAuthority,
-            timestamp: block.timestamp
-        });
-        
-        pscInspections[imo].push(inspection);
-        
-        emit PSCInspectionRecorded(imo, detained, deficiencyCount, inspectionPort);
-    }
-    
-    /**
-     * @notice Submit casualty data verified by FDC
-     * @param _proof The Web2Json proof from FDC containing casualty data
-     * @dev Expected ABI: {imo: string, vessel_name: string, casualty_date: string,
-     *                     casualty_type: string, casualty_details: string}
-     */
-    function submitCasualtyWithProof(IWeb2Json.Proof calldata _proof) external {
-        require(verifyWeb2JsonProof(_proof), "Invalid FDC proof");
-        
-        (
-            string memory imo,
-            string memory vesselName,
-            string memory casualtyDate,
-            string memory casualtyType,
-            string memory casualtyDetails
-        ) = abi.decode(
-            _proof.data.responseBody.abiEncodedData,
-            (string, string, string, string, string)
-        );
-        
-        Casualty memory casualty = Casualty({
-            imo: imo,
-            vesselName: vesselName,
-            casualtyDate: casualtyDate,
-            casualtyType: casualtyType,
-            casualtyDetails: casualtyDetails,
-            timestamp: block.timestamp
-        });
-        
-        casualties[imo].push(casualty);
-        
-        emit CasualtyRecorded(imo, casualtyType, casualtyDate);
-    }
-    
-    /**
-     * @notice Submit dry dock data verified by FDC
-     * @param _proof The Web2Json proof from FDC containing dry dock data
-     */
-    function submitDryDockWithProof(IWeb2Json.Proof calldata _proof) external {
-        require(verifyWeb2JsonProof(_proof), "Invalid FDC proof");
-        
-        (
-            string memory imo,
-            string memory vesselName,
-            string memory dryDockFrom,
-            string memory dryDockTo,
-            string memory status
-        ) = abi.decode(
-            _proof.data.responseBody.abiEncodedData,
-            (string, string, string, string, string)
-        );
-        
-        DryDock memory dryDock = DryDock({
-            imo: imo,
-            vesselName: vesselName,
-            dryDockFrom: dryDockFrom,
-            dryDockTo: dryDockTo,
-            status: status,
-            timestamp: block.timestamp
-        });
-        
-        dryDocks[imo].push(dryDock);
-        
-        emit DryDockRecorded(imo, dryDockFrom, dryDockTo);
-    }
-    
-    /**
-     * @notice Submit vessel position data verified by FDC
-     * @param _proof The Web2Json proof from FDC containing position data
-     */
-    function submitVesselPositionWithProof(IWeb2Json.Proof calldata _proof) external {
-        require(verifyWeb2JsonProof(_proof), "Invalid FDC proof");
-        
-        (
-            string memory imo,
-            string memory vesselName,
-            int256 latitude,
-            int256 longitude,
-            string memory navigationStatus,
-            string memory destination
-        ) = abi.decode(
-            _proof.data.responseBody.abiEncodedData,
-            (string, string, int256, int256, string, string)
-        );
-        
-        vesselPositions[imo] = VesselPosition({
-            imo: imo,
-            vesselName: vesselName,
+            name: name,
             latitude: latitude,
             longitude: longitude,
-            navigationStatus: navigationStatus,
+            navStatus: navStatus,
             destination: destination,
-            timestamp: block.timestamp
+            lastUpdated: block.timestamp
         });
-        
-        emit VesselPositionUpdated(imo, latitude, longitude, navigationStatus);
+
+        if (!imoExists[imo]) {
+            knownIMOs.push(imo);
+            imoExists[imo] = true;
+        }
+
+        emit VesselDataUpdated(imo, name, navStatus);
+
+        if (oldStatus != navStatus && vessels[imo].lastUpdated > 0) {
+            emit NavigationStatusChanged(imo, oldStatus, navStatus);
+        }
     }
-    
-    // ============ Manual Data Submission (for testing/authorized sources) ============
-    
-    function submitPSCInspectionManual(
+
+    /**
+     * @notice Submit voyage-specific data (departure/arrival times and ports)
+     * @dev Data from Datalastic /vessel_pro endpoint:
+     *      - atdEpoch = 0 means vessel has NOT departed yet (still at port of loading)
+     *      - ataEpoch = 0 means vessel has NOT arrived yet
+     *      This distinction is critical: a moored vessel at loading port can have a
+     *      market created, but a moored vessel at discharge port is at settlement time.
+     */
+    function submitVoyageData(
         string calldata imo,
-        string calldata vesselName,
-        string calldata inspectionDate,
+        string calldata departurePort,
+        string calldata destinationPort,
+        uint256 atdEpoch,
+        uint256 etaEpoch,
+        uint256 ataEpoch
+    ) external onlyAuthorized {
+        voyages[imo] = VoyageData({
+            departurePort: departurePort,
+            destinationPort: destinationPort,
+            atdEpoch: atdEpoch,
+            etaEpoch: etaEpoch,
+            ataEpoch: ataEpoch,
+            lastUpdated: block.timestamp
+        });
+
+        emit VoyageDataUpdated(imo, atdEpoch, etaEpoch);
+    }
+
+    /**
+     * @notice Submit PSC inspection record
+     */
+    function submitPSCRecord(
+        string calldata imo,
         bool detained,
         uint256 deficiencyCount,
         string calldata inspectionPort,
+        string calldata inspectionDate,
         string calldata inspectionAuthority
     ) external onlyAuthorized {
-        PSCInspection memory inspection = PSCInspection({
-            imo: imo,
-            vesselName: vesselName,
-            inspectionDate: inspectionDate,
+        pscRecords[imo] = PSCRecord({
             detained: detained,
             deficiencyCount: deficiencyCount,
             inspectionPort: inspectionPort,
-            inspectionAuthority: inspectionAuthority,
-            timestamp: block.timestamp
+            inspectionDate: inspectionDate,
+            inspectionAuthority: inspectionAuthority
         });
-        
-        pscInspections[imo].push(inspection);
-        emit PSCInspectionRecorded(imo, detained, deficiencyCount, inspectionPort);
+
+        emit PSCRecordUpdated(imo, detained, deficiencyCount);
     }
-    
-    function submitCasualtyManual(
+
+    /**
+     * @notice Submit casualty record
+     */
+    function submitCasualtyRecord(
         string calldata imo,
-        string calldata vesselName,
-        string calldata casualtyDate,
+        bool detected,
         string calldata casualtyType,
-        string calldata casualtyDetails
+        string calldata casualtyDate,
+        string calldata details
     ) external onlyAuthorized {
-        Casualty memory casualty = Casualty({
-            imo: imo,
-            vesselName: vesselName,
-            casualtyDate: casualtyDate,
+        casualtyRecords[imo] = CasualtyRecord({
+            detected: detected,
             casualtyType: casualtyType,
-            casualtyDetails: casualtyDetails,
-            timestamp: block.timestamp
+            casualtyDate: casualtyDate,
+            details: details
         });
-        
-        casualties[imo].push(casualty);
-        emit CasualtyRecorded(imo, casualtyType, casualtyDate);
+
+        emit CasualtyRecordUpdated(imo, detected, casualtyType);
     }
-    
+
+    /**
+     * @notice Submit dry dock record
+     */
+    function submitDryDockRecord(
+        string calldata imo,
+        string calldata nextDueDate,
+        bool isOverdue
+    ) external onlyAuthorized {
+        dryDockRecords[imo] = DryDockRecord({
+            nextDueDate: nextDueDate,
+            isOverdue: isOverdue
+        });
+
+        emit DryDockRecordUpdated(imo, isOverdue);
+    }
+
+    /**
+     * @notice Batch-submit all data for a vessel in one transaction
+     * @dev Saves gas when loading from risk_data JSON files
+     */
+    function submitFullVesselProfile(
+        string calldata imo,
+        string calldata name,
+        int256 latitude,
+        int256 longitude,
+        NavigationStatus navStatus,
+        string calldata destination,
+        // PSC
+        bool pscDetained,
+        uint256 pscDeficiencyCount,
+        string calldata pscPort,
+        string calldata pscDate,
+        string calldata pscAuthority,
+        // Casualty
+        bool casualtyDetected,
+        string calldata casualtyType,
+        string calldata casualtyDate,
+        string calldata casualtyDetails,
+        // Dry dock
+        string calldata dryDockNextDue,
+        bool dryDockOverdue
+    ) external onlyAuthorized {
+        // Vessel core
+        vessels[imo] = VesselData({
+            imo: imo,
+            name: name,
+            latitude: latitude,
+            longitude: longitude,
+            navStatus: navStatus,
+            destination: destination,
+            lastUpdated: block.timestamp
+        });
+
+        if (!imoExists[imo]) {
+            knownIMOs.push(imo);
+            imoExists[imo] = true;
+        }
+
+        // PSC
+        pscRecords[imo] = PSCRecord({
+            detained: pscDetained,
+            deficiencyCount: pscDeficiencyCount,
+            inspectionPort: pscPort,
+            inspectionDate: pscDate,
+            inspectionAuthority: pscAuthority
+        });
+
+        // Casualty
+        casualtyRecords[imo] = CasualtyRecord({
+            detected: casualtyDetected,
+            casualtyType: casualtyType,
+            casualtyDate: casualtyDate,
+            details: casualtyDetails
+        });
+
+        // Dry dock
+        dryDockRecords[imo] = DryDockRecord({
+            nextDueDate: dryDockNextDue,
+            isOverdue: dryDockOverdue
+        });
+
+        emit VesselDataUpdated(imo, name, navStatus);
+        emit PSCRecordUpdated(imo, pscDetained, pscDeficiencyCount);
+        emit CasualtyRecordUpdated(imo, casualtyDetected, casualtyType);
+        emit DryDockRecordUpdated(imo, dryDockOverdue);
+    }
+
     // ============ Query Functions ============
-    
-    function getPSCInspectionCount(string calldata imo) external view returns (uint256) {
-        return pscInspections[imo].length;
+
+    function getVessel(string memory imo) external view returns (VesselData memory) {
+        return vessels[imo];
     }
-    
-    function getLatestPSCInspection(string calldata imo) external view returns (PSCInspection memory) {
-        require(pscInspections[imo].length > 0, "No inspections");
-        return pscInspections[imo][pscInspections[imo].length - 1];
+
+    function getVoyage(string memory imo) external view returns (VoyageData memory) {
+        return voyages[imo];
     }
-    
-    function wasVesselDetained(string calldata imo, string calldata fromDate, string calldata toDate) 
-        external view returns (bool) 
-    {
-        PSCInspection[] storage inspections = pscInspections[imo];
-        for (uint256 i = 0; i < inspections.length; i++) {
-            if (inspections[i].detained) {
-                // Simple check - in production, compare dates properly
-                return true;
-            }
-        }
+
+    function getPSC(string memory imo) external view returns (PSCRecord memory) {
+        return pscRecords[imo];
+    }
+
+    function getCasualty(string memory imo) external view returns (CasualtyRecord memory) {
+        return casualtyRecords[imo];
+    }
+
+    function getDryDock(string memory imo) external view returns (DryDockRecord memory) {
+        return dryDockRecords[imo];
+    }
+
+    function getKnownIMOCount() external view returns (uint256) {
+        return knownIMOs.length;
+    }
+
+    // ============ Vessel State Queries ============
+
+    /// @notice Check if vessel is currently moored (any port)
+    function isVesselMoored(string memory imo) external view returns (bool) {
+        return vessels[imo].navStatus == NavigationStatus.Moored;
+    }
+
+    /**
+     * @notice Check if vessel is moored at port of loading (pre-departure)
+     * @dev A vessel is at port of loading if:
+     *      1. Navigation status is Moored
+     *      2. ATD epoch is 0 (has not departed) OR ATD is in the future
+     *      This distinguishes from a vessel moored at port of discharge (post-arrival).
+     */
+    function isVesselAtLoadingPort(string memory imo) external view returns (bool) {
+        VesselData storage v = vessels[imo];
+        if (v.navStatus != NavigationStatus.Moored) return false;
+        
+        VoyageData storage voy = voyages[imo];
+        // No voyage data yet → assume at loading port (pre-departure)
+        if (voy.lastUpdated == 0) return true;
+        // ATD = 0 means not departed yet → at loading port
+        if (voy.atdEpoch == 0) return true;
+        // ATD in the future → scheduled but not departed
+        if (voy.atdEpoch > block.timestamp) return true;
+        
         return false;
     }
-    
-    function getCasualtyCount(string calldata imo) external view returns (uint256) {
-        return casualties[imo].length;
-    }
-    
-    function getLatestCasualty(string calldata imo) external view returns (Casualty memory) {
-        require(casualties[imo].length > 0, "No casualties");
-        return casualties[imo][casualties[imo].length - 1];
-    }
-    
-    function hadCasualty(string calldata imo, string calldata casualtyType) 
-        external view returns (bool) 
-    {
-        Casualty[] storage vesselCasualties = casualties[imo];
-        for (uint256 i = 0; i < vesselCasualties.length; i++) {
-            if (keccak256(bytes(vesselCasualties[i].casualtyType)) == keccak256(bytes(casualtyType))) {
-                return true;
-            }
+
+    /**
+     * @notice Check if vessel has arrived at destination (moored at discharge port)
+     * @dev A vessel has arrived if:
+     *      1. Navigation status is Moored AND
+     *      2. ATA epoch > 0 (has actually arrived) OR
+     *      3. ATD epoch > 0 and ATD < now and ETA < now (departed and past ETA, moored = arrived)
+     */
+    function hasVesselArrived(string memory imo) external view returns (bool) {
+        VesselData storage v = vessels[imo];
+        if (v.navStatus != NavigationStatus.Moored) return false;
+        
+        VoyageData storage voy = voyages[imo];
+        // Explicit arrival recorded
+        if (voy.ataEpoch > 0) return true;
+        // Departed + past ETA + moored = arrived
+        if (voy.atdEpoch > 0 && voy.atdEpoch < block.timestamp && 
+            voy.etaEpoch > 0 && voy.etaEpoch < block.timestamp) {
+            return true;
         }
+        
         return false;
     }
-    
-    function getVesselPosition(string calldata imo) external view returns (VesselPosition memory) {
-        return vesselPositions[imo];
+
+    /**
+     * @notice Check if vessel is currently underway (departed but not arrived)
+     */
+    function isVesselUnderway(string memory imo) external view returns (bool) {
+        VesselData storage v = vessels[imo];
+        if (v.navStatus == NavigationStatus.UnderWay) return true;
+        
+        // Also check voyage data: departed but not arrived
+        VoyageData storage voy = voyages[imo];
+        if (voy.atdEpoch > 0 && voy.atdEpoch < block.timestamp && voy.ataEpoch == 0) {
+            return true;
+        }
+        
+        return false;
     }
-    
-    function isVesselMoored(string calldata imo) external view returns (bool) {
-        VesselPosition storage pos = vesselPositions[imo];
-        return keccak256(bytes(pos.navigationStatus)) == keccak256(bytes("Moored"));
+
+    /// @notice Check if vessel has had a specific casualty type
+    function hadCasualty(string memory imo, string memory casualtyType) external view returns (bool) {
+        CasualtyRecord storage rec = casualtyRecords[imo];
+        if (!rec.detected) return false;
+        return keccak256(bytes(rec.casualtyType)) == keccak256(bytes(casualtyType));
+    }
+
+    /// @notice Check if vessel was detained in latest PSC inspection
+    function wasVesselDetained(string memory imo) external view returns (bool) {
+        return pscRecords[imo].detained;
+    }
+
+    /// @notice Check if vessel data exists and is recent enough
+    function isDataFresh(string memory imo, uint256 maxAge) external view returns (bool) {
+        VesselData storage v = vessels[imo];
+        if (v.lastUpdated == 0) return false;
+        return (block.timestamp - v.lastUpdated) <= maxAge;
     }
 }
