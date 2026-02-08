@@ -4294,8 +4294,8 @@
       ]
     },
     "/Users/matveidanisheuski/hak_2026/onchain/contracts/PoseidonAuction.sol": {
-      "lastModificationDate": 1770546406607,
-      "contentHash": "373b926d53a94f52146237577e451042",
+      "lastModificationDate": 1770550418946,
+      "contentHash": "44d168f9644f9df720d09170de961c70",
       "sourceName": "onchain/contracts/PoseidonAuction.sol",
       "solcConfig": {
         "version": "0.8.25",

@@ -73,7 +73,7 @@ contract PoseidonAuction {
     mapping(address => uint256) public deposits;
 
     uint256 public protocolFees;
-    uint256 public flrPriceUSD = 2 * 1e16; // $0.02
+    uint256 public flrPriceUSD = 1e18; // $1.00 per FLR (constant)
 
     event VesselAdded(uint256 indexed vesselId, string imo, string name);
     event MarketCreated(uint256 indexed marketId, uint256 indexed vesselId, RiskType riskType);
